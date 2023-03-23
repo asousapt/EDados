@@ -44,13 +44,15 @@ typedef struct Caixa{
     FilaEspera Fila;
 }Caixa;
 
-typedef struct NOG{
-    void *info;
-    NOG *prox;
+typedef struct NOG
+{
+    void *Info;
+    struct NOG *Prox;
 }NOG;
 
 
-typedef struct{
+typedef struct
+{
     int NEL;
-    NOG *inicio;
-}ListaG;
+    NOG *Inicio;
+}ListaGenerica;
