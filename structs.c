@@ -46,10 +46,11 @@ typedef struct Caixa{
 
 typedef struct NOG{
     void *info;
+    NOG *prox;
 }NOG;
 
 
 typedef struct{
     int NEL;
-    NOG inicio;
+    NOG *inicio;
 }ListaG;
