@@ -1,6 +1,6 @@
-#include "structs.c"
+#include "ListaGenerica.h"
 
-ListaGenerica *CriarLG() {
+ListaGenerica * CriarLG() {
   printf("\n <%s>\n", __FUNCTION__);
   ListaGenerica *L = (ListaGenerica *)malloc(sizeof(ListaGenerica));
   L->Inicio = NULL;
