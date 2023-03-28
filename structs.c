@@ -11,7 +11,7 @@ typedef struct cliente {
     int tempoEspera;
 } CLIENTE;
 
-typedef struct funcionario{
+typedef struct funcionario {
     int cod;
     char *nome;
 } FUNCIONARIO;
@@ -66,4 +66,3 @@ typedef struct supermercado{
     ListaGenerica *Funcionarios;
     ListaGenerica *Caixas;
 } SUPERMERCADO;
-
