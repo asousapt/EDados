@@ -44,15 +44,23 @@ typedef struct Caixa{
     FilaEspera Fila;
 }Caixa;
 
-// typedef struct NOG
-// {
-//     void *Info;
-//     struct NOG *Prox;
-// }NOG;
+typedef struct NOG{
+    void *Info;
+    struct NOG *Prox;
+}NOG;
 
+typedef struct{
+    int NEL;
+    NOG *Inicio;
+}ListaGenerica;
 
-// typedef struct
-// {
-//     int NEL;
-//     NOG *Inicio;
-// }ListaGenerica;
+typedef struct supermercado{
+    char *nome;
+    time_t horaAbertura;
+    time_t horaFecho;
+    ListaGenerica *Produtos;
+    ListaGenerica *Clientes;
+    ListaGenerica *Funcionarios;
+    ListaGenerica *Caixas;
+}supermercado;
+
