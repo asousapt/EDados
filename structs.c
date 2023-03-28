@@ -3,18 +3,18 @@
 #include <string.h>
 #include <time.h>
 
-typedef struct cliente{
+typedef struct cliente {
     int cod;
     char *nome;
     time_t entrada;
     time_t saida;
     int tempoEspera;
-}cliente;
+} CLIENTE;
 
 typedef struct funcionario{
     int cod;
     char *nome;
-}funcionario;
+} FUNCIONARIO;
 
 typedef struct produto{
     int cod;
@@ -22,27 +22,27 @@ typedef struct produto{
     float preco;
     time_t tempoCompra;
     time_t tempoCaixa;
-}produto;
+} PRODUTO;
 
 typedef struct NOFila{
-    cliente   *Info;
+    CLIENTE   *Info;
     struct NO *Prox;
-}NOFila;
+} NOFILE;
 
-typedef struct{
-    NOFila *Inicio;
-    NOFila *Fim;
+typedef struct {
+    NOFILE *Inicio;
+    NOFILE *Fim;
     int NEL;
-}FilaEspera;
+} FILAESPERA;
 
-typedef struct Caixa{
+typedef struct Caixa {
     int numCaixa;
     int fechado; //1-fechado; 0-aberto
     time_t tempoEspera; //medio
     int contadorPessoas,contadorProdutos;
-    funcionario f;
-    FilaEspera Fila;
-}Caixa;
+    FUNCIONARIO func;
+    FILAESPERA Fila;
+} CAIXA;
 
 typedef struct NOG{
     void *Info;
@@ -58,9 +58,12 @@ typedef struct supermercado{
     char *nome;
     time_t horaAbertura;
     time_t horaFecho;
+    int tempoEsperaMax; 
+    int nmrMinCliFechaCaixa; 
+    int nmrMaxClientesFila;
     ListaGenerica *Produtos;
     ListaGenerica *Clientes;
     ListaGenerica *Funcionarios;
     ListaGenerica *Caixas;
-}supermercado;
+} SUPERMERCADO;
 
