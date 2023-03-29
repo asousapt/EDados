@@ -61,6 +61,7 @@ typedef struct supermercado{
     char *nome;
     time_t horaAbertura;
     time_t horaFecho;
+    int numCaixas;
     int tempoEsperaMax; 
     int nmrMinCliFechaCaixa; 
     int nmrMaxClientesFila;
