@@ -1,17 +1,10 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "structs.c"
-#include "ListaGenerica.c"
+
+#include "funcoes.h"
 
 
-void ConfigInicial(char* ficheiroConfig){
-    if(!access(ficheiroConfig, F_OK )){
-        printf("The File %s\t was Found\n",ficheiroConfig);
-    }else{
-        printf("The File %s\t not Found\n",ficheiroConfig);
-    }
-
+SUPERMERCADO CriarSM(SUPERMERCADO *SM, int nCaixas,time_t horaAbertura,time_t horaFecho,int nmrMinCliFechaCaixa,int nmrMaxClientesFila){
+    
 }
-
-
-SUPERMERCADO CriarSM(SUPERMERCADO *SM, int nCaixas);

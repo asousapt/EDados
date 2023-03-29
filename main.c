@@ -7,10 +7,7 @@
 
 int main(void) {
     printf("*** Bem-vindo ***\n"); 
-    char * ficheiroConfig = "config.ini"; 
-
-    ConfigInicial(ficheiroConfig);
-    
+        
 
     ListaGenerica * ListaCaixas = CriarLG();
 
