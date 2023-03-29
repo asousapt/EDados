@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <string.h>
-#include "ListaGenerica.c"
-#include "texto.c"
-#include "funcoes.c"
+
+#include "ListaGenerica.h"
+#include "texto.h"
+#include "funcoes.h"
 
 int main(void) {
     printf("*** Bem-vindo ***\n"); 

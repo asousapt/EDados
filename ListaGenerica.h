@@ -1,6 +1,6 @@
 
 #include "structs.c"
-#include "ListaGenerica.h"
+#include "ListaGenerica.c"
 
 ListaGenerica * CriarLG();
 void DestruirLG(ListaGenerica *lg, void (*fdest)(void *));
