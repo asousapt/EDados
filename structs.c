@@ -1,3 +1,6 @@
+#ifndef STRUCTS_C
+#define STRUCTS_C
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -58,6 +61,7 @@ typedef struct supermercado{
     char *nome;
     time_t horaAbertura;
     time_t horaFecho;
+    int numCaixas;
     int tempoEsperaMax; 
     int nmrMinCliFechaCaixa; 
     int nmrMaxClientesFila;
@@ -66,3 +70,6 @@ typedef struct supermercado{
     ListaGenerica *Funcionarios;
     ListaGenerica *Caixas;
 } SUPERMERCADO;
+
+
+#endif
