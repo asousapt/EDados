@@ -1,10 +1,28 @@
 #include <stdio.h>
-#include <unistd.h>
-#include "structs.c"
+#include <time.h>
+#include "tools.h"
 
-#include "funcoes.h"
+int validarInt(char *pergunta, int menor,int maior){
+	int num;
+	do{
+		printf("%s(%d-%d)", pergunta,menor,maior);
+		scanf("%d", &num);
+		if(num<menor ||num>maior){
+			printf("Input invalido, por favor volte a introduzir");
+		}
+	}while(num<menor ||num>maior);
+	fflush(stdin);
+	return num;
+}
 
+char *getString(char *pergunta){
+	char string[100];
+	printf("%s",pergunta);
+	gets(string);
+	fflush(stdin);
+	return string;
+}
 
-SUPERMERCADO CriarSM(SUPERMERCADO *SM, int nCaixas,time_t horaAbertura,time_t horaFecho,int nmrMinCliFechaCaixa,int nmrMaxClientesFila){
-    
+int aleatorio(int min, int max){ 
+	return min + rand()%(max-min+1);
 }
