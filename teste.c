@@ -39,25 +39,21 @@ int main()
     int n_campos_lidos;
     int n_linhas_lidas = 0;
     
-    //----------------------------------------------------------------------------
+    
     FILE *F1 = fopen("Clientes.txt","r"); 
     if (!F1) {
         printf("\n\n\tImpossivel abrir Ficheiro \n\n");
         return -1;
     }
+    int linhas = 0; 
     while(!feof(F1))
     {
-        STRING *V = Read_Split_Line_File(F1, n_campos_max, &n_campos_lidos, "\t\r\n"); 
-
-       
-        for (int i = 0; i < n_campos_lidos; i++)
-            printf("%s\n", V[0]);
-            printf("%s\n", V[1]);
-
-        for (int i = 0; i < n_campos_lidos; i++)
-            free (V[i]);
+        STRING *V = Read_Split_Line_File(F1, n_campos_max, &n_campos_lidos, "\t\r"); 
+        printf("%s\n", V[0]);
+        printf("%s\n", V[1]);
         free (V);
     }
+   
     fclose(F1);
 
     return 0;

@@ -2,7 +2,10 @@
 #include "structs.c"
 #include "ListaGenerica.c"
 
-PRODUTO *ficheiroProdutos(char *file);
-CLIENTE *ficheiroClientes(char *file);
+#define STRING char *
+
+// PRODUTO *LerFicheiroProdutos(char *file);
+ListaGenerica *LerficheiroClientes(char *file);
 FUNCIONARIO *ficheiroFuncionarios(char *file);
+STRING *Read_Split_Line_File(FILE *f, int n_campos_max, int *n_campos_lidos, char *separadores);
 
