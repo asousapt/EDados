@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "ListaGenerica.h"
 
 #define STRING char *
 #define MAX_LINHA_FICHEIRO 200
@@ -31,6 +32,7 @@ STRING *Read_Split_Line_File(FILE *f, int n_campos_max, int *n_campos_lidos, cha
     }
     return NULL;
 };
+
 
 
 int main()

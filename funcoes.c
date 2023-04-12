@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <time.h>
-#include <tools.h>
-#include "structs.c"
+#include "ListaGenerica.h"
 #include "funcoes.h"
 
 

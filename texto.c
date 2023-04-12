@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include "texto.h"
 #include "funcoes.h"
-#include "structs.c"
+#include "ListaGenerica.h"
+#include "texto.h"
 
 #define STRING char *
 #define MAX_LINHA_FICHEIRO 200
@@ -32,14 +33,13 @@ STRING *Read_Split_Line_File(FILE *f, int n_campos_max, int *n_campos_lidos, cha
     return NULL;
 };
 
-PRODUTO *LerFicheiroProdutos(char *file){
+// PRODUTO *LerFicheiroProdutos(char *file){
     
-}
+// }
 
 // funcao que le o ficheiro de clientes e coloca numa lista generica
-ListaGenerica *LerficheiroClientes(char *file ){
+ListaGenerica *LerficheiroClientes(char *file , ListaGenerica * LgCl){
     // faz a criacao da lista generica
-    ListaGenerica * LgCl = CriarLG();
     
     int n_campos_max = 20;
     int n_campos_lidos;
@@ -54,17 +54,18 @@ ListaGenerica *LerficheiroClientes(char *file ){
     while(!feof(F1))
     {
         STRING *V = Read_Split_Line_File(F1, n_campos_max, &n_campos_lidos, "\t\r"); 
-        printf("%s\n", V[0]);
-        printf("%s\n", V[1]);
+        
+        CLIENTE * clienteInserir = (* CLIENTE) malloc(sizeof(CLIENTE)); 
+        clienteInserir->cod = V[0];
+        clienteInserir->nome = V[1]; 
+
+        AddBeginLG(LgCl,clienteInserir);
+
         free (V);
     }
    
     fclose(F1);
 
     return LgCl;
-
-}
-
-FUNCIONARIO *ficheiroFuncionarios(char *file){
 
 }
