@@ -3,12 +3,14 @@
 #include "funcoes.h"
 #include "ListaGenerica.h"
 #include "texto.h"
+#include "Fila.h"
 
 #define STRING char *
 #define MAX_LINHA_FICHEIRO 200
-LinhaTexto LT;
+
 
 typedef char LinhaTexto[MAX_LINHA_FICHEIRO];
+LinhaTexto LT;
 
 // funcao que faz separacao das strings da linha 
 STRING *Read_Split_Line_File(FILE *f, int n_campos_max, int *n_campos_lidos, char *separadores)
@@ -38,7 +40,7 @@ STRING *Read_Split_Line_File(FILE *f, int n_campos_max, int *n_campos_lidos, cha
 // }
 
 // funcao que le o ficheiro de clientes e coloca numa lista generica
-ListaGenerica *LerficheiroClientes(char *file , ListaGenerica * LgCl){
+void LerficheiroClientes(char *file , ListaGenerica * LgCl){
     // faz a criacao da lista generica
     
     int n_campos_max = 20;
@@ -48,16 +50,16 @@ ListaGenerica *LerficheiroClientes(char *file , ListaGenerica * LgCl){
     FILE *F1 = fopen(file,"r"); 
     if (!F1) {
         printf("\n\n\tImpossivel abrir Ficheiro \n\n");
-        return -1;
+        //return NULL;
     }
     int linhas = 0; 
     while(!feof(F1))
     {
         STRING *V = Read_Split_Line_File(F1, n_campos_max, &n_campos_lidos, "\t\r"); 
         
-        CLIENTE * clienteInserir = (* CLIENTE) malloc(sizeof(CLIENTE)); 
-        clienteInserir->cod = V[0];
-        clienteInserir->nome = V[1]; 
+        CLIENTE *clienteInserir = (CLIENTE *)malloc(sizeof(CLIENTE)); 
+        clienteInserir->cod = atoi(V[0]);
+        strcpy(clienteInserir->nome, V[1]);
 
         AddBeginLG(LgCl,clienteInserir);
 
@@ -66,6 +68,6 @@ ListaGenerica *LerficheiroClientes(char *file , ListaGenerica * LgCl){
    
     fclose(F1);
 
-    return LgCl;
+    
 
 }

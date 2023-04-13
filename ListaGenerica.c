@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "ListaGenerica.h"
+#include "Fila.h"
 
 ListaGenerica * CriarLG() {
   printf("\n <%s>\n", __FUNCTION__);
@@ -8,6 +9,7 @@ ListaGenerica * CriarLG() {
   L->NEL = 0;
   return L;
 }
+
 void DestruirLG(ListaGenerica *lg, void (*fdest)(void *)) {
   printf("\n <%s>\n", __FUNCTION__);
   if (!lg)
@@ -23,13 +25,22 @@ void DestruirLG(ListaGenerica *lg, void (*fdest)(void *)) {
   free(lg);
 }
 
+void PrintNode (NOG *node, void (*print)(void *))
+{
+  if (node && node->Info && print)
+    print(node->Info);
+}
+
 void ShowLG(ListaGenerica *lg, void (*f)(void *)) {
   printf("\n<%s>\n", __FUNCTION__);
   if (!lg)
     return;
   NOG *P = lg->Inicio;
+  printf("%s", "teste");
   while (P) {
     f(P->Info);
+    void * raw;
+     PrintNode (P, raw);
     P = P->Prox;
   }
 }

@@ -1,8 +1,11 @@
+#ifndef LISTAGENERICA_H_INCLUDED
+#define LISTAGENERICA_H_INCLUDED
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "Fila.h"
+
 
 typedef struct NOG{
     void *Info;
@@ -41,7 +44,7 @@ typedef struct Caixa {
     time_t tempoEspera; //medio
     int contadorPessoas,contadorProdutos;
     FUNCIONARIO func;
-    FILAESPERA Fila;
+    //FILAESPERA Fila;
 } CAIXA;
 
 ListaGenerica * CriarLG();
@@ -49,3 +52,5 @@ void DestruirLG(ListaGenerica *lg, void (*fdest)(void *));
 void ShowLG(ListaGenerica *lg, void (*f)(void *));
 void AddBeginLG(ListaGenerica *lg, void *X);
 int PertenceLG(ListaGenerica *lg, void *X, int (*fcomp)(void *, void *));
+void PrintNode (NOG *node, void (*fprint)(void *));
+#endif // LISTAGENERICA_H_INCLUDED

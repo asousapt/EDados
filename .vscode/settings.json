@@ -1,7 +1,10 @@
 {
     "files.associations": {
         "time.h": "c",
-        "texto.h": "c"
+        "texto.h": "c",
+        "listagenerica.h": "c",
+        "fila.h": "c",
+        "funcoes.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

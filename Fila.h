@@ -1,4 +1,8 @@
+#ifndef FILA_H_INCLUDED
+#define FILA_H_INCLUDED
 
+#include <stdio.h>
+#include "ListaGenerica.h"
 
 typedef struct NOFila{
     CLIENTE   *Info;
@@ -11,3 +15,4 @@ typedef struct FilaEspera {
     int NEL;
 } FILAESPERA;
 
+#endif // FILA_H_INCLUDED
