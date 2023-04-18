@@ -2,11 +2,20 @@
 #include "ListaGenerica.h"
 #include "Fila.h"
 
-ListaGenerica * CriarLG() {
+CLIENTE* CriarCliente(char* numeroCliente,char* nomeCliente){
+  CLIENTE* NovoCliente = (CLIENTE *) malloc(sizeof(CLIENTE));
+  
+  NovoCliente->cod = atoi(numeroCliente);
+  strcpy(NovoCliente->nome,nomeCliente);
+  return NovoCliente;
+}
+
+ListaGenerica *CriarLG() {
   printf("\n <%s>\n", __FUNCTION__);
   ListaGenerica *L = (ListaGenerica *)malloc(sizeof(ListaGenerica));
   L->Inicio = NULL;
   L->NEL = 0;
+
   return L;
 }
 
@@ -25,22 +34,14 @@ void DestruirLG(ListaGenerica *lg, void (*fdest)(void *)) {
   free(lg);
 }
 
-void PrintNode (NOG *node, void (*print)(void *))
-{
-  if (node && node->Info && print)
-    print(node->Info);
-}
 
 void ShowLG(ListaGenerica *lg, void (*f)(void *)) {
   printf("\n<%s>\n", __FUNCTION__);
   if (!lg)
     return;
   NOG *P = lg->Inicio;
-  printf("%s", "teste");
   while (P) {
     f(P->Info);
-    void * raw;
-     PrintNode (P, raw);
     P = P->Prox;
   }
 }

@@ -19,7 +19,7 @@ typedef struct{
 
 typedef struct cliente {
     int cod;
-    char *nome;
+    char nome[100];
     // time_t entrada;
     // time_t saida;
     // int tempoEspera;
@@ -48,9 +48,10 @@ typedef struct Caixa {
 } CAIXA;
 
 ListaGenerica * CriarLG();
+CLIENTE* CriarCliente(char* numeroCliente,char* NomeCliente);
 void DestruirLG(ListaGenerica *lg, void (*fdest)(void *));
 void ShowLG(ListaGenerica *lg, void (*f)(void *));
 void AddBeginLG(ListaGenerica *lg, void *X);
 int PertenceLG(ListaGenerica *lg, void *X, int (*fcomp)(void *, void *));
-void PrintNode (NOG *node, void (*fprint)(void *));
+
 #endif // LISTAGENERICA_H_INCLUDED

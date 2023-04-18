@@ -8,13 +8,13 @@
 #include "funcoes.h"
 
 int main(void) {
-    printf("*** Bem-vindo ***\n"); 
-    char * ficheiroClientes = "Clientes.txt"; 
+  printf("*** Bem-vindo ***\n"); 
+    
+  ListaGenerica * listaCliente = CriarLG();
+  LerficheiroClientes("Clientes.txt",listaCliente); 
 
-   ListaGenerica *LgCl = CriarLG();
-  LerficheiroClientes(ficheiroClientes,LgCl);
-  void *raw_result;
-    ShowLG(LgCl, raw_result);
+  ShowLG(listaCliente, MostrarCliente);
+  DestruirLG(listaCliente, DestruirCliente);
 
   return 0;
 }
