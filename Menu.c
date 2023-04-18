@@ -8,3 +8,13 @@ void menuPrincipal(){
   puts("==");
   puts("=  - Terminar o programa=");
 }
+
+void menuUtilizador(){
+  puts("====================================");
+  puts("=\tMenu Utilizador=");
+  puts("= 1 - Abrir caixa                  =");
+  puts("= 2 - Fechar caixa                 =");
+  puts("= 3 - Continuar                    =");
+  puts("= 4 - Terminar o programa          =");
+  puts("====================================");
+}
