@@ -14,7 +14,17 @@ void menuUtilizador(){
   puts("=\tMenu Utilizador=");
   puts("= 1 - Abrir caixa                  =");
   puts("= 2 - Fechar caixa                 =");
+  puts("= 2 - Estatistica                  =");
   puts("= 3 - Continuar                    =");
   puts("= 4 - Terminar o programa          =");
+  puts("====================================");
+}
+
+void menuEstatistica(){
+  puts("===============================================");
+  puts("=\tMenu Estatistica=");
+  puts("= 1 - Estatisticas gerais          =");
+  puts("= 2 - Lista de Pessoas atendidas por uma caixa=");
+  puts("= 2 - Sair                         =");
   puts("====================================");
 }
