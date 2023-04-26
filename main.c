@@ -6,15 +6,28 @@
 #include "texto.h"
 #include "texto.c"
 #include "funcoes.h"
+#include "supermercado.h"
 
 int main(void) {
   printf("*** Bem-vindo ***\n"); 
-    
+  
+ SUPERMERCADO * supermercado1 = CriarSM();
+  // cria as listas 
   ListaGenerica * listaCliente = CriarLG();
-  LerficheiroClientes("Clientes.txt",listaCliente); 
+  ListaGenerica * listaFuncionarios = CriarLG();
+  ListaGenerica * listaProdutos = CriarLG();
 
-  ShowLG(listaCliente, MostrarCliente);
+  // Lê dos ficheiros e alimenta as listas com dados dos clientes, funcionarios e produtos 
+  LerficheiroClientes("Clientes.txt",listaCliente); 
+  LerficheiroFuncionarios("Funcionarios.txt", listaFuncionarios); 
+  LerficheiroProdutos("Produtos.txt", listaProdutos);
+  
+  //ShowLG(listaProdutos, MostrarProduto);
+  
+  //limpa da memoria todas as listas 
   DestruirLG(listaCliente, DestruirCliente);
+  DestruirLG(listaFuncionarios, DestruirFuncionario);
+  DestruirLG(listaProdutos, DestruirProduto);
 
   return 0;
 }

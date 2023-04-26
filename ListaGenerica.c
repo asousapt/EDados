@@ -4,10 +4,38 @@
 
 CLIENTE* CriarCliente(char* numeroCliente,char* nomeCliente){
   CLIENTE* NovoCliente = (CLIENTE *) malloc(sizeof(CLIENTE));
-  
+ 
+
   NovoCliente->cod = atoi(numeroCliente);
-  strcpy(NovoCliente->nome,nomeCliente);
+   NovoCliente->nome = (char*) malloc(strlen(nomeCliente) + 1);
+    strcpy(NovoCliente->nome, nomeCliente);
+
   return NovoCliente;
+}
+
+//Cria um novo objecto funcionario 
+FUNCIONARIO* CriarFuncionario(char* numeroFuncionario,char* nomeFuncionario) {
+  FUNCIONARIO* novoFuncionario = (FUNCIONARIO *) malloc(sizeof(FUNCIONARIO));
+ 
+  novoFuncionario->cod = atoi(numeroFuncionario);
+  novoFuncionario->nome = (char*) malloc(strlen(nomeFuncionario) + 1);
+  strcpy(novoFuncionario->nome, nomeFuncionario);
+
+  return novoFuncionario;
+}
+
+// cria um novo objecto produto 
+PRODUTO* CriarProduto(char* codigo, char* designacao, char* preco, char* tempoCompra, char* tempoCaixa ){
+  PRODUTO* novoProduto = (PRODUTO *) malloc(sizeof(PRODUTO));
+
+  novoProduto->cod = atoi(codigo); 
+  novoProduto->designacao = (char*) malloc(strlen(designacao) + 1);
+  strcpy(novoProduto->designacao, designacao);
+  novoProduto->preco = atof(preco); 
+  novoProduto->tempoCaixa = atof(tempoCaixa);
+  novoProduto->tempoCompra = atof(tempoCompra);
+
+  return novoProduto;
 }
 
 ListaGenerica *CriarLG() {

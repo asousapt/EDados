@@ -19,7 +19,7 @@ typedef struct{
 
 typedef struct cliente {
     int cod;
-    char nome[100];
+    char* nome;
     // time_t entrada;
     // time_t saida;
     // int tempoEspera;
@@ -34,8 +34,8 @@ typedef struct produto{
     int cod;
     char *designacao;
     float preco;
-    time_t tempoCompra;
-    time_t tempoCaixa;
+    float tempoCompra;
+    float tempoCaixa;
 } PRODUTO;
 
 typedef struct Caixa {
@@ -48,7 +48,9 @@ typedef struct Caixa {
 } CAIXA;
 
 ListaGenerica * CriarLG();
+PRODUTO* CriarProduto(char* codigo, char* designacao, char* preco, char* tempoCompra, char* tempoCaixa );
 CLIENTE* CriarCliente(char* numeroCliente,char* NomeCliente);
+FUNCIONARIO* CriarFuncionario(char* numeroFuncionario,char* nomeFuncionario);
 void DestruirLG(ListaGenerica *lg, void (*fdest)(void *));
 void ShowLG(ListaGenerica *lg, void (*f)(void *));
 void AddBeginLG(ListaGenerica *lg, void *X);

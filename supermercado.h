@@ -2,7 +2,7 @@
 #include <time.h>
 #include "ListaGenerica.h"
 
-typedef struct supermercado{
+typedef struct {
     char *nome;
     time_t horaAbertura;
     time_t horaFecho;

@@ -15,78 +15,78 @@ typedef struct FilaEspera {
     int NEL;
 } FILAESPERA;
 
-FILA *CriarFila(){
-  FILA *NovaFila = (FILA *) malloc(sizeof(struct fila));
-  if (!NovaFila) return NULL;
-  NovaFila->Cabeca = NovaFila->Cauda = NULL;
-  NovaFila->NElementos = 0;
-  return NovaFila;
-}
+// FILA *CriarFila(){
+//   FILA *NovaFila = (FILA *) malloc(sizeof(struct fila));
+//   if (!NovaFila) return NULL;
+//   NovaFila->Cabeca = NovaFila->Cauda = NULL;
+//   NovaFila->NElementos = 0;
+//   return NovaFila;
+// }
 
-//5. Escreva uma função que liste todas as viaturas em espera, mostrando os seus dados.
-void ListarViaturas(FILA *Fila){
-  printf("\n %s", __FUNCTION__);
-  if(!Fila || !Fila->Cabeca) return;
-  ELEMENTO *p = Fila->Cabeca;
-  while(p){
-    MostrarViatura(p->Dados);
-    p=p->Seg;
-  }
-}
+// //5. Escreva uma função que liste todas as viaturas em espera, mostrando os seus dados.
+// void ListarViaturas(FILA *Fila){
+//   printf("\n %s", __FUNCTION__);
+//   if(!Fila || !Fila->Cabeca) return;
+//   ELEMENTO *p = Fila->Cabeca;
+//   while(p){
+//     MostrarViatura(p->Dados);
+//     p=p->Seg;
+//   }
+// }
 
-//6. Escreva uma função que calcule o tempo de lavagem da viatura em segundos.
-int TempoLavagem (time_t Inicio, time_t Fim){
-  return (int)difftime(Fim, Inicio);
-}
-//7. Escreva uma função que permita saber quantas viaturas estão ainda à espera da lavagem.
-int TotalViaturas(FILA *Fila){
-  if(!Fila || !Fila->Cabeca) return 0;
-  ELEMENTO *p = Fila->Cabeca;
-  int contador = 0;
-  while(p){
-    contador++;
-    p=p->Seg;
-  }
-  return contador;
-}
+// //6. Escreva uma função que calcule o tempo de lavagem da viatura em segundos.
+// int TempoLavagem (time_t Inicio, time_t Fim){
+//   return (int)difftime(Fim, Inicio);
+// }
+// //7. Escreva uma função que permita saber quantas viaturas estão ainda à espera da lavagem.
+// int TotalViaturas(FILA *Fila){
+//   if(!Fila || !Fila->Cabeca) return 0;
+//   ELEMENTO *p = Fila->Cabeca;
+//   int contador = 0;
+//   while(p){
+//     contador++;
+//     p=p->Seg;
+//   }
+//   return contador;
+// }
 
-//8. Escreva uma função que permita inserir uma viatura na fila de espera.
-void InserirViatura(FILA *Fila, VIATURA *Viatura){
-  if(!Fila || !Viatura) return;
-// criação do elemento para guardar a nova viatura
-ELEMENTO *NovoE = (ELEMENTO*)malloc(sizeof(ELEMENTO));
-NovoE->Dados=Viatura;
-NovoE->Seg=NULL;
+// //8. Escreva uma função que permita inserir uma viatura na fila de espera.
+// void InserirViatura(FILA *Fila, VIATURA *Viatura){
+//   if(!Fila || !Viatura) return;
+// // criação do elemento para guardar a nova viatura
+// ELEMENTO *NovoE = (ELEMENTO*)malloc(sizeof(ELEMENTO));
+// NovoE->Dados=Viatura;
+// NovoE->Seg=NULL;
   
-  if(!Fila->Cabeca){    // caso especifico Fila vazia
-   Fila->Cabeca = NovoE;
-   Fila->Cauda = NovoE;
-  }
-  else{                 // tem pelo menos um elemento
-    (Fila->Cauda)->Seg = NovoE;
-    Fila->Cauda = NovoE;    // atualizar a cauda para o "novo" ultimo elemento
-  }
-  Fila->NElementos++;
-}
+//   if(!Fila->Cabeca){    // caso especifico Fila vazia
+//    Fila->Cabeca = NovoE;
+//    Fila->Cauda = NovoE;
+//   }
+//   else{                 // tem pelo menos um elemento
+//     (Fila->Cauda)->Seg = NovoE;
+//     Fila->Cauda = NovoE;    // atualizar a cauda para o "novo" ultimo elemento
+//   }
+//   Fila->NElementos++;
+// }
 
-// 9. Escreva uma função que permita retirar uma viatura da fila de espera, mas que antes preencha o tempo de saída e calcule o tempo de lavagem para mostrar ao utilizador.
+// // 9. Escreva uma função que permita retirar uma viatura da fila de espera, mas que antes preencha o tempo de saída e calcule o tempo de lavagem para mostrar ao utilizador.
 
-ELEMENTO* RemoverViatura(FILA *Fila){
-  if(!Fila || !Fila->Cabeca) return NULL;
-  ELEMENTO *Ret;
-  Ret=Fila->Cabeca;
-  if(Fila->Cabeca==Fila->Cauda){//Só tem 1 Elemento
-    Fila->Cabeca = Fila->Cauda = NULL;
-  }
-  else{
-    Fila->Cabeca=(Fila->Cabeca)->Seg; // A cabeça passa a ser o segundo elemento
-  }
-  Fila->NElementos--;
+// ELEMENTO* RemoverViatura(FILA *Fila){
+//   if(!Fila || !Fila->Cabeca) return NULL;
+//   ELEMENTO *Ret;
+//   Ret=Fila->Cabeca;
+//   if(Fila->Cabeca==Fila->Cauda){//Só tem 1 Elemento
+//     Fila->Cabeca = Fila->Cauda = NULL;
+//   }
+//   else{
+//     Fila->Cabeca=(Fila->Cabeca)->Seg; // A cabeça passa a ser o segundo elemento
+//   }
+//   Fila->NElementos--;
 
-  // especifica ao problema
-  Ret->Dados->TempoSaida = time(NULL);
-  Ret->Dados->TempoLavagem = TempoLavagem (Ret->Dados->TempoEntrada, Ret->Dados->TempoSaida);
-  return Ret;
-}
+//   // especifica ao problema
+//   Ret->Dados->TempoSaida = time(NULL);
+//   Ret->Dados->TempoLavagem = TempoLavagem (Ret->Dados->TempoEntrada, Ret->Dados->TempoSaida);
+//   return Ret;
+// }
 
 #endif // FILA_H_INCLUDED
