@@ -2,7 +2,7 @@
 #include <time.h>
 #include "ListaGenerica.h"
 
-typedef struct {
+typedef struct supermercado{
     char *nome;
     time_t horaAbertura;
     time_t horaFecho;
@@ -16,4 +16,4 @@ typedef struct {
     ListaGenerica *Caixas;
 } SUPERMERCADO;
 
-SUPERMERCADO CriarSM();
+SUPERMERCADO * CriarSM();

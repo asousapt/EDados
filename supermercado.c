@@ -1,23 +1,33 @@
 #include <time.h>
-
+#include <stdio.h>
+#include <string.h>
 #include "supermercado.h"
 #include "funcoes.c"
 
-SUPERMERCADO CriarSM(){
+SUPERMERCADO * CriarSM(){
     int nCaixas, nmrMinCliFechaCaixa, nmrMaxClientesFila;
-    time_t horaAbertura, horaFecho;
+    int horaAbertura, minutoAbertura, horaFecho, minutoFecho = 0;
     char *nome;
 
     SUPERMERCADO *SM = (SUPERMERCADO *)malloc(sizeof(SUPERMERCADO));
 
     nome = getString("Nome do Supermercado:");
     
-    //pedir horas (testar se funciona!)
-    printf("\nHora de abertura (HH:MM):");
-    scanf("%H:%M",&horaAbertura);
+    // pede ao utilizador a hora de abertura do supermercado
+    do
+    {
+        printf("\nHora de abertura (HH:MM):");
+        scanf("%d:%d", &horaAbertura, &minutoAbertura);
+    } while (validaHoras(horaAbertura, minutoAbertura) == 0);
+    
 
-    printf("\nHora de fecho (HH:MM):");
-    scanf("%H:%M",&horaFecho);
+    //pede ao utilizador a hora de fecho do supermercado
+    do
+    {
+        printf("\nHora de fecho (HH:MM):");
+        scanf("%d:%d",&horaFecho, &minutoFecho);
+    } while (validaHoras(horaAbertura, minutoAbertura) == 0);
+    
 
     nCaixas = validarInt("\nNúmero de caixas do supermercado:",1,10);
     nmrMaxClientesFila = validarInt("\nMáximo de clientes na fila:",1,20);

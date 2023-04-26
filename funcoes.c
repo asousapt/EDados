@@ -4,9 +4,6 @@
 #include "ListaGenerica.h"
 #include "funcoes.h"
 
-
-
-
 int validarInt(char *pergunta, int menor,int maior){
 	int num;
 	do{
@@ -30,4 +27,12 @@ char *getString(char *pergunta){
 
 int aleatorio(int min, int max){ 
 	return min + rand()%(max-min+1);
+}
+
+int validaHoras(int hora, int minutos) {
+	if (hora == 0 && minutos == 0 ) return 0; 
+	if (hora < 0 || hora > 23) return 0; 
+	if (minutos < 0 || minutos > 59) return 0; 
+			
+	return 1;
 }

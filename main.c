@@ -6,12 +6,14 @@
 #include "texto.h"
 #include "texto.c"
 #include "funcoes.h"
-#include "supermercado.h"
+#include "supermercado.c"
+
 
 int main(void) {
   printf("*** Bem-vindo ***\n"); 
   
- SUPERMERCADO * supermercado1 = CriarSM();
+ SUPERMERCADO * supermercadoActual = CriarSM();
+
   // cria as listas 
   ListaGenerica * listaCliente = CriarLG();
   ListaGenerica * listaFuncionarios = CriarLG();
