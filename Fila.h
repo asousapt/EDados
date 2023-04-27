@@ -1,22 +1,29 @@
 #ifndef FILA_H_INCLUDED
 #define FILA_H_INCLUDED
-
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
 #include "ListaGenerica.h"
 
-typedef struct NOFila{
-    CLIENTE   *Info;
-    struct NO *Prox;
+
+typedef struct {
+    void *Dados;
+    struct NOFILA *Prox;
 } NOFILA;
 
-typedef struct FilaEspera {
-    NOFILA *Inicio;
-    NOFILA *Fim;
-    int NEL;
-} FILAESPERA;
+typedef struct Filagenerica {
+    NOFILA *cabeca;
+    NOFILA *cauda;
+} FILAGENERICA;
 
-// FILA *CriarFila(){
-//   FILA *NovaFila = (FILA *) malloc(sizeof(struct fila));
+typedef struct compras {
+    CLIENTE* ClienteActual
+    ListaGenerica * ListaCompras; 
+} FILACOMPRAS;
+
+// FILAESPERA *CriarFila(){
+//   FILAESPERA *NovaFila = (FILAESPERA *) malloc(sizeof(struct FILAESPERA));
 //   if (!NovaFila) return NULL;
 //   NovaFila->Cabeca = NovaFila->Cauda = NULL;
 //   NovaFila->NElementos = 0;

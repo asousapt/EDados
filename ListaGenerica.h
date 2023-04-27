@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include "Fila.h"
 
 
 typedef struct NOG{
@@ -38,13 +39,13 @@ typedef struct produto{
     float tempoCaixa;
 } PRODUTO;
 
-typedef struct Caixa {
+typedef struct caixa {
     int numCaixa;
     int fechado; //1-fechado; 0-aberto
     time_t tempoEspera; //medio
     int contadorPessoas,contadorProdutos;
     FUNCIONARIO func;
-    //FILAESPERA Fila;
+    Filagenerica* filaCaixa;
 } CAIXA;
 
 ListaGenerica * CriarLG();

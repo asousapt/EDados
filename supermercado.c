@@ -55,3 +55,12 @@ SUPERMERCADO * CriarSM(){
 
     return SM;
 }
+
+int carregaSupermercado(SUPERMERCADO* supermercadoActual){
+    // Lê dos ficheiros e alimenta as listas com dados dos clientes, funcionarios e produtos 
+    if (LerficheiroClientes("Clientes.txt",supermercadoActual->Clientes) == 0) return 0; 
+    if (LerficheiroFuncionarios("Funcionarios.txt", supermercadoActual->Funcionarios) == 0) return 0;
+    if (LerficheiroProdutos("Produtos.txt", supermercadoActual->Produtos) == 0) return 0;
+
+    return 1;
+}
