@@ -45,7 +45,7 @@ typedef struct caixa {
     time_t tempoEspera; //medio
     int contadorPessoas,contadorProdutos;
     FUNCIONARIO func;
-    Filagenerica* filaCaixa;
+    FILAGENERICA* filaCaixa;
 } CAIXA;
 
 ListaGenerica * CriarLG();

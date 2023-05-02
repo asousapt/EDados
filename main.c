@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 #include "ListaGenerica.h"
-
-#include "Fila.h"
-
+#include "ListaGenerica.c"
 #include "texto.h"
 #include "texto.c"
 #include "funcoes.h"
 #include "supermercado.c"
+
 
 
 int main(void) {

@@ -17,10 +17,10 @@ typedef struct Filagenerica {
     NOFILA *cauda;
 } FILAGENERICA;
 
-typedef struct compras {
-    CLIENTE* ClienteActual
-    ListaGenerica * ListaCompras; 
-} FILACOMPRAS;
+// typedef struct compras {
+//     //CLIENTE* ClienteActual;
+//     ListaGenerica * ListaCompras; 
+// } FILACOMPRAS;
 
 // FILAESPERA *CriarFila(){
 //   FILAESPERA *NovaFila = (FILAESPERA *) malloc(sizeof(struct FILAESPERA));
