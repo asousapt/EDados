@@ -17,4 +17,5 @@ typedef struct supermercado{
 } SUPERMERCADO;
 
 SUPERMERCADO * CriarSM();
+void destruirSM(SUPERMERCADO super);
 int carregaSupermercado(SUPERMERCADO* supermercadoActual);

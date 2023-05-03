@@ -53,6 +53,10 @@ PRODUTO* CriarProduto(char* codigo, char* designacao, char* preco, char* tempoCo
 CLIENTE* CriarCliente(char* numeroCliente,char* NomeCliente);
 FUNCIONARIO* CriarFuncionario(char* numeroFuncionario,char* nomeFuncionario);
 void DestruirLG(ListaGenerica *lg, void (*fdest)(void *));
+void DestruirCliente(void *obj);
+void DestruirFuncionario(void *obj);
+void DestruirProduto(void *obj);
+void DestruirCaixa(void *obj);
 void ShowLG(ListaGenerica *lg, void (*f)(void *));
 void AddBeginLG(ListaGenerica *lg, void *X);
 int PertenceLG(ListaGenerica *lg, void *X, int (*fcomp)(void *, void *));

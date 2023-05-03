@@ -56,6 +56,9 @@ SUPERMERCADO * CriarSM(){
     return SM;
 }
 
+void destruirSM(SUPERMERCADO super){
+};
+
 int carregaSupermercado(SUPERMERCADO* supermercadoActual){
     // Lê dos ficheiros e alimenta as listas com dados dos clientes, funcionarios e produtos 
     if (LerficheiroClientes("Clientes.txt",supermercadoActual->Clientes) == 0) return 0; 
