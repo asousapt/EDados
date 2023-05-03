@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include "ListaGenerica.h"
 #include "supermercado.h"
-
-
-
 
 
 int main(void) {

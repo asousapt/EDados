@@ -19,11 +19,6 @@ typedef struct{
 }ListaGenerica;
 
 
-typedef struct funcionario {
-    int cod;
-    char *nome;
-} FUNCIONARIO;
-
 typedef struct produto{
     int cod;
     char *designacao;
@@ -35,8 +30,6 @@ typedef struct produto{
 
 ListaGenerica * CriarLG();
 PRODUTO* CriarProduto(char* codigo, char* designacao, char* preco, char* tempoCompra, char* tempoCaixa );
-
-FUNCIONARIO* CriarFuncionario(char* numeroFuncionario,char* nomeFuncionario);
 void DestruirLG(ListaGenerica *lg, void (*fdest)(void *));
 void ShowLG(ListaGenerica *lg, void (*f)(void *));
 void AddBeginLG(ListaGenerica *lg, void *X);

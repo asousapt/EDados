@@ -2,19 +2,6 @@
 #include "ListaGenerica.h"
 #include "Fila.h"
 
-
-
-//Cria um novo objecto funcionario 
-FUNCIONARIO* CriarFuncionario(char* numeroFuncionario,char* nomeFuncionario) {
-  FUNCIONARIO* novoFuncionario = (FUNCIONARIO *) malloc(sizeof(FUNCIONARIO));
- 
-  novoFuncionario->cod = atoi(numeroFuncionario);
-  novoFuncionario->nome = (char*) malloc(strlen(nomeFuncionario) + 1);
-  strcpy(novoFuncionario->nome, nomeFuncionario);
-
-  return novoFuncionario;
-}
-
 // cria um novo objecto produto 
 PRODUTO* CriarProduto(char* codigo, char* designacao, char* preco, char* tempoCompra, char* tempoCaixa ){
   PRODUTO* novoProduto = (PRODUTO *) malloc(sizeof(PRODUTO));
@@ -28,8 +15,6 @@ PRODUTO* CriarProduto(char* codigo, char* designacao, char* preco, char* tempoCo
 
   return novoProduto;
 }
-
-
 
 ListaGenerica *CriarLG() {
   printf("\n <%s>\n", __FUNCTION__);
@@ -54,7 +39,6 @@ void DestruirLG(ListaGenerica *lg, void (*fdest)(void *)) {
   }
   free(lg);
 }
-
 
 void ShowLG(ListaGenerica *lg, void (*f)(void *)) {
   printf("\n<%s>\n", __FUNCTION__);

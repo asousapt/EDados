@@ -5,6 +5,7 @@
 #include <string.h>
 #include "ListaGenerica.h"
 #include "Fila.h"
+#include "Funcionarios.h"
 
 typedef struct caixa {
     int numCaixa;

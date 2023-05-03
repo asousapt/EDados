@@ -11,9 +11,9 @@ int LerficheiroProdutos(char *ficheiro, ListaGenerica * LgProd);
 int LerficheiroClientes(char *ficheiro, ListaGenerica * LgCl);
 int LerficheiroFuncionarios(char *file, ListaGenerica * LgFunc);
 STRING *Read_Split_Line_File(FILE *f, int n_campos_max, int *n_campos_lidos, char *separadores);
-void MostrarFuncionario(void* F);
+
 void MostrarProduto(void* P);
-void DestruirFuncionario(void* F);
+
 void MostrarCaixa(void* F);
 void DestruirProduto(void* P);
 

@@ -120,24 +120,6 @@ int LerficheiroClientes(char *ficheiro , ListaGenerica * LgCl){
 }
 
 
-// Faz print de um Funcionario 
-void MostrarFuncionario(void* F){
-  FUNCIONARIO* objFuncionario = (FUNCIONARIO *) F;
-  printf("\n === Funcionario ===");
-  printf("\n Numero: %d", objFuncionario->cod);
-  printf("\n Nome: %s", objFuncionario->nome);
-
-}
-
-// Faz print de uma caixa 
-void MostrarCaixa(void* F){
-  CAIXA* objCaixa = (CAIXA *) F;
-  printf("\n === Caixa ===");
-  printf("\n Numero: %d", objCaixa->numCaixa);
-  printf("\n Nome: %s", objCaixa->NomeCaixa);
-
-}
-
 // Faz print de um produto 
 void MostrarProduto(void* P){
   PRODUTO* objProduto = (PRODUTO *) P;
@@ -151,10 +133,6 @@ void MostrarProduto(void* P){
 
 }
 
-void DestruirFuncionario(void* F){
-  FUNCIONARIO* objFuncionario = (FUNCIONARIO *) F;
-  free(objFuncionario);
-}
 
 void DestruirProduto(void* P){
   PRODUTO* objProduto = (PRODUTO *) P;

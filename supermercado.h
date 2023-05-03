@@ -4,6 +4,7 @@
 #include <time.h>
 #include "ListaGenerica.h"
 #include "Caixa.h"
+#include "Funcionarios.h"
 
 typedef struct supermercado{
     char *nome;
