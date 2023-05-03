@@ -41,10 +41,11 @@ typedef struct produto{
 
 typedef struct caixa {
     int numCaixa;
+    char * NomeCaixa;
     int fechado; //1-fechado; 0-aberto
-    time_t tempoEspera; //medio
+    float tempoEspera; //medio
     int contadorPessoas,contadorProdutos;
-    FUNCIONARIO func;
+    FUNCIONARIO* func;
     FILAGENERICA* filaCaixa;
 } CAIXA;
 

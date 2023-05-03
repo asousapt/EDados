@@ -34,6 +34,8 @@ SUPERMERCADO * CriarSM(){
     nmrMinCliFechaCaixa = validarInt("\nNúmero de clientes para fechar a caixa:",1,5);
     
     //Ler Ficheiros
+    int i; 
+    
     ListaGenerica *ListaCaixas = CriarLG();
     ListaGenerica *ListaClientes = CriarLG();
     ListaGenerica *ListaFuncionarios = CriarLG();
@@ -56,11 +58,23 @@ SUPERMERCADO * CriarSM(){
     return SM;
 }
 
+void carregaCaixas(SUPERMERCADO* supermercadoActual){
+    int numeroCaixas = supermercadoActual->numCaixas+10;
+    int i = 10;
+
+    for ( i = 10; i < numeroCaixas; i++)
+    {
+       CAIXA* caixaInserir = CriarCaixa(i);
+
+       AddBeginLG(supermercadoActual->Caixas,caixaInserir);
+    }
+}
+
 int carregaSupermercado(SUPERMERCADO* supermercadoActual){
     // Lê dos ficheiros e alimenta as listas com dados dos clientes, funcionarios e produtos 
     if (LerficheiroClientes("Clientes.txt",supermercadoActual->Clientes) == 0) return 0; 
     if (LerficheiroFuncionarios("Funcionarios.txt", supermercadoActual->Funcionarios) == 0) return 0;
     if (LerficheiroProdutos("Produtos.txt", supermercadoActual->Produtos) == 0) return 0;
-
+    carregaCaixas(supermercadoActual);
     return 1;
 }

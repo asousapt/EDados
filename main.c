@@ -21,7 +21,7 @@ if(carregaSupermercado(supermercadoActual) == 0) {
   return 0;
 }
 
-  ShowLG(supermercadoActual->Produtos, MostrarProduto);
+  ShowLG(supermercadoActual->Caixas, MostrarCaixa);
   
 free(supermercadoActual);
 

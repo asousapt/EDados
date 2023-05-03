@@ -1,3 +1,5 @@
+#ifndef SUPERMERCADO_H_INCLUDED
+#define SUPERMERCADO_H_INCLUDED
 #include <stdlib.h>
 #include <time.h>
 #include "ListaGenerica.h"
@@ -18,3 +20,6 @@ typedef struct supermercado{
 
 SUPERMERCADO * CriarSM();
 int carregaSupermercado(SUPERMERCADO* supermercadoActual);
+void carregaCaixas(SUPERMERCADO* supermercadoActual);
+
+#endif // SUPERMERCADO_H_INCLUDED
