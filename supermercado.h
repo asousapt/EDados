@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "ListaGenerica.h"
+#include "Caixa.h"
 
 typedef struct supermercado{
     char *nome;

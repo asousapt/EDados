@@ -2,16 +2,7 @@
 #include "ListaGenerica.h"
 #include "Fila.h"
 
-CLIENTE* CriarCliente(char* numeroCliente,char* nomeCliente){
-  CLIENTE* NovoCliente = (CLIENTE *) malloc(sizeof(CLIENTE));
- 
 
-  NovoCliente->cod = atoi(numeroCliente);
-   NovoCliente->nome = (char*) malloc(strlen(nomeCliente) + 1);
-    strcpy(NovoCliente->nome, nomeCliente);
-
-  return NovoCliente;
-}
 
 //Cria um novo objecto funcionario 
 FUNCIONARIO* CriarFuncionario(char* numeroFuncionario,char* nomeFuncionario) {
@@ -38,24 +29,7 @@ PRODUTO* CriarProduto(char* codigo, char* designacao, char* preco, char* tempoCo
   return novoProduto;
 }
 
-// Criar objecto caixa
-CAIXA* CriarCaixa(int numero ){
-  CAIXA* novaCaixa = (CAIXA *) malloc(sizeof(CAIXA));
-  char nome[10];
-  sprintf(nome, "Caixa %d", numero);
 
-  novaCaixa->numCaixa = numero; 
-  novaCaixa->contadorPessoas = 0;
-  novaCaixa->contadorProdutos = 0;
-  novaCaixa->fechado = 1;
-  // novaCaixa->filaCaixa
-  novaCaixa->func = NULL;
-  novaCaixa->tempoEspera = 0;
-  novaCaixa->NomeCaixa = (char*) malloc(strlen(nome) + 1);
-  strcpy(novaCaixa->NomeCaixa, nome);
-
-  return novaCaixa;
-}
 
 ListaGenerica *CriarLG() {
   printf("\n <%s>\n", __FUNCTION__);

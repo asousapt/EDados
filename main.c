@@ -1,11 +1,8 @@
 #include <stdio.h>
 #include <string.h>
-#include "ListaGenerica.h"
-#include "ListaGenerica.c"
-#include "texto.h"
-#include "texto.c"
-#include "funcoes.h"
-#include "supermercado.c"
+#include "supermercado.h"
+
+
 
 
 

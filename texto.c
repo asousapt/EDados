@@ -119,14 +119,6 @@ int LerficheiroClientes(char *ficheiro , ListaGenerica * LgCl){
     return 1;
 }
 
-// Faz print de um cliente 
-void MostrarCliente(void* C){
-  CLIENTE* objCliente = (CLIENTE *) C;
-  printf("\n === Cliente ===");
-  printf("\n Numero: %d", objCliente->cod);
-  printf("\n Nome: %s", objCliente->nome);
-
-}
 
 // Faz print de um Funcionario 
 void MostrarFuncionario(void* F){
@@ -157,12 +149,6 @@ void MostrarProduto(void* P){
   printf("\n Tempo Compra: %f", objProduto->tempoCompra);
   printf("\n Tempo Caixa: %f", objProduto->tempoCaixa);
 
-}
-
-//funcao que limpa da memoria o cliente 
-void DestruirCliente(void* C){
-  CLIENTE* objCliente = (CLIENTE *) C;
-  free(objCliente);
 }
 
 void DestruirFuncionario(void* F){

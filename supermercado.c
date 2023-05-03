@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "supermercado.h"
-#include "funcoes.c"
+#include"ListaGenerica.h"
 
 SUPERMERCADO * CriarSM(){
     int nCaixas, nmrMinCliFechaCaixa, nmrMaxClientesFila;
