@@ -4,6 +4,8 @@
 #include "ListaGenerica.h"
 #include "texto.h"
 #include "Fila.h"
+#include "Clientes.h"
+#include "Produtos.h"
 
 #define STRING char *
 #define MAX_LINHA_FICHEIRO 200
@@ -89,7 +91,6 @@ int LerficheiroFuncionarios(char *ficheiro, ListaGenerica * LgFunc) {
     return 1;
 }
 
-
 // funcao que le o ficheiro de clientes e coloca numa lista generica
 int LerficheiroClientes(char *ficheiro , ListaGenerica * LgCl){
   
@@ -117,24 +118,4 @@ int LerficheiroClientes(char *ficheiro , ListaGenerica * LgCl){
    
     fclose(F1);
     return 1;
-}
-
-
-// Faz print de um produto 
-void MostrarProduto(void* P){
-  PRODUTO* objProduto = (PRODUTO *) P;
-
-  printf("\n === Produto ===");
-  printf("\n Numero: %d", objProduto->cod);
-  printf("\n Descricao: %s", objProduto->designacao);
-  printf("\n Preco: %f", objProduto->preco);
-  printf("\n Tempo Compra: %f", objProduto->tempoCompra);
-  printf("\n Tempo Caixa: %f", objProduto->tempoCaixa);
-
-}
-
-
-void DestruirProduto(void* P){
-  PRODUTO* objProduto = (PRODUTO *) P;
-  free(objProduto);
 }

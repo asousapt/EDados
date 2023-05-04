@@ -7,7 +7,6 @@
 #include "Fila.h"
 #include "Caixa.h"
 
-
 typedef struct NOG{
     void *Info;
     struct NOG *Prox;
@@ -18,18 +17,8 @@ typedef struct{
     NOG *Inicio;
 }ListaGenerica;
 
-
-typedef struct produto{
-    int cod;
-    char *designacao;
-    float preco;
-    float tempoCompra;
-    float tempoCaixa;
-} PRODUTO;
-
-
 ListaGenerica * CriarLG();
-PRODUTO* CriarProduto(char* codigo, char* designacao, char* preco, char* tempoCompra, char* tempoCaixa );
+
 void DestruirLG(ListaGenerica *lg, void (*fdest)(void *));
 void ShowLG(ListaGenerica *lg, void (*f)(void *));
 void AddBeginLG(ListaGenerica *lg, void *X);

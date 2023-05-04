@@ -2,19 +2,6 @@
 #include "ListaGenerica.h"
 #include "Fila.h"
 
-// cria um novo objecto produto 
-PRODUTO* CriarProduto(char* codigo, char* designacao, char* preco, char* tempoCompra, char* tempoCaixa ){
-  PRODUTO* novoProduto = (PRODUTO *) malloc(sizeof(PRODUTO));
-
-  novoProduto->cod = atoi(codigo); 
-  novoProduto->designacao = (char*) malloc(strlen(designacao) + 1);
-  strcpy(novoProduto->designacao, designacao);
-  novoProduto->preco = atof(preco); 
-  novoProduto->tempoCaixa = atof(tempoCaixa);
-  novoProduto->tempoCompra = atof(tempoCompra);
-
-  return novoProduto;
-}
 
 ListaGenerica *CriarLG() {
   printf("\n <%s>\n", __FUNCTION__);

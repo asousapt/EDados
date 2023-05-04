@@ -1,8 +1,10 @@
 #ifndef SUPERMERCADO_H_INCLUDED
 #define SUPERMERCADO_H_INCLUDED
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include "ListaGenerica.h"
+#include "funcoes.h"
 #include "Caixa.h"
 #include "Funcionarios.h"
 

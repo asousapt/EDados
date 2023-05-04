@@ -1,8 +1,11 @@
-#include <time.h>
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
+#include <time.h>
+#include "funcoes.h"
 #include "supermercado.h"
-#include"ListaGenerica.h"
+#include "ListaGenerica.h"
+#include "Caixa.h"
+#include "Funcionarios.h"
 
 SUPERMERCADO * CriarSM(){
     int nCaixas, nmrMinCliFechaCaixa, nmrMaxClientesFila;

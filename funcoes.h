@@ -1,3 +1,8 @@
+#ifndef FUNCOES_H_INCLUDED
+#define FUNCOES_H_INCLUDED
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <stdlib.h>
 #include <time.h>
 
@@ -7,4 +12,4 @@ char *getString(char *pergunta);
 int aleatorio(int min, int max);
 int validaHoras(int hora, int minutos);
 
-
+#endif // FUNCOES_H_INCLUDED

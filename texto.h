@@ -3,6 +3,9 @@
 #include <stdio.h>
 #include "ListaGenerica.h"
 #include "Clientes.h"
+#include "funcoes.h"
+#include "Produtos.h"
+#include "Caixa.h"
 
 #define STRING char *
 
@@ -11,13 +14,6 @@ int LerficheiroProdutos(char *ficheiro, ListaGenerica * LgProd);
 int LerficheiroClientes(char *ficheiro, ListaGenerica * LgCl);
 int LerficheiroFuncionarios(char *file, ListaGenerica * LgFunc);
 STRING *Read_Split_Line_File(FILE *f, int n_campos_max, int *n_campos_lidos, char *separadores);
-
-void MostrarProduto(void* P);
-
-void MostrarCaixa(void* F);
-void DestruirProduto(void* P);
-
-
 
 #endif // TEXTO_H_INCLUDED
 
