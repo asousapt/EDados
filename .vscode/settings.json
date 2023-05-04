@@ -7,7 +7,13 @@
         "funcoes.h": "c",
         "array": "c",
         "string": "c",
-        "string_view": "c"
+        "string_view": "c",
+        "stdlib.h": "c",
+        "caixa.h": "c",
+        "supermercado.h": "c",
+        "fUNCIONARIOS.C": "cpp",
+        "stdio.h": "c",
+        "string.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

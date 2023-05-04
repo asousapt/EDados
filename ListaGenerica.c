@@ -2,28 +2,6 @@
 #include "ListaGenerica.h"
 #include "Fila.h"
 
-CLIENTE* CriarCliente(char* numeroCliente,char* nomeCliente){
-  CLIENTE* NovoCliente = (CLIENTE *) malloc(sizeof(CLIENTE));
- 
-
-  NovoCliente->cod = atoi(numeroCliente);
-   NovoCliente->nome = (char*) malloc(strlen(nomeCliente) + 1);
-    strcpy(NovoCliente->nome, nomeCliente);
-
-  return NovoCliente;
-}
-
-//Cria um novo objecto funcionario 
-FUNCIONARIO* CriarFuncionario(char* numeroFuncionario,char* nomeFuncionario) {
-  FUNCIONARIO* novoFuncionario = (FUNCIONARIO *) malloc(sizeof(FUNCIONARIO));
- 
-  novoFuncionario->cod = atoi(numeroFuncionario);
-  novoFuncionario->nome = (char*) malloc(strlen(nomeFuncionario) + 1);
-  strcpy(novoFuncionario->nome, nomeFuncionario);
-
-  return novoFuncionario;
-}
-
 // cria um novo objecto produto 
 PRODUTO* CriarProduto(char* codigo, char* designacao, char* preco, char* tempoCompra, char* tempoCaixa ){
   PRODUTO* novoProduto = (PRODUTO *) malloc(sizeof(PRODUTO));
@@ -62,6 +40,7 @@ void DestruirLG(ListaGenerica *lg, void (*fdest)(void *)) {
   free(lg);
 }
 
+<<<<<<< HEAD
 void DestruirCliente(void *obj){
   CLIENTE *cliente = (CLIENTE *) obj;
   free(cliente->nome);
@@ -83,6 +62,8 @@ void DestruirCaixa(void *obj){
   //Destruir Fila na caixas
 }
 
+=======
+>>>>>>> ccaab5cb81d227b08d1254c9cc10845951113dbf
 void ShowLG(ListaGenerica *lg, void (*f)(void *)) {
   printf("\n<%s>\n", __FUNCTION__);
   if (!lg)
@@ -95,7 +76,7 @@ void ShowLG(ListaGenerica *lg, void (*f)(void *)) {
 }
 
 void AddBeginLG(ListaGenerica *lg, void *X) {
-  printf("\n<%s>\n", __FUNCTION__);
+  //printf("\n<%s>\n", __FUNCTION__);
   if (!lg || !X)
     return;
   NOG *novono = (NOG *)malloc(sizeof(NOG));

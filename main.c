@@ -1,12 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "ListaGenerica.h"
-#include "ListaGenerica.c"
-#include "texto.h"
-#include "texto.c"
-#include "funcoes.h"
-#include "supermercado.c"
-
+#include "supermercado.h"
 
 
 int main(void) {
@@ -21,7 +16,7 @@ if(carregaSupermercado(supermercadoActual) == 0) {
   return 0;
 }
 
-  ShowLG(supermercadoActual->Produtos, MostrarProduto);
+  ShowLG(supermercadoActual->Caixas, MostrarCaixa);
   
 free(supermercadoActual);
 
