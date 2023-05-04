@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <time.h>
-#include "ListaGenerica.h"
 #include "Fila.h"
 
-// //cria fila generica
-// FILAGENERICA *CriarFila() {
-//     FILAGENERICA *q = (FILAGENERICA *) malloc(sizeof(FILAGENERICA));
-//     q->cabeca = q->cauda = NULL;
-//     return q;
-// }
+//cria fila generica
+FILAGENERICA *CriarFila() {
+    FILAGENERICA *fila = (FILAGENERICA *) malloc(sizeof(FILAGENERICA));
+    fila->cabeca = fila->cauda = NULL;
+    fila->tamanho = 0;
+    return fila;
+}
 
-// // Função para criar um novo nó para a fila passando apenas os dados
+// Função para criar um novo nó para a fila passando apenas os dados
 // NOFILA *CriarNoFila(void *dados) {
 //     NOFILA *novoNo = (NOFILA *) malloc(sizeof(NOFILA));
 //     novoNo->Dados = dados;
@@ -20,31 +20,31 @@
 // }
 
 // // Função para verificar se a fila está vazia
-// int FilaVazia(FILAGENERICA *q) {
-//     return q->cabeca == NULL;
+// int FilaVazia(FILAGENERICA *fila) {
+//     return fila->cabeca == NULL;
 // }
 
 // //adiciona na fila generica 
-// void AdicionaAFila(FILAGENERICA *q, void *dados) {
+// void AdicionaAFila(FILAGENERICA *fila, void *dados) {
 //     NOFILA *novoNo = CriarNoFila(dados);
-//     if (isEmpty(q)) {
-//         q->cabeca = q->cauda = novoNo;
+//     if (isEmpty(fila)) {
+//         fila->cabeca = fila->cauda = novoNo;
 //         return;
 //     }
-//     q->cauda->Prox = novoNo;
-//     q->cauda = novoNo;
+//     fila->cauda->Prox = novoNo;
+//     fila->cauda = novoNo;
 // }
 
 // //retira elemento da fila generica 
-// void *RetirarDaFila(FILAGENERICA *q) {
-//     if (isEmpty(q)) {
+// void *RetirarDaFila(FILAGENERICA *fila) {
+//     if (isEmpty(fila)) {
 //         return NULL;
 //     }
-//     NOFILA *temp = q->cabeca;
+//     NOFILA *temp = fila->cabeca;
 //     void *dados = temp->Dados;
-//     q->cabeca = q->cabeca->Prox;
-//     if (q->cabeca == NULL) {
-//         q->cauda = NULL;
+//     fila->cabeca = fila->cabeca->Prox;
+//     if (fila->cabeca == NULL) {
+//         fila->cauda = NULL;
 //     }
 //     free(temp);
 //     return dados;

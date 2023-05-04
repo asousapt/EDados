@@ -23,7 +23,12 @@ typedef struct supermercado{
 } SUPERMERCADO;
 
 SUPERMERCADO * CriarSM();
+<<<<<<< HEAD
+void destruirSM(SUPERMERCADO super);
+int carregaSupermercado(SUPERMERCADO* supermercadoActual);
+=======
 int carregaSupermercado(SUPERMERCADO* supermercadoActual);
 void carregaCaixas(SUPERMERCADO* supermercadoActual);
 
 #endif // SUPERMERCADO_H_INCLUDED
+>>>>>>> ccaab5cb81d227b08d1254c9cc10845951113dbf

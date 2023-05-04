@@ -17,16 +17,40 @@ void DestruirLG(ListaGenerica *lg, void (*fdest)(void *)) {
   if (!lg)
     return;
   NOG *P = lg->Inicio;
-  NOG *Rafael;
+  NOG *Pproximo;
   while (P) {
-    Rafael = P->Prox;
+    Pproximo = P->Prox;
     fdest(P->Info);
     free(P);
-    P = Rafael;
+    P = Pproximo;
   }
   free(lg);
 }
 
+<<<<<<< HEAD
+void DestruirCliente(void *obj){
+  CLIENTE *cliente = (CLIENTE *) obj;
+  free(cliente->nome);
+}
+
+void DestruirFuncionario(void *obj){
+  FUNCIONARIO *funcionario = (FUNCIONARIO *) obj;
+  free(funcionario->nome);
+}
+
+void DestruirProduto(void *obj){
+  PRODUTO *produto = (PRODUTO *) obj;
+  free(produto->designacao);
+}
+
+void DestruirCaixa(void *obj){
+  CAIXA *caixa = (CAIXA *) obj;
+  free(caixa->func);
+  //Destruir Fila na caixas
+}
+
+=======
+>>>>>>> ccaab5cb81d227b08d1254c9cc10845951113dbf
 void ShowLG(ListaGenerica *lg, void (*f)(void *)) {
   printf("\n<%s>\n", __FUNCTION__);
   if (!lg)

@@ -61,6 +61,10 @@ SUPERMERCADO * CriarSM(){
     return SM;
 }
 
+<<<<<<< HEAD
+void destruirSM(SUPERMERCADO super){
+};
+=======
 void carregaCaixas(SUPERMERCADO* supermercadoActual){
     int numeroCaixas = supermercadoActual->numCaixas+10;
     int i = 10;
@@ -72,6 +76,7 @@ void carregaCaixas(SUPERMERCADO* supermercadoActual){
        AddBeginLG(supermercadoActual->Caixas,caixaInserir);
     }
 }
+>>>>>>> ccaab5cb81d227b08d1254c9cc10845951113dbf
 
 int carregaSupermercado(SUPERMERCADO* supermercadoActual){
     // Lê dos ficheiros e alimenta as listas com dados dos clientes, funcionarios e produtos 
