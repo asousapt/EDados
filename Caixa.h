@@ -6,6 +6,7 @@
 
 #include "Funcionarios.h"
 #include "ListaGenerica.h"
+#include "funcoes.h"
 
 typedef struct caixa {
     int numCaixa;
@@ -19,6 +20,9 @@ typedef struct caixa {
 
 CAIXA* CriarCaixa(int numero );
 void MostrarCaixa(void* F);
+void DestruirCaixa(void *obj);
+CAIXA* ProcurarCaixa(ListaGenerica *lg,int numero);
+CAIXA* ProcurarCaixaAberta(ListaGenerica *lg,int numero);
 void AbrirCaixa(ListaGenerica *lg);
 
 #endif // CAIXA_H_INCLUDED

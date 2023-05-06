@@ -5,6 +5,8 @@
 #include <string.h>
 #include <time.h>
 
+#include "Produtos.h"
+
 typedef struct produto{
     int cod;
     char *designacao;
@@ -16,5 +18,6 @@ typedef struct produto{
 PRODUTO* CriarProduto(char* codigo, char* designacao, char* preco, char* tempoCompra, char* tempoCaixa );
 void MostrarProduto(void* P);
 void DestruirProduto(void* P);
+PRODUTO* ProcurarProdutos(ListaGenerica *lg,int codProduto);
 
 #endif // PRODUTOS_H_INCLUDED

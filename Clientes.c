@@ -27,3 +27,22 @@ void DestruirCliente(void* C){
   CLIENTE* objCliente = (CLIENTE *) C;
   free(objCliente);
 }
+
+CLIENTE* ProcurarCliente (ListaGenerica *lg,int codigoCliente){
+  CLIENTE *cl,*clR;
+  NOG *P = lg->Inicio;
+  while (P) {
+    cl = P->Info;
+    if (cl->cod == codigoCliente) {
+      clR = cl;
+    }
+    P = P->Prox;
+  }
+  return clR;
+}
+
+// void AdicionarClienteCaixa(ListaGenerica *lgCx,ListaGenerica *lgCl,int numeroCaixa,int codigoCliente){
+//   if (!lgCx || !lgCl) return;
+//   CAIXA *cx = ProcurarCaixaAberta(lgCx,numeroCaixa);
+//   CLIENTE *cl ;
+// }

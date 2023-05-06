@@ -26,3 +26,16 @@ void DestruirFuncionario(void* F){
   FUNCIONARIO* objFuncionario = (FUNCIONARIO *) F;
   free(objFuncionario);
 }
+
+FUNCIONARIO* ProcurarFuncionario(ListaGenerica *lg,int codFuncionario){
+  FUNCIONARIO *f,*fR;
+  NOG *P = lg->Inicio;
+  while (P) {
+    f = P->Info;
+    if (f->cod == codFuncionario) {
+      fR = f;
+    }
+    P = P->Prox;
+  }
+  return fR;
+}

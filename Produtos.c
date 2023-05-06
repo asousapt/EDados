@@ -34,3 +34,16 @@ void DestruirProduto(void* P){
   PRODUTO* objProduto = (PRODUTO *) P;
   free(objProduto);
 }
+
+PRODUTO* ProcurarProdutos(ListaGenerica *lg,int codProduto){
+  PRODUTO *prd,*prdR;
+  NOG *P = lg->Inicio;
+  while (P) {
+    prd = P->Info;
+    if (prd->cod == codProduto) {
+      prdR = prd;
+    }
+    P = P->Prox;
+  }
+  return prdR;
+}

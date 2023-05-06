@@ -31,17 +31,40 @@ void MostrarCaixa(void* F){
   printf("\n Fechado: %d\n", objCaixa->fechado);
 }
 
-void AbrirCaixa(ListaGenerica *lg){
-  int numero = validarInt("Número Caixa:",0,100);
-    
-  if (!lg) return;
-  CAIXA *cx;
+void DestruirCaixa(void* F){
+  CAIXA* objCaixa = (CAIXA *) F;
+  free(objCaixa);
+}
+
+CAIXA* ProcurarCaixa(ListaGenerica *lg,int numero){
+  CAIXA *cx,*cxR;
   NOG *P = lg->Inicio;
   while (P) {
     cx = P->Info;
     if (cx->numCaixa == numero) {
-      cx->fechado = 0;
+      cxR = cx;
     }
     P = P->Prox;
   }
+  return cxR;
+}
+CAIXA* ProcurarCaixaAberta(ListaGenerica *lg,int numero){
+  CAIXA *cx,*cxR;
+  NOG *P = lg->Inicio;
+  while (P) {
+    cx = P->Info;
+    if (cx->numCaixa == numero && cx->fechado == 0) {
+      cxR = cx;
+    }
+    P = P->Prox;
+  }
+  return cxR;
+}
+
+void AbrirCaixa(ListaGenerica *lg){
+  if (!lg) return;
+  int numero = validarInt("Número Caixa:",0,100);
+    
+  CAIXA *cx = ProcurarCaixa(lg,numero);
+  cx->fechado = 0;
 }
