@@ -4,7 +4,6 @@
 
 
 ListaGenerica *CriarLG() {
-  printf("\n <%s>\n", __FUNCTION__);
   ListaGenerica *L = (ListaGenerica *)malloc(sizeof(ListaGenerica));
   L->Inicio = NULL;
   L->NEL = 0;
@@ -13,7 +12,6 @@ ListaGenerica *CriarLG() {
 }
 
 void DestruirLG(ListaGenerica *lg, void (*fdest)(void *)) {
-  printf("\n <%s>\n", __FUNCTION__);
   if (!lg)
     return;
   NOG *P = lg->Inicio;
@@ -28,7 +26,6 @@ void DestruirLG(ListaGenerica *lg, void (*fdest)(void *)) {
 }
 
 void ShowLG(ListaGenerica *lg, void (*f)(void *)) {
-  printf("\n<%s>\n", __FUNCTION__);
   if (!lg)
     return;
   NOG *P = lg->Inicio;
