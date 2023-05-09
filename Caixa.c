@@ -4,10 +4,8 @@
 #include "Caixa.h"
 
 // Criar objecto caixa
-CAIXA* CriarCaixa(int numero ){
+CAIXA* CriarCaixa(int numero){
   CAIXA* novaCaixa = (CAIXA *) malloc(sizeof(CAIXA));
-  char nome[10];
-  sprintf(nome, "Caixa %d", numero);
 
   novaCaixa->numCaixa = numero; 
   novaCaixa->contadorPessoas = 0;
@@ -16,8 +14,6 @@ CAIXA* CriarCaixa(int numero ){
   // novaCaixa->filaCaixa
   novaCaixa->func = NULL;
   novaCaixa->tempoEspera = 0;
-  novaCaixa->NomeCaixa = (char*) malloc(strlen(nome) + 1);
-  strcpy(novaCaixa->NomeCaixa, nome);
 
   return novaCaixa;
 }
@@ -25,9 +21,11 @@ CAIXA* CriarCaixa(int numero ){
 // Faz print de uma caixa 
 void MostrarCaixa(void* F){
   CAIXA* objCaixa = (CAIXA *) F;
+  char *nome = (char *)malloc(10);
+  sprintf(nome,"%s %d", "Caixa", objCaixa->numCaixa);
   printf("\n === Caixa ===");
   printf("\n Numero: %d", objCaixa->numCaixa);
-  printf("\n Nome: %s", objCaixa->NomeCaixa);
+  printf("\n Nome: %s", nome);
   printf("\n Fechado: %d\n", objCaixa->fechado);
 }
 
@@ -68,3 +66,4 @@ void AbrirCaixa(ListaGenerica *lg){
   CAIXA *cx = ProcurarCaixa(lg,numero);
   cx->fechado = 0;
 }
+
