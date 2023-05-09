@@ -29,10 +29,12 @@ void AdicionaAFila(FILAGENERICA *fila, void *dados) {
     NOFILA *novoNo = CriarNoFila(dados);
     if (FilaVazia(fila)) {
         fila->cabeca = fila->cauda = novoNo;
+        fila->tamanho++;
         return;
     }
     fila->cauda->Prox = novoNo;
     fila->cauda = novoNo;
+    fila->tamanho++;
 }
 
 //retira elemento da fila generica 
@@ -47,5 +49,15 @@ void *RetirarDaFila(FILAGENERICA *fila) {
         fila->cauda = NULL;
     }
     free(temp);
+    fila->tamanho--;
     return dados;
+}
+
+void MostrarFila(FILAGENERICA *Fila, void (*f)(void *)){
+    if(!Fila || !Fila->cabeca) return;
+    NOFILA *p = (NOFILA *)Fila->cabeca;
+    while(p){
+        f(p->Dados);
+        p=p->Prox;
+    }
 }

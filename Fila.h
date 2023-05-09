@@ -16,4 +16,11 @@ typedef struct Filagenerica {
     int tamanho;
 } FILAGENERICA;
 
+FILAGENERICA *CriarFila();
+int FilaVazia(FILAGENERICA *fila);
+void AdicionaAFila(FILAGENERICA *fila, void *dados);
+void *RetirarDaFila(FILAGENERICA *fila);
+void MostrarFila(FILAGENERICA *Fila, void (*f)(void *));
+
+
 #endif
