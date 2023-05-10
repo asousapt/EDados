@@ -17,5 +17,10 @@ typedef struct Filagenerica {
 } FILAGENERICA;
 
 FILAGENERICA *CriarFila();
+int FilaVazia(FILAGENERICA *fila);
+void AdicionaAFila(FILAGENERICA *fila, void *dados);
+void *RetirarDaFila(FILAGENERICA *fila);
+void MostrarFila(FILAGENERICA *Fila, void (*f)(void *));
 
-#endif FILA_H_INCLUDED
+
+#endif

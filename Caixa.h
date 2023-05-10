@@ -10,7 +10,6 @@
 
 typedef struct caixa {
     int numCaixa;
-    char * NomeCaixa;
     int fechado; //1-fechado; 0-aberto
     float tempoEspera; //medio
     int contadorPessoas,contadorProdutos;
@@ -23,6 +22,7 @@ void MostrarCaixa(void* F);
 void DestruirCaixa(void *obj);
 CAIXA* ProcurarCaixa(ListaGenerica *lg,int numero);
 CAIXA* ProcurarCaixaAberta(ListaGenerica *lg,int numero);
+void MostrarCaixasEstado(ListaGenerica *lg,int estado);
 void AbreFechaCaixa(ListaGenerica *lg);
 
 #endif // CAIXA_H_INCLUDED

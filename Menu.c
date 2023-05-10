@@ -1,30 +1,36 @@
 #include "menu.h"
- 
-void menuPrincipal(){
-  puts("====================================");
-  puts("=\t\tMenu Principal=");
-  puts("= 1 - Iniciar o Programa=");
-  puts("==");
-  puts("==");
-  puts("=  - Terminar o programa=");
+
+int menuUtilizador(){
+  int opcao = 0;
+
+  printf("====================================");
+  printf("========== Menu Utilizador =========");
+  printf("====================================");
+  printf("= 1 - Abrir Caixa                  =");
+  printf("= 2 - Fechar Caixa                 =");
+  printf("= 3 - Mostrar Caixas               =");
+  printf("= 4 - Mostrar Clientes da Caixa    =");
+  printf("= 5 - Pesquisar Cliente            =");
+  printf("= 5 - Mos Cliente            =");
+  printf("= 6 - Continuar                    =");
+  printf("= 0 - Terminar o programa          =");
+  printf("====================================");
+  scanf("%d",&opcao);
+
+  return opcao;
 }
 
-void menuUtilizador(){
-  puts("====================================");
-  puts("=\tMenu Utilizador=");
-  puts("= 1 - Abrir caixa                  =");
-  puts("= 2 - Fechar caixa                 =");
-  puts("= 2 - Estatistica                  =");
-  puts("= 3 - Continuar                    =");
-  puts("= 4 - Terminar o programa          =");
-  puts("====================================");
-}
+int menuMostrarCaixa(){
+  int opcao = 0;
+  printf("====================================");
+  printf("========== Mostrar Caixas ==========");
+  printf("====================================");
+  printf("= 1 - Todas as Caixas              =");
+  printf("= 2 - Caixas Abertas               =");
+  printf("= 3 - Caixas Fechadas              =");
+  printf("= 0 - Sair                         =");
+  printf("====================================");
+  scanf("%d",&opcao);
 
-void menuEstatistica(){
-  puts("===============================================");
-  puts("=\tMenu Estatistica=");
-  puts("= 1 - Estatisticas gerais          =");
-  puts("= 2 - Lista de Pessoas atendidas por uma caixa=");
-  puts("= 2 - Sair                         =");
-  puts("====================================");
+  return opcao;
 }
