@@ -61,10 +61,10 @@ CAIXA* ProcurarCaixaAberta(ListaGenerica *lg,int numero){
   return cxR;
 }
 
-void AbrirCaixa(ListaGenerica *lg){
+void AbreFechaCaixa(ListaGenerica *lg){
   if (!lg) return;
   int numero = validarInt("Número Caixa:",0,100);
     
   CAIXA *cx = ProcurarCaixa(lg,numero);
-  cx->fechado = 0;
+  cx->fechado = !cx->fechado;
 }

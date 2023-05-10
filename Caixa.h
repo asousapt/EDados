@@ -23,6 +23,6 @@ void MostrarCaixa(void* F);
 void DestruirCaixa(void *obj);
 CAIXA* ProcurarCaixa(ListaGenerica *lg,int numero);
 CAIXA* ProcurarCaixaAberta(ListaGenerica *lg,int numero);
-void AbrirCaixa(ListaGenerica *lg);
+void AbreFechaCaixa(ListaGenerica *lg);
 
 #endif // CAIXA_H_INCLUDED
