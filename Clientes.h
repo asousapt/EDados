@@ -16,6 +16,7 @@ CLIENTE* CriarCliente(char* numeroCliente,char* NomeCliente);
 void MostrarCliente(void* C);
 void DestruirCliente(void* C); 
 CLIENTE* ProcurarCliente (ListaGenerica *lg,int codigoCliente);
+int validaCliente(void *elem1, void *elem2);
 // void AdicionarClienteCaixa(ListaGenerica *lgCx,ListaGenerica *lgCl,int numeroCaixa,int codigoCliente);
 
 #endif // CLIENTES_H_INCLUDED

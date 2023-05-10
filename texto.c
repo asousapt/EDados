@@ -6,6 +6,7 @@
 #include "Fila.h"
 #include "Clientes.h"
 #include "Produtos.h"
+#include "Log.h"
 
 #define STRING char *
 #define MAX_LINHA_FICHEIRO 200
@@ -45,22 +46,26 @@ int LerficheiroProdutos(char *ficheiro, ListaGenerica * LgProd) {
     
     FILE *F1 = fopen(ficheiro,"r"); 
     if (!F1) {
-        printf("\n\n\tImpossivel abrir Ficheiro \n\n");
+        printf("\n\n\tImpossivel abrir Ficheiro de produtos!\n\n");
         return 0;
     }
-
+    printf("A importar produtos...\n");
+    
      while(!feof(F1))
     {
         STRING *V = Read_Split_Line_File(F1, n_campos_max, &n_campos_lidos, "\t\r"); 
        
         PRODUTO * produtoInserir = CriarProduto(V[0], V[1], V[2], V[3], V[4]);
         
-        AddBeginLG(LgProd,produtoInserir);
-
+        if (PertenceLG(LgProd, produtoInserir, validaProduto) == 0) {
+            AddBeginLG(LgProd,produtoInserir);
+        }
+        
         free (V);
     }
    
     fclose(F1);
+    printf("Produtos importados com sucesso!\n");
     return 1;
 }
 
@@ -72,7 +77,7 @@ int LerficheiroFuncionarios(char *ficheiro, ListaGenerica * LgFunc) {
     
     FILE *F1 = fopen(ficheiro,"r"); 
     if (!F1) {
-        printf("\n\n\tImpossivel abrir Ficheiro \n\n");
+        printf("\n\n\tImpossivel abrir Ficheiro de funcionarios \n\n");
         return 0;
     }
 
@@ -81,18 +86,21 @@ int LerficheiroFuncionarios(char *ficheiro, ListaGenerica * LgFunc) {
         STRING *V = Read_Split_Line_File(F1, n_campos_max, &n_campos_lidos, "\t\r"); 
        
         FUNCIONARIO * funcionarioInserir = CriarFuncionario(V[0], V[1]);
+        if (PertenceLG(LgFunc, funcionarioInserir,validaFuncionario) == 0) {
+            AddBeginLG(LgFunc,funcionarioInserir);
+        }
         
-        AddBeginLG(LgFunc,funcionarioInserir);
-
         free (V);
     }
    
     fclose(F1);
+    printf("Funcionários importados com sucesso!\n");
+
     return 1;
 }
 
 // funcao que le o ficheiro de clientes e coloca numa lista generica
-int LerficheiroClientes(char *ficheiro , ListaGenerica * LgCl){
+int LerficheiroClientes(char *ficheiro , SUPERMERCADO * supermercadoActual){
   
     int n_campos_max = 20;
     int n_campos_lidos;
@@ -100,7 +108,7 @@ int LerficheiroClientes(char *ficheiro , ListaGenerica * LgCl){
     
     FILE *F1 = fopen(ficheiro,"r"); 
     if (!F1) {
-        printf("\n\n\tImpossivel abrir Ficheiro \n\n");
+        printf("\n\n\tImpossivel abrir Ficheiro de Clientes!\n\n");
         return 0;
     }
     
@@ -111,11 +119,18 @@ int LerficheiroClientes(char *ficheiro , ListaGenerica * LgCl){
        
         CLIENTE *clienteInserir = CriarCliente(V[0], V[1]);
         
-        AddBeginLG(LgCl,clienteInserir);
+       if (PertenceLG(supermercadoActual->Clientes, clienteInserir, validaCliente) == 0 ) {
+            AddBeginLG(supermercadoActual->Clientes,clienteInserir);
+        }
+        
 
         free (V);
     }
    
     fclose(F1);
+    //struct tm *data_hora_atual; 
+    //LOG  * logCriar = CriarLog("Clientes importados", data_hora_atual);
+    //AddBeginLG()
+    printf("Clientes importados com sucesso!\n");
     return 1;
 }

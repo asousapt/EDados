@@ -46,7 +46,7 @@ void AddBeginLG(ListaGenerica *lg, void *X) {
   lg->NEL++;
 }
 int PertenceLG(ListaGenerica *lg, void *X, int (*fcomp)(void *, void *)) {
-  printf("\n <%s>\n", __FUNCTION__);
+  //printf("\n <%s>\n", __FUNCTION__);
   if (!lg || !X)
     return 0;
   NOG *P = lg->Inicio;
