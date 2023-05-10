@@ -71,3 +71,19 @@ void AbreFechaCaixa(ListaGenerica *lg){
     cx->fechado = !cx->fechado;
   }
 }
+
+void MostrarCaixasEstado(ListaGenerica *lg,int estado){
+  CAIXA *cx;
+  NOG *P = lg->Inicio;
+  while (P) {
+    cx = P->Info;
+    if (cx->fechado == estado) {
+      char *nome = (char *)malloc(10);
+      sprintf(nome,"%s %d", "Caixa", cx->numCaixa);
+      printf("\n === Caixa ===");
+      printf("\n Numero: %d", cx->numCaixa);
+      printf("\n Nome: %s", nome);
+    }
+    P = P->Prox;
+  }
+}
