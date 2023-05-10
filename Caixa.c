@@ -66,5 +66,10 @@ void AbreFechaCaixa(ListaGenerica *lg){
   int numero = validarInt("Número Caixa:",0,100);
     
   CAIXA *cx = ProcurarCaixa(lg,numero);
-  cx->fechado = !cx->fechado;
+  if (cx = NULL){
+    printf("\nCaixa não existe!");
+  } 
+  else {
+    cx->fechado = !cx->fechado;
+  }
 }

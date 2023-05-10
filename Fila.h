@@ -16,4 +16,6 @@ typedef struct Filagenerica {
     int tamanho;
 } FILAGENERICA;
 
+FILAGENERICA *CriarFila();
+
 #endif FILA_H_INCLUDED
