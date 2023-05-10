@@ -7,6 +7,7 @@
 #include "Clientes.h"
 #include "Produtos.h"
 #include "Log.h"
+#include "supermercado.h"
 
 #define STRING char *
 #define MAX_LINHA_FICHEIRO 200
@@ -128,9 +129,9 @@ int LerficheiroClientes(char *ficheiro , SUPERMERCADO * supermercadoActual){
     }
    
     fclose(F1);
-    //struct tm *data_hora_atual; 
-    //LOG  * logCriar = CriarLog("Clientes importados", data_hora_atual);
-    //AddBeginLG()
+    struct tm *data_hora_atual; 
+    LOG  * logCriar = CriarLog("Clientes importados", data_hora_atual);
+    AddBeginLG(supermercadoActual->LogApp, logCriar);
     printf("Clientes importados com sucesso!\n");
     return 1;
 }

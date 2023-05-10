@@ -11,10 +11,10 @@
 
 
 typedef struct log {
-    struct tm *data_hora_atual;  
+    time_t *data_hora_atual;  
     char * mensagem; 
 } LOG;
 
-LOG* CriarLog(char * mensagem, time_t dataAccao);
+LOG* CriarLog(char * mensagem, time_t *dataAccao);
 void MostrarLog(void* C);
 #endif // LOG_H_INCLUDED

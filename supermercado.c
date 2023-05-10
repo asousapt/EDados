@@ -59,7 +59,7 @@ SUPERMERCADO * CriarSM(){
     SM->Clientes = ListaClientes;
     SM->Funcionarios = ListaFuncionarios;
     SM->Produtos = ListaProdutos;
-
+    SM->LogApp = ListaLogApp;
     return SM;
 }
 

@@ -34,7 +34,7 @@ int main(void) {
 
   //ShowLG(supermercadoActual->Caixas, MostrarCaixa);
   //AbreFechaCaixa(supermercadoActual->Caixas);
-  ShowLG(supermercadoActual->Clientes, MostrarCliente);
+  //ShowLG(supermercadoActual->LogApp, MostrarLog);
 
   free(supermercadoActual);
 
