@@ -39,7 +39,7 @@ void AdicionaAFila(FILAGENERICA *fila, void *dados) {
 
 //retira elemento da fila generica 
 void *RetirarDaFila(FILAGENERICA *fila) {
-    if (isEmpty(fila)) {
+    if (FilaVazia(fila)) {
         return NULL;
     }
     NOFILA *temp = fila->cabeca;

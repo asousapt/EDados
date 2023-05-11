@@ -7,6 +7,7 @@
 #include "Caixa.h"
 #include "Funcionarios.h"
 #include "texto.h"
+#include "Fila.h"
 
 // estes ficheiros estao incluidos aqui para compilar apenas com main.c 
 #include "funcoes.c"
@@ -17,6 +18,7 @@
 #include "Produtos.c"
 #include "Funcionarios.c"
 #include "Caixa.c"
+#include "Fila.c"
 
 int main(void) {
   printf("*** Bem-vindo ***\n"); 

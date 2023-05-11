@@ -7,6 +7,7 @@ void menuPrincipal(){
   puts("==");
   puts("==");
   puts("=  - Terminar o programa=");
+  puts("====================================");
 }
 
 void menuUtilizador(){
