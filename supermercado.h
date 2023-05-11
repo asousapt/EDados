@@ -20,6 +20,7 @@ typedef struct supermercado{
     ListaGenerica *Clientes;
     ListaGenerica *Funcionarios;
     ListaGenerica *Caixas;
+    ListaGenerica *LogApp;
 } SUPERMERCADO;
 
 SUPERMERCADO * CriarSM();

@@ -14,6 +14,16 @@ CLIENTE* CriarCliente(char* numeroCliente,char* nomeCliente){
   return NovoCliente;
 }
 
+// Funcao que faz a validacao se o cliente ja existe na lista 
+int validaCliente(void *elem1, void *elem2) {
+  CLIENTE* cliente1 = (CLIENTE *) elem1;
+  CLIENTE* cliente2 = (CLIENTE *) elem2;
+
+  if (cliente1->cod == cliente2->cod) return 1; 
+  
+  return 0;
+}
+
 // Faz print de um cliente 
 void MostrarCliente(void* C){
   CLIENTE* objCliente = (CLIENTE *) C;

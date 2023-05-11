@@ -19,5 +19,6 @@ PRODUTO* CriarProduto(char* codigo, char* designacao, char* preco, char* tempoCo
 void MostrarProduto(void* P);
 void DestruirProduto(void* P);
 PRODUTO* ProcurarProdutos(ListaGenerica *lg,int codProduto);
+int validaProduto(void *elem1, void *elem2);
 
 #endif // PRODUTOS_H_INCLUDED

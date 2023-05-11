@@ -39,3 +39,12 @@ FUNCIONARIO* ProcurarFuncionario(ListaGenerica *lg,int codFuncionario){
   }
   return fR;
 }
+
+int validaFuncionario(void *elem1, void *elem2) {
+  FUNCIONARIO* funcionario1 = (FUNCIONARIO *) elem1;
+  FUNCIONARIO* funcionario2 = (FUNCIONARIO *) elem2;
+
+  if (funcionario1->cod == funcionario2->cod) return 1; 
+  
+  return 0;
+}

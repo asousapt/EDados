@@ -47,3 +47,12 @@ PRODUTO* ProcurarProdutos(ListaGenerica *lg,int codProduto){
   }
   return prdR;
 }
+
+int validaProduto(void *elem1, void *elem2) {
+  PRODUTO* produto1 = (PRODUTO *) elem1;
+  PRODUTO* produto2 = (PRODUTO *) elem2;
+
+  if (produto1->cod == produto2->cod) return 1; 
+  
+  return 0;
+}

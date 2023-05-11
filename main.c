@@ -7,7 +7,7 @@
 #include "Caixa.h"
 #include "Funcionarios.h"
 #include "texto.h"
-#include "Fila.h"
+#include "Log.h"
 
 // estes ficheiros estao incluidos aqui para compilar apenas com main.c 
 #include "funcoes.c"
@@ -18,7 +18,7 @@
 #include "Produtos.c"
 #include "Funcionarios.c"
 #include "Caixa.c"
-#include "Fila.c"
+#include "Log.c"
 
 int main(void) {
   printf("*** Bem-vindo ***\n"); 
@@ -32,9 +32,9 @@ int main(void) {
     return 0;
   }
 
-  ShowLG(supermercadoActual->Caixas, MostrarCaixa);
-  AbrirCaixa(supermercadoActual->Caixas);
-  ShowLG(supermercadoActual->Caixas, MostrarCaixa);
+  //ShowLG(supermercadoActual->Caixas, MostrarCaixa);
+  //AbreFechaCaixa(supermercadoActual->Caixas);
+  //ShowLG(supermercadoActual->LogApp, MostrarLog);
 
   free(supermercadoActual);
 
