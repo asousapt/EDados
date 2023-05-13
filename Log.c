@@ -6,12 +6,11 @@
 
 LOG* CriarLog(char * mensagem, time_t *dataAccao){
     LOG* novoLog = (LOG *) malloc(sizeof(LOG));
-
+    
+    novoLog->data_hora_atual = (time_t*) malloc(sizeof(time_t));
+    novoLog->mensagem = (char*) malloc(strlen(mensagem) + 1);
+    novoLog->data_hora_atual = dataAccao;
     strcpy(novoLog->mensagem, mensagem);
-     time_t tempo_atual;
-    time(&tempo_atual);
-    novoLog->data_hora_atual = malloc(sizeof(time_t));
-    *(novoLog->data_hora_atual) = tempo_atual;
 
     return novoLog;
 }
@@ -20,5 +19,5 @@ void MostrarLog(void* C){
   LOG* objLog = (LOG *) C;
   printf("\n === Log ===");
   printf("\n Mensagem: %s", objLog->mensagem);
-  printf("\n Data: %s",objLog->data_hora_atual);
+  printf("\n Data: %s", ctime(&objLog->data_hora_atual));
 }

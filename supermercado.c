@@ -6,8 +6,11 @@
 #include "ListaGenerica.h"
 #include "Caixa.h"
 #include "Funcionarios.h"
+#include "Log.h"
 
 SUPERMERCADO * CriarSM(){
+    time_t dataAtual;
+
     int nCaixas, nmrMinCliFechaCaixa, nmrMaxClientesFila;
     int horaAbertura, minutoAbertura, horaFecho, minutoFecho = 0;
     char *nome;
@@ -60,26 +63,57 @@ SUPERMERCADO * CriarSM(){
     SM->Funcionarios = ListaFuncionarios;
     SM->Produtos = ListaProdutos;
     SM->LogApp = ListaLogApp;
+
+    time(&dataAtual);
+    LOG  * logCriar = CriarLog("Supermercado inicializado com sucesso!", dataAtual);
+    AddBeginLG(ListaLogApp, logCriar);
+
     return SM;
 }
 
 void carregaCaixas(SUPERMERCADO* supermercadoActual){
+    time_t dataAtual;
+    time(&dataAtual);
+    LOG  * logCriar1 = CriarLog("Inicio de criacao de caixas do supermercado!", dataAtual);
+    AddBeginLG(supermercadoActual->LogApp, logCriar1);
+
     int numeroCaixas = supermercadoActual->numCaixas+10;
     int i = 10;
 
     for ( i = 10; i < numeroCaixas; i++)
     {
-       CAIXA* caixaInserir = CriarCaixa(i);
+        CAIXA* caixaInserir = CriarCaixa(i);
+                
+        AddBeginLG(supermercadoActual->Caixas,caixaInserir);
+        
+        time(&dataAtual);
+        char caixastr[30];
+        sprintf(caixastr, "Caixa %d criada com sucesso", i);
 
-       AddBeginLG(supermercadoActual->Caixas,caixaInserir);
+        LOG  * logCriar2 = CriarLog(caixastr, dataAtual);
+        AddBeginLG(supermercadoActual->LogApp, logCriar2);
     }
+    
+    time(&dataAtual);
+    LOG  * logCriar3 = CriarLog("Caixas criadas com sucesso!", dataAtual);
+    AddBeginLG(supermercadoActual->LogApp, logCriar3);
 }
 
 int carregaSupermercado(SUPERMERCADO* supermercadoActual){
+    time_t dataAtual;
+    time(&dataAtual);
+    
+    LOG  * logCriar1 = CriarLog("Inicio do carregamento do supermercado.", dataAtual);
+    AddBeginLG(supermercadoActual->LogApp, logCriar1);
+
     // Lê dos ficheiros e alimenta as listas com dados dos clientes, funcionarios e produtos 
     if (LerficheiroClientes("Clientes.txt",supermercadoActual) == 0) return 0; 
-    if (LerficheiroFuncionarios("Funcionarios.txt", supermercadoActual->Funcionarios) == 0) return 0;
-    if (LerficheiroProdutos("Produtos.txt", supermercadoActual->Produtos) == 0) return 0;
+    if (LerficheiroFuncionarios("Funcionarios.txt", supermercadoActual) == 0) return 0;
+    if (LerficheiroProdutos("Produtos.txt", supermercadoActual) == 0) return 0;
     carregaCaixas(supermercadoActual);
+    
+    time(&dataAtual);
+    LOG  * logCriar2 = CriarLog("Supermercado carregado cum sucesso!.", dataAtual);
+    AddBeginLG(supermercadoActual->LogApp, logCriar2);
     return 1;
 }

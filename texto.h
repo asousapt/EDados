@@ -6,14 +6,13 @@
 #include "funcoes.h"
 #include "Produtos.h"
 #include "Caixa.h"
+#include "supermercado.h"
 
 #define STRING char *
 
-// PRODUTO *LerFicheiroProdutos(char *file);
-int LerficheiroProdutos(char *ficheiro, ListaGenerica * LgProd);
+int LerficheiroProdutos(char *ficheiro, SUPERMERCADO * supermercadoActual);
 int LerficheiroClientes(char *ficheiro , SUPERMERCADO * supermercadoActual);
-//int LerficheiroClientes(char *ficheiro, ListaGenerica * LgCl);
-int LerficheiroFuncionarios(char *file, ListaGenerica * LgFunc);
+int LerficheiroFuncionarios(char *file, SUPERMERCADO * supermercadoActual);
 STRING *Read_Split_Line_File(FILE *f, int n_campos_max, int *n_campos_lidos, char *separadores);
 
 #endif // TEXTO_H_INCLUDED

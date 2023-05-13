@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Produtos.h"
+#include "ListaGenerica.h"
 
 // cria um novo objecto produto 
 PRODUTO* CriarProduto(char* codigo, char* designacao, char* preco, char* tempoCompra, char* tempoCaixa ){

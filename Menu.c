@@ -1,4 +1,4 @@
-#include "menu.h"
+#include "Menu.h"
 
 int menuUtilizador(){
   int opcao = 0;
