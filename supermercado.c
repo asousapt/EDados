@@ -48,6 +48,7 @@ SUPERMERCADO * CriarSM(){
     ListaGenerica *ListaProdutos = CriarLG();
     ListaGenerica *ListaProdutosGratis = CriarLG();
     ListaGenerica *ListaLogApp = CriarLG(); 
+    ListaGenerica *ListaClientesAsCompras = CriarLG(); 
 
     SM->nome = nome;
     
@@ -63,6 +64,8 @@ SUPERMERCADO * CriarSM(){
     SM->Funcionarios = ListaFuncionarios;
     SM->Produtos = ListaProdutos;
     SM->LogApp = ListaLogApp;
+    SM->ProdutosOferecidos = ListaProdutosGratis;
+    SM->ClientesAsCompras = ListaClientesAsCompras;
 
     time(&dataAtual);
     LOG  * logCriar = CriarLog("Supermercado inicializado com sucesso!", dataAtual);

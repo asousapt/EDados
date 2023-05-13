@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include "Fila.h"
 #include "Funcionarios.h"
 #include "ListaGenerica.h"
 #include "funcoes.h"
@@ -17,7 +17,7 @@ typedef struct caixa {
     FILAGENERICA* filaCaixa;
 } CAIXA;
 
-CAIXA* CriarCaixa(int numero );
+CAIXA* CriarCaixa(int numero);
 void MostrarCaixa(void* F);
 void DestruirCaixa(void *obj);
 CAIXA* ProcurarCaixa(ListaGenerica *lg,int numero);

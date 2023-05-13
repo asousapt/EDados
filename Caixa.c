@@ -1,17 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "Fila.h"
 #include "Caixa.h"
+
 
 // Criar objecto caixa
 CAIXA* CriarCaixa(int numero){
   CAIXA* novaCaixa = (CAIXA *) malloc(sizeof(CAIXA));
+  FILAGENERICA *filaCaixa = CriarFila();
 
   novaCaixa->numCaixa = numero; 
   novaCaixa->contadorPessoas = 0;
   novaCaixa->contadorProdutos = 0;
   novaCaixa->fechado = 1;
-  // novaCaixa->filaCaixa
+  novaCaixa->filaCaixa = filaCaixa;
   novaCaixa->func = NULL;
   novaCaixa->tempoEspera = 0;
 

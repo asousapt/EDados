@@ -8,11 +8,13 @@
 #include "Funcionarios.h"
 #include "texto.h"
 #include "Log.h"
+#include "Fila.h"
 
 // estes ficheiros estao incluidos aqui para compilar apenas com main.c 
 #include "funcoes.c"
 #include "supermercado.c"
 #include "ListaGenerica.c"
+#include "Fila.c"
 #include "texto.c"
 #include "Clientes.c"
 #include "Produtos.c"

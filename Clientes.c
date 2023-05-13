@@ -3,6 +3,7 @@
 #include <string.h>
 #include <time.h>
 #include "Clientes.h"
+#include "supermercado.h"
 
 CLIENTE* CriarCliente(char* numeroCliente,char* nomeCliente){
   CLIENTE* NovoCliente = (CLIENTE *) malloc(sizeof(CLIENTE));
@@ -51,8 +52,3 @@ CLIENTE* ProcurarCliente (ListaGenerica *lg,int codigoCliente){
   return clR;
 }
 
-// void AdicionarClienteCaixa(ListaGenerica *lgCx,ListaGenerica *lgCl,int numeroCaixa,int codigoCliente){
-//   if (!lgCx || !lgCl) return;
-//   CAIXA *cx = ProcurarCaixaAberta(lgCx,numeroCaixa);
-//   CLIENTE *cl ;
-// }
