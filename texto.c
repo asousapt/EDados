@@ -16,6 +16,23 @@
 typedef char LinhaTexto[MAX_LINHA_FICHEIRO];
 LinhaTexto LT;
 
+char *trim(char *str)
+{
+    char *end;
+
+    while(isspace((unsigned char)*str)) str++;
+
+    if(*str == 0)
+        return str;
+
+    end = str + strlen(str) - 1;
+    while(end > str && isspace((unsigned char)*end)) end--;
+
+    end[1] = '\0';
+
+    return str;
+}
+
 
 // funcao que faz separacao das strings da linha 
 STRING *Read_Split_Line_File(FILE *f, int n_campos_max, int *n_campos_lidos, char *separadores)

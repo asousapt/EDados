@@ -35,6 +35,16 @@ void ShowLG(ListaGenerica *lg, void (*f)(void *)) {
   }
 }
 
+void EscreveLG(ListaGenerica *lg, FILE *ficheiro, void (*f)(void *, FILE *)) {
+  if (!lg || !ficheiro)
+    return;
+  NOG *P = lg->Inicio;
+  while (P) {
+    f(P->Info, ficheiro);
+    P = P->Prox;
+  }
+}
+
 void AddBeginLG(ListaGenerica *lg, void *X) {
   //printf("\n<%s>\n", __FUNCTION__);
   if (!lg || !X)

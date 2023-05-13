@@ -17,4 +17,7 @@ typedef struct log {
 
 LOG* CriarLog(char * mensagem, time_t *dataAccao);
 void MostrarLog(void* C);
+void exportaLogCsv(ListaGenerica* ListaLog);
+void EscreveLog(void *L, FILE *ficheiro);
+
 #endif // LOG_H_INCLUDED
