@@ -67,6 +67,8 @@ void AbreFechaCaixa(ListaGenerica *lg){
   int numero = validarInt("Número Caixa:",0,100);
     
   CAIXA *cx = ProcurarCaixa(lg,numero);
-  cx->fechado = 0;
+  if (cx){
+    cx->fechado = !(cx->fechado);
+  }
 }
 

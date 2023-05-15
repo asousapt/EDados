@@ -37,7 +37,11 @@ int main(void) {
   //ShowLG(supermercadoActual->Caixas, MostrarCaixa);
   //AbreFechaCaixa(supermercadoActual->Caixas);
   //ShowLG(supermercadoActual->LogApp, MostrarLog);
-  exportaLogCsv(supermercadoActual->LogApp);
+  //ShowLG(supermercadoActual->Clientes, MostrarCliente);
+  //AdicionarClienteAsCompras(supermercadoActual);
+  //ShowLG(supermercadoActual->ClientesAsCompras, MostrarClientesAsCompras);
+
+  //exportaLogCsv(supermercadoActual->LogApp);
 
   free(supermercadoActual);
 
