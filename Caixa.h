@@ -11,7 +11,9 @@
 typedef struct caixa {
     int numCaixa;
     int fechado; //1-fechado; 0-aberto
-    float tempoEspera; //medio
+    float tempoTotal;
+    float tempoEsperaMed; //medio
+    float tempoEsperaReal;
     int contadorPessoas,contadorProdutos;
     FUNCIONARIO* func;
     FILAGENERICA* filaCaixa;

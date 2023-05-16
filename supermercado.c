@@ -12,7 +12,7 @@ SUPERMERCADO * CriarSM(){
     time_t dataAtual;
 
     int nCaixas, nmrMinCliFechaCaixa, nmrMaxClientesFila;
-    int horaAbertura, minutoAbertura, horaFecho, minutoFecho = 0;
+    int horaAbertura, minutoAbertura, horaFecho, minutoFecho,nmrClientesSupermercado, tempoMaxEspera = 0;
     char *nome;
 
     SUPERMERCADO *SM = (SUPERMERCADO *)malloc(sizeof(SUPERMERCADO));
@@ -36,9 +36,10 @@ SUPERMERCADO * CriarSM(){
     
 
     nCaixas = validarInt("\nNúmero de caixas do supermercado:",1,10);
-    nmrMaxClientesFila = validarInt("\nMáximo de clientes na fila:",1,20);
-    nmrMinCliFechaCaixa = validarInt("\nNúmero de clientes para fechar a caixa:",1,5);
-    
+    nmrMaxClientesFila = validarInt("\nNumero maximo de clientes na fila:",1,20);
+    nmrMinCliFechaCaixa = validarInt("\nNúmero minimo de clientes para fechar a caixa:",1,5);
+    tempoMaxEspera = validarInt("\nNúmero minimo de clientes para fechar a caixa:",1,60);
+    nmrClientesSupermercado = validarInt("\nNúmero maximo de clientes em simultaneo no supermercado",1,100);
     //Ler Ficheiros
     int i; 
     
@@ -58,7 +59,9 @@ SUPERMERCADO * CriarSM(){
     SM->numCaixas = nCaixas;
     SM->nmrMaxClientesFila = nmrMaxClientesFila;
     SM->nmrMinCliFechaCaixa = nmrMinCliFechaCaixa;
-
+    SM->tempoEsperaMax = tempoMaxEspera;
+    SM->nmrClientesSupermercado = nmrClientesSupermercado;
+    
     SM->Caixas = ListaCaixas;
     SM->Clientes = ListaClientes;
     SM->Funcionarios = ListaFuncionarios;
