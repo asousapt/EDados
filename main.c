@@ -43,6 +43,12 @@ int main(void) {
 
   //exportaLogCsv(supermercadoActual->LogApp);
 
+  while(1){
+    if(kbhit()){
+      puts("Key was pressed");
+    }
+  }
+
   free(supermercadoActual);
 
   return 0;
