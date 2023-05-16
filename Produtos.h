@@ -15,6 +15,12 @@ typedef struct produto{
     float tempoCaixa;
 } PRODUTO;
 
+typedef struct produtoscliente{
+    PRODUTO *produtoCL;
+    int quantidade;
+} PRODUTOCLIENTE;
+
+
 PRODUTO* CriarProduto(char* codigo, char* designacao, char* preco, char* tempoCompra, char* tempoCaixa );
 void MostrarProduto(void* P);
 void DestruirProduto(void* P);

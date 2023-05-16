@@ -16,9 +16,11 @@ typedef struct cliente {
 
 typedef struct ClientesAsCompras {
     CLIENTE *cliente;
-    ListaGenerica *Produtos;
-    time_t *horaEntrada;
-    time_t *horaCaixa;
+    ListaGenerica *ProdutosClientes;
+    time_t *horaEntradaSuper;
+    time_t *horaEntradaFila;
+    time_t *horaSaidaSupermercado;
+    float tempoEspera;
     int nProdutos;
 } CLIENTEASCOMPRAS;
 
@@ -31,7 +33,7 @@ CLIENTE* ProcurarCliente (ListaGenerica *lg,int codigoCliente);
 int validaCliente(void *elem1, void *elem2);
 
 //Funcoes: Cliente - Supermercado
-int VerificaClienteAsCompras (SUPERMERCADO *S,int codigoCliente);
+int VerificaClienteAsCompras(SUPERMERCADO *S,int codigoCliente);
 CLIENTEASCOMPRAS* ProcurarClienteAsCompras (ListaGenerica *lg,int codigoCliente);
 void AdicionarClienteAsCompras(SUPERMERCADO *S);
 void AdicionarProdutoAoCliente(SUPERMERCADO *S,int codigo);
