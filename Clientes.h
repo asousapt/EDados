@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <time.h>
 #include "ListaGenerica.h"
 #include "supermercado.h"
 #include "Produtos.h"
@@ -17,14 +17,11 @@ typedef struct cliente {
 typedef struct ClientesAsCompras {
     CLIENTE *cliente;
     ListaGenerica *Produtos;
+    time_t *horaEntrada;
+    time_t *horaCaixa;
     int nProdutos;
 } CLIENTEASCOMPRAS;
 
-typedef struct ClienteCaixa {
-    CLIENTE *cliente;
-    ListaGenerica *Produtos;
-    CAIXA *cx;
-} CLIENTECAIXA;
 
 //Funcoes: Cliente
 CLIENTE* CriarCliente(char* numeroCliente,char* NomeCliente);

@@ -126,7 +126,7 @@ void MostrarClientesAsCompras(void* C){
 void AdicionarProdutoAoCliente(SUPERMERCADO *S,int codigo){
   int icr = 1, altProd = aleatorio(1,1000);
 
-  CLIENTEASCOMPRAS *CC = ProcurarClienteAsCompras(S->ClientesAsCompras,numero);
+  CLIENTEASCOMPRAS *CC = ProcurarClienteAsCompras(S->ClientesAsCompras,codigo);
   if (!CC) return;
 
   PRODUTO *Prod;

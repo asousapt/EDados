@@ -37,6 +37,7 @@
   "C_Cpp_Runner.showCompilationTime": false,
   "files.associations": {
     "menu.h": "c",
-    "caixa.h": "c"
+    "caixa.h": "c",
+    "string.h": "c"
   }
 }
