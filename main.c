@@ -9,6 +9,7 @@
 #include "texto.h"
 #include "Log.h"
 #include "Fila.h"
+#include "Relogio.h"
 
 // estes ficheiros estao incluidos aqui para compilar apenas com main.c 
 #include "funcoes.c"
@@ -21,13 +22,18 @@
 #include "Funcionarios.c"
 #include "Caixa.c"
 #include "Log.c"
+#include "Relogio.c"
 
 int main(void) {
   printf("*** Bem-vindo ***\n"); 
 
+  //Relogio* R = (Relogio *) malloc(sizeof(Relogio));
+
   // Vamos pedir ao utilizador para criar o supermercado
   SUPERMERCADO * supermercadoActual = CriarSM();
-
+  
+  //StartRelogio(R, 100, supermercadoActual);
+  
   //carrega dados do supermercado
   if(carregaSupermercado(supermercadoActual) == 0) {
     printf("%s", "Erro ao carregar os dados do supermercado! O programa vai ser encerrado!\n"); 
@@ -41,7 +47,7 @@ int main(void) {
   //AdicionarClienteAsCompras(supermercadoActual);
   //ShowLG(supermercadoActual->ClientesAsCompras, MostrarClientesAsCompras);
 
-  //exportaLogCsv(supermercadoActual->LogApp);
+  exportaLogCsv(supermercadoActual->LogApp);
 
   free(supermercadoActual);
 

@@ -16,7 +16,9 @@ CAIXA* CriarCaixa(int numero){
   novaCaixa->fechado = 1;
   novaCaixa->filaCaixa = filaCaixa;
   novaCaixa->func = NULL;
-  novaCaixa->tempoEspera = 0;
+  novaCaixa->tempoEsperaReal = 0;
+  novaCaixa->tempoEsperaMed = 0;
+  novaCaixa->tempoTotal = 0;
 
   return novaCaixa;
 }

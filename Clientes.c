@@ -4,6 +4,10 @@
 #include <time.h>
 #include "Clientes.h"
 
+// int clienteMax(SUPERMERCADO* LgCl)[
+//   lgCl->c
+// ]
+
 CLIENTE* CriarCliente(char* numeroCliente,char* nomeCliente){
   CLIENTE* NovoCliente = (CLIENTE *) malloc(sizeof(CLIENTE));
  
@@ -38,7 +42,7 @@ void DestruirCliente(void* C){
   free(objCliente);
 }
 
-CLIENTE* ProcurarCliente (ListaGenerica *lg,int codigoCliente){
+CLIENTE* ProcurarCliente(ListaGenerica *lg,int codigoCliente){
   CLIENTE *cl,*clR;
   NOG *P = lg->Inicio;
   while (P) {
@@ -51,7 +55,7 @@ CLIENTE* ProcurarCliente (ListaGenerica *lg,int codigoCliente){
   return clR;
 }
 
-int VerificaClienteAsCompras (SUPERMERCADO *S,int codigoCliente){
+int VerificaClienteAsCompras(SUPERMERCADO *S,int codigoCliente){
   CLIENTE *cl;
   NOG *P = S->ClientesAsCompras->Inicio;
   int retorna = 0;
@@ -68,7 +72,7 @@ int VerificaClienteAsCompras (SUPERMERCADO *S,int codigoCliente){
   return retorna;
 }
 
-CLIENTEASCOMPRAS* ProcurarClienteAsCompras (ListaGenerica *lg,int codigoCliente){
+CLIENTEASCOMPRAS* ProcurarClienteAsCompras(ListaGenerica *lg,int codigoCliente){
   CLIENTEASCOMPRAS *cl,*clR;
   NOG *P = lg->Inicio;
   while (P) {
@@ -108,7 +112,8 @@ void AdicionarClienteAsCompras(SUPERMERCADO *S){
   CLIENTEASCOMPRAS* NovoCliente = (CLIENTEASCOMPRAS *) malloc(sizeof(CLIENTEASCOMPRAS));
   NovoCliente->cliente = cl;
   NovoCliente->nProdutos = nProd;
-  NovoCliente->Produtos = CriarLG(); 
+  NovoCliente->ProdutosClientes = CriarLG();
+  //NovoCliente->horaEntradaSuper = 
   AddBeginLG(S->ClientesAsCompras,NovoCliente);
 }
 
@@ -120,7 +125,7 @@ void MostrarClientesAsCompras(void* C){
   printf("\n Nome: %s", objCliente->nome);
   printf("\n === Produtos do Cliente ===");
 
-  ShowLG(objClienteCompras->Produtos,MostrarProduto);
+  ShowLG(objClienteCompras->ProdutosClientes,MostrarProduto);
 }
 
 void AdicionarProdutoAoCliente(SUPERMERCADO *S,int codigo){
@@ -129,7 +134,7 @@ void AdicionarProdutoAoCliente(SUPERMERCADO *S,int codigo){
   CLIENTEASCOMPRAS *CC = ProcurarClienteAsCompras(S->ClientesAsCompras,codigo);
   if (!CC) return;
 
-  PRODUTO *Prod;
+  PRODUTOCLIENTE *Prod;
   NOG *P = S->Produtos->Inicio;
   while (P) {
     if (icr == altProd) {
@@ -140,6 +145,6 @@ void AdicionarProdutoAoCliente(SUPERMERCADO *S,int codigo){
     icr++;
   }
 
-  AddBeginLG(CC->Produtos,Prod);
+  AddBeginLG(CC->ProdutosClientes,Prod);
 }
 
