@@ -3,10 +3,7 @@
 #include <string.h>
 #include <time.h>
 #include "Clientes.h"
-
-// int clienteMax(SUPERMERCADO* LgCl)[
-//   lgCl->c
-// ]
+#include "supermercado.h"
 
 CLIENTE* CriarCliente(char* numeroCliente,char* nomeCliente){
   CLIENTE* NovoCliente = (CLIENTE *) malloc(sizeof(CLIENTE));
