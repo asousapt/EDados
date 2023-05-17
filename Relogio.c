@@ -6,7 +6,7 @@ void StartRelogio(Relogio *R, int Vel, SUPERMERCADO *S){
     R->VELOCIDADE = Vel;
 
     struct tm *tmp = localtime(&R->START);
-    sscanf(S->horaAbertura, "%d:%d", &tmp->tm_hour, &tmp->tm_min);
+    //sscanf(S->horaAbertura, "%d:%d", &tmp->tm_hour, &tmp->tm_min);
     R->Hora_Inicio = mktime(tmp);
     printf("Hora de Arranque = [%s]\n", asctime(localtime(&(R->Hora_Inicio))));
 }
