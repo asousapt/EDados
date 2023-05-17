@@ -34,6 +34,7 @@ void MostrarCaixa(void* F){
   printf("\n Fechado: %d\n", objCaixa->fechado);
 }
 
+
 void DestruirCaixa(void* F){
   CAIXA* objCaixa = (CAIXA *) F;
   free(objCaixa);
@@ -74,3 +75,28 @@ void AbreFechaCaixa(ListaGenerica *lg){
   }
 }
 
+// Retorna o ponteiro com a caixa mais rapida
+CAIXA* caixaComMenorTempo(ListaGenerica* lista) {
+    NOG* atual = lista->Inicio;
+    CAIXA* caixaMenorTempoEsperaReal = NULL;
+    float menorTempo = 999999; 
+
+    while (atual != NULL) {
+        CAIXA* caixaAtual = (CAIXA*)atual->Info;
+        
+        float tempoProdutos = 0;
+        if (caixaAtual->filaCaixa->tamanho > 0) {
+          tempoProdutos =calcularTempoTotalCompra(caixaAtual->filaCaixa);
+        }
+
+        if ((caixaAtual->tempoEsperaReal+tempoProdutos) < menorTempo) {
+            menorTempo = caixaAtual->tempoEsperaReal+tempoProdutos;
+            caixaMenorTempoEsperaReal = caixaAtual;
+        }
+        
+
+        atual = atual->Prox;
+    }
+
+    return caixaMenorTempoEsperaReal;
+}

@@ -35,6 +35,7 @@ void ShowLG(ListaGenerica *lg, void (*f)(void *)) {
   }
 }
 
+
 void EscreveLG(ListaGenerica *lg, FILE *ficheiro, void (*f)(void *, FILE *)) {
   if (!lg || !ficheiro)
     return;
