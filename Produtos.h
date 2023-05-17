@@ -5,7 +5,7 @@
 #include <string.h>
 #include <time.h>
 
-#include "Produtos.h"
+#include "Relogio.h"
 
 typedef struct produto{
     int cod;
@@ -31,6 +31,6 @@ int validaProduto(void *elem1, void *elem2);
 int GetQuantidadeProdutoCliente(ListaGenerica *lg, PRODUTO *P);
 PRODUTOCLIENTE *GetProdutoCliente(ListaGenerica *lg, PRODUTO *P);
 void AdicionarProdutoAoCliente(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC);
-void AdicionarTodosOsProdutosAosClientes(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC);
+void AdicionarTodosOsProdutosAosClientes(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC,Relogio *R);
 
 #endif // PRODUTOS_H_INCLUDED

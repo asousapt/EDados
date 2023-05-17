@@ -112,7 +112,7 @@ void AdicionarProdutoAoCliente(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC){
   }
 }
 
-void AdicionarTodosOsProdutosAosClientes(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC){
+void AdicionarTodosOsProdutosAosClientes(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC,Relogio *R){
   int numProd = CC->nProdutos;
 
   for (int i = 1; i>numProd; i++){
@@ -129,9 +129,9 @@ void AdicionarTodosOsProdutosAosClientes(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC){
     P = P->Prox;
   }
 
-  /*time_t horaIrCaixa = VerTimeRelogio();
+  time_t horaIrCaixa = VerTimeRelogio(R);
   horaIrCaixa = mktime(tmp);
 
-  CC->horaEntradaFila = horaIrCaixa;*/
+  CC->horaEntradaFila = horaIrCaixa;
 }
 

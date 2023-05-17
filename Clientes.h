@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+
+#include "Relogio.h"
 #include "ListaGenerica.h"
 #include "supermercado.h"
 #include "Produtos.h"
@@ -36,9 +38,9 @@ int validaCliente(void *elem1, void *elem2);
 //Funcoes: Cliente - Supermercado
 int VerificaClienteAsCompras(SUPERMERCADO *S,int codigoCliente);
 CLIENTEASCOMPRAS* ProcurarClienteAsCompras(ListaGenerica *lg,int codigoCliente);
-void AdicionarClienteAsCompras(SUPERMERCADO *S);
+void AdicionarClienteAsCompras(SUPERMERCADO *S,Relogio *R);
 void MostrarClientesAsCompras(void* C);
-void AdicionarVariosClientesAsCompras(SUPERMERCADO *S);
+void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,Relogio *R);
 
 // void AdicionarClienteCaixa(ListaGenerica *lgCx,ListaGenerica *lgCl,int numeroCaixa,int codigoCliente);
 

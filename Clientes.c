@@ -82,7 +82,7 @@ CLIENTEASCOMPRAS* ProcurarClienteAsCompras(ListaGenerica *lg,int codigoCliente){
   return clR;
 }
 
-void AdicionarClienteAsCompras(SUPERMERCADO *S){
+void AdicionarClienteAsCompras(SUPERMERCADO *S,Relogio *R){
   int altCliente = 0,skip = 0,icr = 1;
   CLIENTE *cl;
 
@@ -110,7 +110,7 @@ void AdicionarClienteAsCompras(SUPERMERCADO *S){
   NovoCliente->cliente = cl;
   NovoCliente->nProdutos = nProd;
   NovoCliente->ProdutosClientes = CriarLG();
-  //NovoCliente->horaEntradaSuper = VerTimeRelogio();
+  NovoCliente->horaEntradaSuper = VerTimeRelogio(R);
   AddBeginLG(S->ClientesAsCompras,NovoCliente);
 } 
 
@@ -125,12 +125,12 @@ void MostrarClientesAsCompras(void* C){
   ShowLG(objClienteCompras->ProdutosClientes,MostrarProduto);
 }
 
-void AdicionarVariosClientesAsCompras(SUPERMERCADO *S){
+void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,Relogio *R){
   int numClientesSM = S->ClientesAsCompras->NEL;
   int numVerificacao = (S->nmrClientesSupermercado) - numClientesSM;
   int numClientes = aleatorio(1,numVerificacao);
 
   for (int i = 1; i>numClientes; i++){
-    AdicionarClienteAsCompras(S);
+    AdicionarClienteAsCompras(S,R);
   }
 }
