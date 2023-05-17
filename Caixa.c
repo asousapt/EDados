@@ -75,7 +75,7 @@ void AbreFechaCaixa(ListaGenerica *lg){
   }
 }
 
-// Retorna o ponteiro com a caixa mais rapida
+// Retorna o ponteiro com a caixa mais rapida ja contando com os clientes que estao na fila
 CAIXA* caixaComMenorTempo(ListaGenerica* lista) {
     NOG* atual = lista->Inicio;
     CAIXA* caixaMenorTempoEsperaReal = NULL;
@@ -86,15 +86,13 @@ CAIXA* caixaComMenorTempo(ListaGenerica* lista) {
         
         float tempoProdutos = 0;
         if (caixaAtual->filaCaixa->tamanho > 0) {
-          tempoProdutos =calcularTempoTotalCompra(caixaAtual->filaCaixa);
+          tempoProdutos = calcularTempoTotalCompra(caixaAtual->filaCaixa);
         }
 
         if ((caixaAtual->tempoEsperaReal+tempoProdutos) < menorTempo) {
             menorTempo = caixaAtual->tempoEsperaReal+tempoProdutos;
             caixaMenorTempoEsperaReal = caixaAtual;
         }
-        
-
         atual = atual->Prox;
     }
 
