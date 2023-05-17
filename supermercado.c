@@ -26,14 +26,16 @@ SUPERMERCADO * CriarSM(){
         scanf("%d:%d", &horaAbertura, &minutoAbertura);
     } while (validaHoras(horaAbertura, minutoAbertura) == 0);
     
+    SM->horaAbertura = convertToTime(horaAbertura, minutoAbertura);
 
     //pede ao utilizador a hora de fecho do supermercado
     do
     {
         printf("\nHora de fecho (HH:MM):");
         scanf("%d:%d",&horaFecho, &minutoFecho);
-    } while (validaHoras(horaAbertura, minutoAbertura) == 0);
-    
+    } while (validaHorasFecho(horaAbertura, minutoAbertura,SM->horaAbertura) == 0);
+     
+    SM->horaFecho = convertToTime(horaFecho, minutoFecho);
 
     nCaixas = validarInt("\nNúmero de caixas do supermercado:",1,10);
     nmrMaxClientesFila = validarInt("\nNumero maximo de clientes na fila:",1,20);
@@ -52,9 +54,6 @@ SUPERMERCADO * CriarSM(){
     ListaGenerica *ListaClientesAsCompras = CriarLG(); 
 
     SM->nome = nome;
-    
-    SM->horaAbertura = horaAbertura;
-    SM->horaFecho = horaFecho;
 
     SM->numCaixas = nCaixas;
     SM->nmrMaxClientesFila = nmrMaxClientesFila;

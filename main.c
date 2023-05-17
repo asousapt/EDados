@@ -47,14 +47,9 @@ int main(void) {
   //AdicionarClienteAsCompras(supermercadoActual);
   //ShowLG(supermercadoActual->ClientesAsCompras, MostrarClientesAsCompras);
 
+  printf("Hora de abertura do supermercado: %s", asctime(localtime(&(supermercadoActual->horaAbertura))));
+
   exportaLogCsv(supermercadoActual->LogApp);
-
-  while(1){
-    if(kbhit()){
-      puts("Key was pressed");
-    }
-  }
-
   free(supermercadoActual);
 
   return 0;

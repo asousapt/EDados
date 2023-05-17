@@ -10,7 +10,7 @@ int validarInt(char *pergunta, int menor,int maior){
 		printf("%s(%d-%d)", pergunta,menor,maior);
 		scanf("%d", &num);
 		if(num<menor ||num>maior){
-			printf("Input invalido, por favor volte a introduzir");
+			printf("Input invalido, por favor volte a introduzir(%d-%d)",menor,maior);
 		}
 	}while(num<menor ||num>maior);
 	fflush(stdin);
@@ -30,9 +30,37 @@ int aleatorio(int min, int max){
 }
 
 int validaHoras(int hora, int minutos) {
-	if (hora == 0 && minutos == 0 ) return 0; 
-	if (hora < 0 || hora > 23) return 0; 
-	if (minutos < 0 || minutos > 59) return 0; 
-			
+	if (hora == 0 && minutos == 0 ){
+		printf("Hora invalida (00:01 - 23:59)");
+		return 0; 
+	} 
+	if (hora < 0 || hora > 23) {
+		return 0;
+		printf("Hora invalida (00:01 - 23:59)");
+	} 
+	if (minutos < 0 || minutos > 59) {
+		printf("Hora invalida (00:01 - 23:59)");
+		return 0; 
+	}
+
+	return 1;
+}
+
+time_t convertToTime(int hora, int minutos){
+	time_t x = time(0);
+	struct tm *tmp = localtime(&x);
+	tmp->tm_hour = hora;
+	tmp->tm_min = minutos;
+	time_t tempo = mktime(tmp);
+	return tempo;
+}
+
+int validaHorasFecho(int hora,int minutos,time_t abertura){
+	if(!validaHoras(hora,minutos)) return 0;
+	time_t fecho = convertToTime(hora,minutos);
+	if(difftime(fecho,abertura)>0){
+		printf("Tempo de fecho invalido, coloque um tempo de fecho maior que o tempo de abertura");
+		return 0;
+	}
 	return 1;
 }
