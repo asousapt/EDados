@@ -57,3 +57,81 @@ int validaProduto(void *elem1, void *elem2) {
   
   return 0;
 }
+
+int GetQuantidadeProdutoCliente(ListaGenerica *lg, PRODUTO *P){
+  PRODUTOCLIENTE *PC;
+  int qtd = 0;
+  NOG *P = lg->Inicio;
+  while (P) {
+    PC = P;
+    if (PC->produtoCL->cod == P->cod) {
+      qtd = qtd + PC->quantidade;
+    }
+  }
+  return qtd;
+}
+
+PRODUTOCLIENTE *GetProdutoCliente(ListaGenerica *lg, PRODUTO *Prod){
+  PRODUTOCLIENTE *PC,*PCReturn;
+  int qtd = 0;
+  NOG *P = lg->Inicio;
+  while (P) {
+    PC = P->Info;
+    if (PC->produtoCL->cod == Prod->cod){
+      PCReturn = PC;
+    }
+    P = P->Prox;
+  }
+  return PCReturn;
+}
+
+void AdicionarProdutoAoCliente(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC){
+  int icr = 1, altProd = aleatorio(1,1000);
+
+  PRODUTO *Prod;
+  NOG *P = S->Produtos->Inicio;
+  while (P) {
+    if (icr == altProd) {
+        Prod = P->Info;
+      break;
+    }
+    P = P->Prox;
+    icr++;
+  }
+  
+  int qtd = GetQuantidadeProdutoCliente(CC->ProdutosClientes,Prod);
+  if (qtd == 0){
+    PRODUTOCLIENTE* PC = (PRODUTOCLIENTE *) malloc(sizeof(PRODUTOCLIENTE));
+    PC->produtoCL = Prod;
+    PC->quantidade = 1;
+    AddBeginLG(CC->ProdutosClientes,PC);
+  }else{
+    PRODUTOCLIENTE* PC = GetProdutoCliente(CC->ProdutosClientes,Prod);
+    if (!PC) return;
+    PC->quantidade = qtd+1;
+  }
+}
+
+void AdicionarTodosOsProdutosAosClientes(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC){
+  int numProd = CC->nProdutos;
+
+  for (int i = 1; i>numProd; i++){
+    AdicionarProdutoAoCliente(S,CC);
+  }
+
+  struct tm *tmp;
+
+  PRODUTOCLIENTE *PC;
+  NOG *P = CC->ProdutosClientes->Inicio;
+  while (P) {
+    PC = P->Info;
+    tmp->tm_sec = tmp->tm_sec + PC->produtoCL->tempoCompra;
+    P = P->Prox;
+  }
+
+  /*time_t horaIrCaixa = VerTimeRelogio();
+  horaIrCaixa = mktime(tmp);
+
+  CC->horaEntradaFila = horaIrCaixa;*/
+}
+

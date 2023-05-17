@@ -104,15 +104,15 @@ void AdicionarClienteAsCompras(SUPERMERCADO *S){
       icr++;
     }
   }
-  
+
   int nProd = aleatorio(5,40); 
   CLIENTEASCOMPRAS* NovoCliente = (CLIENTEASCOMPRAS *) malloc(sizeof(CLIENTEASCOMPRAS));
   NovoCliente->cliente = cl;
   NovoCliente->nProdutos = nProd;
   NovoCliente->ProdutosClientes = CriarLG();
-  //NovoCliente->horaEntradaSuper = 
+  //NovoCliente->horaEntradaSuper = VerTimeRelogio();
   AddBeginLG(S->ClientesAsCompras,NovoCliente);
-}
+} 
 
 void MostrarClientesAsCompras(void* C){
   CLIENTEASCOMPRAS* objClienteCompras = (CLIENTEASCOMPRAS *) C;
@@ -125,23 +125,12 @@ void MostrarClientesAsCompras(void* C){
   ShowLG(objClienteCompras->ProdutosClientes,MostrarProduto);
 }
 
-void AdicionarProdutoAoCliente(SUPERMERCADO *S,int codigo){
-  int icr = 1, altProd = aleatorio(1,1000);
+void AdicionarVariosClientesAsCompras(SUPERMERCADO *S){
+  int numClientesSM = S->ClientesAsCompras->NEL;
+  int numVerificacao = (S->nmrClientesSupermercado) - numClientesSM;
+  int numClientes = aleatorio(1,numVerificacao);
 
-  CLIENTEASCOMPRAS *CC = ProcurarClienteAsCompras(S->ClientesAsCompras,codigo);
-  if (!CC) return;
-
-  PRODUTOCLIENTE *Prod;
-  NOG *P = S->Produtos->Inicio;
-  while (P) {
-    if (icr == altProd) {
-        Prod = P->Info;
-      break;
-    }
-    P = P->Prox;
-    icr++;
+  for (int i = 1; i>numClientes; i++){
+    AdicionarClienteAsCompras(S);
   }
-
-  AddBeginLG(CC->ProdutosClientes,Prod);
 }
-
