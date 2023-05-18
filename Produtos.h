@@ -5,6 +5,8 @@
 #include <string.h>
 #include <time.h>
 
+#include "supermercado.h"
+#include "Clientes.h"
 #include "Relogio.h"
 
 typedef struct produto{
@@ -19,7 +21,6 @@ typedef struct produtoscliente{
     PRODUTO *produtoCL;
     int quantidade;
 } PRODUTOCLIENTE;
-
 
 PRODUTO* CriarProduto(char* codigo, char* designacao, char* preco, char* tempoCompra, char* tempoCaixa);
 void MostrarProduto(void* P);
