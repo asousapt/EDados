@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "Produtos.h"
 #include "ListaGenerica.h"
 
@@ -59,13 +60,13 @@ int validaProduto(void *elem1, void *elem2) {
   return 0;
 }
 
-int GetQuantidadeProdutoCliente(ListaGenerica *lg, PRODUTO *P){
+int GetQuantidadeProdutoCliente(ListaGenerica *lg, PRODUTO *Prod){
   PRODUTOCLIENTE *PC;
   int qtd = 0;
   NOG *P = lg->Inicio;
   while (P) {
     PC = P;
-    if (PC->produtoCL->cod == P->cod) {
+    if (PC->produtoCL->cod == Prod->cod) {
       qtd = qtd + PC->quantidade;
     }
   }
@@ -135,4 +136,3 @@ void AdicionarTodosOsProdutosAosClientes(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC,Re
 
   CC->horaEntradaFila = horaIrCaixa;
 }
-

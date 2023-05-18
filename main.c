@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "supermercado.h"
 #include "ListaGenerica.h"
 #include "Clientes.h"
+#include "Produtos.h"
 #include "Caixa.h"
 #include "Funcionarios.h"
 #include "texto.h"
@@ -39,7 +41,8 @@ int main(void) {
     printf("%s", "Erro ao carregar os dados do supermercado! O programa vai ser encerrado!\n"); 
     return 0;
   }
-
+   CAIXA* caixa1 = caixaComMenorTempo(supermercadoActual->Caixas);
+  
   //ShowLG(supermercadoActual->Caixas, MostrarCaixa);
   //AbreFechaCaixa(supermercadoActual->Caixas);
   //ShowLG(supermercadoActual->LogApp, MostrarLog);
@@ -50,6 +53,13 @@ int main(void) {
   printf("Hora de abertura do supermercado: %s", asctime(localtime(&(supermercadoActual->horaAbertura))));
 
   exportaLogCsv(supermercadoActual->LogApp);
+
+  // while(1){
+  //   if(kbhit()){
+  //     puts("Key was pressed");
+  //   }
+  // }
+
   free(supermercadoActual);
 
   return 0;

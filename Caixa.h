@@ -19,6 +19,7 @@ typedef struct caixa {
     FILAGENERICA* filaCaixa;
 } CAIXA;
 
+int tempoEsperaMin(void* C);
 CAIXA* CriarCaixa(int numero);
 void MostrarCaixa(void* F);
 void DestruirCaixa(void *obj);
@@ -26,5 +27,6 @@ CAIXA* ProcurarCaixa(ListaGenerica *lg,int numero);
 CAIXA* ProcurarCaixaAberta(ListaGenerica *lg,int numero);
 void AbrirCaixa(ListaGenerica *lg);
 void MostrarCaixasEstado(ListaGenerica *lg,int estado);
+CAIXA* caixaComMenorTempo(ListaGenerica* lista);
 
 #endif // CAIXA_H_INCLUDED
