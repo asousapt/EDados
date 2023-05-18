@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "supermercado.h"
 #include "ListaGenerica.h"
 #include "Clientes.h"
