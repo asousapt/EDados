@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "Produtos.h"
+
 #include "Relogio.h"
 #include "ListaGenerica.h"
 #include "supermercado.h"
@@ -18,9 +18,9 @@ typedef struct cliente {
 typedef struct ClientesAsCompras {
     CLIENTE *cliente;
     ListaGenerica *ProdutosClientes;
-    time_t *horaEntradaSuper;
-    time_t *horaEntradaFila;
-    time_t *horaSaidaSupermercado;
+    time_t horaEntradaSuper;
+    time_t horaEntradaFila;
+    time_t horaSaidaSupermercado;
     float tempoEspera;
     int nProdutos;
 } CLIENTEASCOMPRAS;

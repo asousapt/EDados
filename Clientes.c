@@ -4,6 +4,7 @@
 #include <time.h>
 #include "Clientes.h"
 #include "supermercado.h"
+#include "Produtos.h"
 
 CLIENTE* CriarCliente(char* numeroCliente,char* nomeCliente){
   CLIENTE* NovoCliente = (CLIENTE *) malloc(sizeof(CLIENTE));
@@ -113,6 +114,10 @@ void AdicionarClienteAsCompras(SUPERMERCADO *S,Relogio *R){
   NovoCliente->ProdutosClientes = CriarLG();
   NovoCliente->horaEntradaSuper = VerTimeRelogio(R);
   AddBeginLG(S->ClientesAsCompras,NovoCliente);
+
+  AdicionarTodosOsProdutosAosClientes(S,NovoCliente,R);
+
+  
 } 
 
 void MostrarClientesAsCompras(void* C){

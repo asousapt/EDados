@@ -29,19 +29,22 @@
 int main(void) {
   printf("*** Bem-vindo ***\n"); 
 
-  //Relogio* R = (Relogio *) malloc(sizeof(Relogio));
-
   // Vamos pedir ao utilizador para criar o supermercado
   SUPERMERCADO * supermercadoActual = CriarSM();
-  
-  //StartRelogio(R, 100, supermercadoActual);
   
   //carrega dados do supermercado
   if(carregaSupermercado(supermercadoActual) == 0) {
     printf("%s", "Erro ao carregar os dados do supermercado! O programa vai ser encerrado!\n"); 
     return 0;
   }
-   CAIXA* caixa1 = caixaComMenorTempo(supermercadoActual->Caixas);
+
+  //Iniciar Relogio
+  Relogio* R = (Relogio *) malloc(sizeof(Relogio));
+  StartRelogio(R, 100, supermercadoActual);
+
+  AdicionarVariosClientesAsCompras(supermercadoActual,R);
+
+  CAIXA* caixa1 = caixaComMenorTempo(supermercadoActual->Caixas);
   
   //ShowLG(supermercadoActual->Caixas, MostrarCaixa);
   //AbreFechaCaixa(supermercadoActual->Caixas);
