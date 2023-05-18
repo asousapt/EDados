@@ -2,6 +2,8 @@
 #include <unistd.h>
 #include <time.h>
 #include "Fila.h"
+#include "Clientes.h"
+#include "Produtos.h"
 
 //cria fila generica
 FILAGENERICA *CriarFila() {

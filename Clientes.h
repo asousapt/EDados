@@ -4,11 +4,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-
+#include "Produtos.h"
 #include "Relogio.h"
 #include "ListaGenerica.h"
 #include "supermercado.h"
-#include "Produtos.h"
 #include "Caixa.h"
 
 typedef struct cliente {

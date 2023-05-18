@@ -134,4 +134,3 @@ void AdicionarTodosOsProdutosAosClientes(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC,Re
 
   CC->horaEntradaFila = horaIrCaixa;
 }
-

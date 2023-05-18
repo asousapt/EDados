@@ -4,6 +4,7 @@
 #include "supermercado.h"
 #include "ListaGenerica.h"
 #include "Clientes.h"
+#include "Produtos.h"
 #include "Caixa.h"
 #include "Funcionarios.h"
 #include "texto.h"

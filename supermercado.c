@@ -10,39 +10,53 @@
 
 SUPERMERCADO * CriarSM(){
     time_t dataAtual;
-
+    int emDesenvolvimento = 0; 
     int nCaixas, nmrMinCliFechaCaixa, nmrMaxClientesFila;
     int horaAbertura, minutoAbertura, horaFecho, minutoFecho,nmrClientesSupermercado, tempoMaxEspera = 0;
     char *nome;
 
     SUPERMERCADO *SM = (SUPERMERCADO *)malloc(sizeof(SUPERMERCADO));
-
-    nome = getString("Nome do Supermercado:");
+    printf("\nAmbiente de desenvolvimento? (0-1)\n");
+    scanf("%d", &emDesenvolvimento);
     
-    // pede ao utilizador a hora de abertura do supermercado
-    do
-    {
-        printf("\nHora de abertura (HH:MM):");
-        scanf("%d:%d", &horaAbertura, &minutoAbertura);
-    } while (validaHoras(horaAbertura, minutoAbertura) == 0);
+    if (emDesenvolvimento = 0) {
+        nome = getString("Nome do Supermercado:");
     
-    SM->horaAbertura = convertToTime(horaAbertura, minutoAbertura);
+        // pede ao utilizador a hora de abertura do supermercado
+        do
+        {
+            printf("\nHora de abertura (HH:MM):");
+            scanf("%d:%d", &horaAbertura, &minutoAbertura);
+        } while (validaHoras(horaAbertura, minutoAbertura) == 0);
+        
+        SM->horaAbertura = convertToTime(horaAbertura, minutoAbertura);
 
-    //pede ao utilizador a hora de fecho do supermercado
-    do
-    {
-        printf("\nHora de fecho (HH:MM):");
-        scanf("%d:%d",&horaFecho, &minutoFecho);
-    } while (validaHorasFecho(horaAbertura, minutoAbertura,SM->horaAbertura) == 0);
-     
-    SM->horaFecho = convertToTime(horaFecho, minutoFecho);
+        //pede ao utilizador a hora de fecho do supermercado
+        do
+        {
+            printf("\nHora de fecho (HH:MM):");
+            scanf("%d:%d",&horaFecho, &minutoFecho);
+        } while (validaHorasFecho(horaAbertura, minutoAbertura,SM->horaAbertura) == 0);
+        
+        SM->horaFecho = convertToTime(horaFecho, minutoFecho);
 
-    nCaixas = validarInt("\nNúmero de caixas do supermercado:",1,10);
-    nmrMaxClientesFila = validarInt("\nNumero maximo de clientes na fila:",1,20);
-    nmrMinCliFechaCaixa = validarInt("\nNúmero minimo de clientes para fechar a caixa:",1,5);
-    tempoMaxEspera = validarInt("\nTempo maximo de espera de clientes na fila em minutos",1,60);
-    nmrClientesSupermercado = validarInt("\nNúmero maximo de clientes em simultaneo no supermercado",1,100);
-    //Ler Ficheiros
+        nCaixas = validarInt("\nNúmero de caixas do supermercado:",1,10);
+        nmrMaxClientesFila = validarInt("\nNumero maximo de clientes na fila:",1,20);
+        nmrMinCliFechaCaixa = validarInt("\nNúmero minimo de clientes para fechar a caixa:",1,5);
+        tempoMaxEspera = validarInt("\nTempo maximo de espera de clientes na fila em minutos",1,60);
+        nmrClientesSupermercado = validarInt("\nNúmero maximo de clientes em simultaneo no supermercado",1,100);
+        
+    } else  {
+        nome ="LIDL";
+        SM->horaAbertura = convertToTime(8, 0);
+        SM->horaFecho = convertToTime(20, 0);
+        nCaixas = 10; 
+        nmrMaxClientesFila = 10; 
+        nmrMinCliFechaCaixa = 3; 
+        tempoMaxEspera = 5; 
+        nmrClientesSupermercado = 100;
+    }
+    
     int i; 
     
     ListaGenerica *ListaCaixas = CriarLG();
