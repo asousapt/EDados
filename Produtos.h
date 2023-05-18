@@ -33,5 +33,6 @@ int GetQuantidadeProdutoCliente(ListaGenerica *lg, PRODUTO *P);
 PRODUTOCLIENTE *GetProdutoCliente(ListaGenerica *lg, PRODUTO *P);
 // void AdicionarProdutoAoCliente(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC);
 void AdicionarTodosOsProdutosAosClientes(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC,Relogio *R);
+void DestruirProdutoCliente(void *x);
 
 #endif // PRODUTOS_H_INCLUDED

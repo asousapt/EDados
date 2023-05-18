@@ -136,3 +136,9 @@ void AdicionarTodosOsProdutosAosClientes(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC,Re
 
   CC->horaEntradaFila = horaIrCaixa;
 }
+
+void DestruirProdutoCliente(void *x){
+  PRODUTOCLIENTE *obj = (PRODUTOCLIENTE *) x;
+  DestruirProduto(obj->produtoCL);
+  free(obj);
+}

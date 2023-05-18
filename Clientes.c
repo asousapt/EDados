@@ -135,3 +135,9 @@ void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,Relogio *R){
     AdicionarClienteAsCompras(S,R);
   }
 }
+
+void DestruirClienteAsCompras(void *obj){
+  CLIENTEASCOMPRAS *x = obj;
+  DestruirCliente(x->cliente);
+  DestruirLG(x->ProdutosClientes,);
+}

@@ -40,6 +40,7 @@ CLIENTEASCOMPRAS* ProcurarClienteAsCompras(ListaGenerica *lg,int codigoCliente);
 void AdicionarClienteAsCompras(SUPERMERCADO *S,Relogio *R);
 void MostrarClientesAsCompras(void* C);
 void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,Relogio *R);
+void DestruirClientesAsCompras(void* obj);
 
 // void AdicionarClienteCaixa(ListaGenerica *lgCx,ListaGenerica *lgCl,int numeroCaixa,int codigoCliente);
 
