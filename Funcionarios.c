@@ -30,6 +30,7 @@ void MostrarFuncionario(void* F){
 
 void DestruirFuncionario(void* F){
   FUNCIONARIO* objFuncionario = (FUNCIONARIO *) F;
+  free(objFuncionario->nome);
   free(objFuncionario);
 }
 

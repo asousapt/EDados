@@ -29,12 +29,8 @@
 int main(void) {
   printf("*** Bem-vindo ***\n"); 
 
-  //Relogio* R = (Relogio *) malloc(sizeof(Relogio));
-
   // Vamos pedir ao utilizador para criar o supermercado
   SUPERMERCADO * supermercadoActual = CriarSM();
-  
-  //StartRelogio(R, 100, supermercadoActual);
   
   //carrega dados do supermercado
   if(carregaSupermercado(supermercadoActual) == 0) {
@@ -44,6 +40,15 @@ int main(void) {
    //CAIXA* caixa1 = caixaComMenorTempo(supermercadoActual->Caixas);
    AbreFechaCaixa(supermercadoActual, 0, 1);
   listarCaixas(supermercadoActual->Caixas); 
+
+  //Iniciar Relogio
+  Relogio* R = (Relogio *) malloc(sizeof(Relogio));
+  StartRelogio(R, 100, supermercadoActual);
+
+  AdicionarVariosClientesAsCompras(supermercadoActual,R);
+
+  CAIXA* caixa1 = caixaComMenorTempo(supermercadoActual->Caixas);
+  
   //ShowLG(supermercadoActual->Caixas, MostrarCaixa);
   
   //ShowLG(supermercadoActual->LogApp, MostrarLog);

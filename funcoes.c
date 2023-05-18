@@ -58,7 +58,7 @@ time_t convertToTime(int hora, int minutos){
 int validaHorasFecho(int hora,int minutos,time_t abertura){
 	if(!validaHoras(hora,minutos)) return 0;
 	time_t fecho = convertToTime(hora,minutos);
-	if(difftime(fecho,abertura)>0){
+	if(difftime(fecho,abertura)<0){
 		printf("Tempo de fecho invalido, coloque um tempo de fecho maior que o tempo de abertura");
 		return 0;
 	}

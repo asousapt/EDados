@@ -19,8 +19,10 @@ typedef struct Filagenerica {
 FILAGENERICA *CriarFila();
 int FilaVazia(FILAGENERICA *fila);
 void AdicionaAFila(FILAGENERICA *fila, void *dados);
-void *RetirarDaFila(FILAGENERICA *fila);
+void *RetirarDaFila(FILAGENERICA *fila, void(*f)(void *));
 void MostrarFila(FILAGENERICA *Fila, void (*f)(void *));
+void DestruirFila(FILAGENERICA *fila, void (*f)(void *));
+
 float calcularTempoTotalCompra(FILAGENERICA* fila);
 
 #endif

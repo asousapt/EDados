@@ -4,6 +4,7 @@
 #include <time.h>
 #include "Clientes.h"
 #include "supermercado.h"
+#include "Produtos.h"
 
 CLIENTE* CriarCliente(char* numeroCliente,char* nomeCliente){
   CLIENTE* NovoCliente = (CLIENTE *) malloc(sizeof(CLIENTE));
@@ -36,6 +37,7 @@ void MostrarCliente(void* C){
 //funcao que limpa da memoria o cliente 
 void DestruirCliente(void* C){
   CLIENTE* objCliente = (CLIENTE *) C;
+  free(objCliente->nome);
   free(objCliente);
 }
 
@@ -112,6 +114,10 @@ void AdicionarClienteAsCompras(SUPERMERCADO *S,Relogio *R){
   NovoCliente->ProdutosClientes = CriarLG();
   NovoCliente->horaEntradaSuper = VerTimeRelogio(R);
   AddBeginLG(S->ClientesAsCompras,NovoCliente);
+
+  AdicionarTodosOsProdutosAosClientes(S,NovoCliente,R);
+
+  
 } 
 
 void MostrarClientesAsCompras(void* C){
@@ -133,4 +139,10 @@ void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,Relogio *R){
   for (int i = 1; i>numClientes; i++){
     AdicionarClienteAsCompras(S,R);
   }
+}
+
+void DestruirClienteAsCompras(void *obj){
+  CLIENTEASCOMPRAS *x = obj;
+  DestruirCliente(x->cliente);
+  DestruirLG(x->ProdutosClientes,);
 }
