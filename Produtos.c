@@ -33,6 +33,7 @@ void MostrarProduto(void* P){
 
 void DestruirProduto(void* P){
   PRODUTO* objProduto = (PRODUTO *) P;
+  free(objProduto->designacao);
   free(objProduto);
 }
 

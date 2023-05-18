@@ -36,6 +36,7 @@ void MostrarCliente(void* C){
 //funcao que limpa da memoria o cliente 
 void DestruirCliente(void* C){
   CLIENTE* objCliente = (CLIENTE *) C;
+  free(objCliente->nome);
   free(objCliente);
 }
 

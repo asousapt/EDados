@@ -38,7 +38,7 @@ void AdicionaAFila(FILAGENERICA *fila, void *dados) {
 }
 
 //retira elemento da fila generica 
-void *RetirarDaFila(FILAGENERICA *fila) {
+void *RetirarDaFila(FILAGENERICA *fila, void (*f)(void *)) {
     if (FilaVazia(fila)) {
         return NULL;
     }
@@ -48,9 +48,39 @@ void *RetirarDaFila(FILAGENERICA *fila) {
     if (fila->cabeca == NULL) {
         fila->cauda = NULL;
     }
+    f(dados);
+    free(temp->Prox);
     free(temp);
     fila->tamanho--;
     return dados;
+}
+
+/*void DestruirLG(ListaGenerica *lg, void (*fdest)(void *)) {
+  if (!lg)
+    return;
+  NOG *P = lg->Inicio;
+  NOG *Pproximo;
+  while (P) {
+    Pproximo = P->Prox;
+    fdest(P->Info);
+    free(P);
+    P = Pproximo;
+  }
+  free(lg);
+}*/
+
+void DestruirFila(FILAGENERICA *fila, void (*f)(void *)){
+    if (FilaVazia(fila)) {
+        return NULL;
+    }
+    NOFILA *temp = fila->cabeca;
+    NOFILA *prox;
+        while (temp) {
+        prox = temp->Prox;
+        fdest(temp->Dados);
+        free(temp);
+        temp = prox;
+    }
 }
 
 void MostrarFila(FILAGENERICA *Fila, void (*f)(void *)){
