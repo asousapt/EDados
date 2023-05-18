@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "supermercado.h"
 #include "Fila.h"
 #include "Funcionarios.h"
 #include "ListaGenerica.h"
@@ -21,12 +22,16 @@ typedef struct caixa {
 
 int tempoEsperaMin(void* C);
 CAIXA* CriarCaixa(int numero);
-void MostrarCaixa(void* F);
+void MostrarCaixaAberta(void* F);
+void MostrarCaixaFechada(void* F);
 void DestruirCaixa(void *obj);
 CAIXA* ProcurarCaixa(ListaGenerica *lg,int numero);
 CAIXA* ProcurarCaixaAberta(ListaGenerica *lg,int numero);
 void AbrirCaixa(ListaGenerica *lg);
 void MostrarCaixasEstado(ListaGenerica *lg,int estado);
 CAIXA* caixaComMenorTempo(ListaGenerica* lista);
+void AbreFechaCaixa(SUPERMERCADO *super, int numero, int operacao);
+void MostrarCaixa(void* F); 
+void listarCaixas(ListaGenerica* listaCaixas); 
 
 #endif // CAIXA_H_INCLUDED

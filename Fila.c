@@ -64,7 +64,7 @@ void MostrarFila(FILAGENERICA *Fila, void (*f)(void *)){
     }
 }
 
-
+// Verifica qual o tempo que a compra do cliente vai demorar
 float calcularTempoTotalCompra(FILAGENERICA* fila) {
     float tempoTotal = 0.0;
     NOFILA* atual = fila->cabeca;
@@ -73,23 +73,17 @@ float calcularTempoTotalCompra(FILAGENERICA* fila) {
         CLIENTEASCOMPRAS* clienteCompras = (CLIENTEASCOMPRAS*)atual->Dados;
         ListaGenerica* listaProdutos = clienteCompras->ProdutosClientes;
 
-        // Iterar sobre a lista de produtos dentro do nó atual
         NOG* atualLista = listaProdutos->Inicio;
 
         while (atualLista != NULL) {
             PRODUTOCLIENTE* produtoCliente = (PRODUTOCLIENTE*)atualLista->Info;
 
-            // Acessar os campos da estrutura PRODUTOCLIENTE
             PRODUTO* produto = produtoCliente->produtoCL;
             tempoTotal += produto->tempoCompra;
 
-            // Faça as operações necessárias com os campos da estrutura
-
-            // Avançar para o próximo nó da lista de produtos
             atualLista = atualLista->Prox;
         }
 
-        // Avançar para o próximo nó da fila
         atual = atual->Prox;
     }
 }

@@ -2,13 +2,19 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Funcionarios.h"
+#include "Caixa.h"
 
 //Cria um novo objecto funcionario 
 FUNCIONARIO* CriarFuncionario(char* numeroFuncionario,char* nomeFuncionario) {
   FUNCIONARIO* novoFuncionario = (FUNCIONARIO *) malloc(sizeof(FUNCIONARIO));
- 
+  ListaGenerica* carrinhos = (ListaGenerica *) malloc(sizeof(ListaGenerica));
+  carrinhos = CriarLG();
+
   novoFuncionario->cod = atoi(numeroFuncionario);
   novoFuncionario->nome = (char*) malloc(strlen(nomeFuncionario) + 1);
+  novoFuncionario->nmrClientesAtendidos = 0; 
+  novoFuncionario->ListaCarrinhos = carrinhos;
+
   strcpy(novoFuncionario->nome, nomeFuncionario);
 
   return novoFuncionario;
@@ -47,4 +53,27 @@ int validaFuncionario(void *elem1, void *elem2) {
   if (funcionario1->cod == funcionario2->cod) return 1; 
   
   return 0;
+}
+
+// Funcao que encontra um funcionario que esteja livre
+FUNCIONARIO* encontrarFuncionarioLivre(ListaGenerica* listaFuncionarios, ListaGenerica* listaCaixas) {
+    NOG* atualFunc = listaFuncionarios->Inicio;
+    while (atualFunc != NULL) {
+        FUNCIONARIO* func = (FUNCIONARIO*)atualFunc->Info;
+        int atribuido = 0;
+        NOG* caixaAtual = listaCaixas->Inicio;
+        while (caixaAtual != NULL) {
+            CAIXA* caixa = (CAIXA*) caixaAtual->Info ;
+            if (caixa->func == func) {
+                atribuido = 1;
+                break;
+            }
+            caixaAtual = caixaAtual->Prox;
+        }
+        if (!atribuido) {
+            return func;
+        }
+        atualFunc = atualFunc->Prox;
+    }
+    return NULL;
 }

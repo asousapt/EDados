@@ -41,10 +41,11 @@ int main(void) {
     printf("%s", "Erro ao carregar os dados do supermercado! O programa vai ser encerrado!\n"); 
     return 0;
   }
-   CAIXA* caixa1 = caixaComMenorTempo(supermercadoActual->Caixas);
-  
+   //CAIXA* caixa1 = caixaComMenorTempo(supermercadoActual->Caixas);
+   AbreFechaCaixa(supermercadoActual, 0, 1);
+  listarCaixas(supermercadoActual->Caixas); 
   //ShowLG(supermercadoActual->Caixas, MostrarCaixa);
-  //AbreFechaCaixa(supermercadoActual->Caixas);
+  
   //ShowLG(supermercadoActual->LogApp, MostrarLog);
   //ShowLG(supermercadoActual->Clientes, MostrarCliente);
   //AdicionarClienteAsCompras(supermercadoActual);
