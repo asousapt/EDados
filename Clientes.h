@@ -41,6 +41,7 @@ void AdicionarClienteAsCompras(SUPERMERCADO *S,Relogio *R);
 void MostrarClientesAsCompras(void* C);
 void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,Relogio *R);
 void DestruirClientesAsCompras(void* obj);
+void VerificaTempoEntradaCaixa(SUPERMERCADO *S,Relogio * R);
 
 // void AdicionarClienteCaixa(ListaGenerica *lgCx,ListaGenerica *lgCl,int numeroCaixa,int codigoCliente);
 

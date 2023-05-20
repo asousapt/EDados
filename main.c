@@ -38,15 +38,14 @@ int main(void) {
     return 0;
   }
   
-   /*AbreFechaCaixa(supermercadoActual, 0, 1);
-  listarCaixas(supermercadoActual->Caixas); */
-
   //Iniciar Relogio
   Relogio* R = (Relogio *) malloc(sizeof(Relogio));
   StartRelogio(R, 100, supermercadoActual);
+  
+   /*AbreFechaCaixa(supermercadoActual, 0, 1);
+  listarCaixas(supermercadoActual->Caixas); */
 
   AdicionarVariosClientesAsCompras(supermercadoActual,R);
-  ShowLG(supermercadoActual->ClientesAsCompras, MostrarClientesAsCompras);
 
   //CAIXA* caixa1 = caixaComMenorTempo(supermercadoActual->Caixas);
   

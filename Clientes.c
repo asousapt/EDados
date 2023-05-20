@@ -146,6 +146,29 @@ void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,Relogio *R){
   }
 }
 
+void VerificaTempoEntradaCaixa(SUPERMERCADO *S,Relogio * R){
+  time_t horaAtual = VerTimeRelogio(R);
+  struct tm *tmp = localtime(&horaAtual);
+  CLIENTEASCOMPRAS * CC;
+
+  NOG *P = S->ClientesAsCompras->Inicio;
+  int retorna = 0;
+  while (P) {
+    CC = P->Info;
+
+    time_t HoraCaixa = CC->horaEntradaFila;
+    struct tm *strHoraCaixa = localtime(&HoraCaixa);
+    if (strHoraCaixa->tm_hour < tmp->tm_hour){
+      //AdicionaClienteCaixa();
+    }else if (strHoraCaixa->tm_hour == tmp->tm_hour && strHoraCaixa->tm_min < tmp->tm_min){
+      //AdicionaClienteCaixa();
+    }else if (strHoraCaixa->tm_hour == tmp->tm_hour && strHoraCaixa->tm_min == tmp->tm_min && strHoraCaixa->tm_sec <= tmp->tm_sec){
+      //AdicionaClienteCaixa();
+    }
+    P = P->Prox;
+  }
+}
+
 void DestruirClienteAsCompras(void *obj){
   CLIENTEASCOMPRAS *x = obj;
   DestruirCliente(x->cliente);
