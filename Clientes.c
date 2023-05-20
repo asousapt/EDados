@@ -107,7 +107,7 @@ void AdicionarClienteAsCompras(SUPERMERCADO *S,Relogio *R){
     }
   }
 
-  int nProd = aleatorio(5,40); 
+  int nProd = aleatorio(1,5); 
   CLIENTEASCOMPRAS* NovoCliente = (CLIENTEASCOMPRAS *) malloc(sizeof(CLIENTEASCOMPRAS));
   NovoCliente->cliente = cl;
   NovoCliente->nProdutos = nProd;
@@ -116,8 +116,6 @@ void AdicionarClienteAsCompras(SUPERMERCADO *S,Relogio *R){
   AddBeginLG(S->ClientesAsCompras,NovoCliente);
 
   AdicionarTodosOsProdutosAosClientes(S,NovoCliente,R);
-
-  
 } 
 
 void MostrarClientesAsCompras(void* C){
@@ -126,9 +124,16 @@ void MostrarClientesAsCompras(void* C){
   printf("\n === Cliente No Supermercado ===");
   printf("\n Numero: %d", objCliente->cod);
   printf("\n Nome: %s", objCliente->nome);
-  printf("\n === Produtos do Cliente ===");
+  printf(" Nº de Produtos: %d", objClienteCompras->nProdutos);
+  
+  struct tm *tmp = localtime(&objClienteCompras->horaEntradaSuper);
+  printf("\n Entrada Supermercado: %dh%dm", tmp->tm_hour,tmp->tm_min);
 
-  ShowLG(objClienteCompras->ProdutosClientes,MostrarProduto);
+  tmp = localtime(&objClienteCompras->horaEntradaFila);
+  printf("\n Entrada Caixa: %dh%dm%ds", tmp->tm_hour,tmp->tm_min,tmp->tm_sec);
+  printf("\n\n === Produtos do Cliente ===");
+
+  ShowLG(objClienteCompras->ProdutosClientes,MostrarProdutoCliente);
 }
 
 void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,Relogio *R){
@@ -136,7 +141,7 @@ void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,Relogio *R){
   int numVerificacao = (S->nmrClientesSupermercado) - numClientesSM;
   int numClientes = aleatorio(1,numVerificacao);
 
-  for (int i = 1; i>numClientes; i++){
+  for (int i = 1; i<=numClientes; i++){
     AdicionarClienteAsCompras(S,R);
   }
 }
@@ -144,5 +149,5 @@ void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,Relogio *R){
 void DestruirClienteAsCompras(void *obj){
   CLIENTEASCOMPRAS *x = obj;
   DestruirCliente(x->cliente);
-  DestruirLG(x->ProdutosClientes,);
+  //DestruirLG(x->ProdutosClientes,);
 }

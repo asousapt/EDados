@@ -37,17 +37,18 @@ int main(void) {
     printf("%s", "Erro ao carregar os dados do supermercado! O programa vai ser encerrado!\n"); 
     return 0;
   }
-   //CAIXA* caixa1 = caixaComMenorTempo(supermercadoActual->Caixas);
-   AbreFechaCaixa(supermercadoActual, 0, 1);
-  listarCaixas(supermercadoActual->Caixas); 
+  
+   /*AbreFechaCaixa(supermercadoActual, 0, 1);
+  listarCaixas(supermercadoActual->Caixas); */
 
   //Iniciar Relogio
   Relogio* R = (Relogio *) malloc(sizeof(Relogio));
   StartRelogio(R, 100, supermercadoActual);
 
   AdicionarVariosClientesAsCompras(supermercadoActual,R);
+  ShowLG(supermercadoActual->ClientesAsCompras, MostrarClientesAsCompras);
 
-  CAIXA* caixa1 = caixaComMenorTempo(supermercadoActual->Caixas);
+  //CAIXA* caixa1 = caixaComMenorTempo(supermercadoActual->Caixas);
   
   //ShowLG(supermercadoActual->Caixas, MostrarCaixa);
   
@@ -56,7 +57,7 @@ int main(void) {
   //AdicionarClienteAsCompras(supermercadoActual);
   //ShowLG(supermercadoActual->ClientesAsCompras, MostrarClientesAsCompras);
 
-  printf("Hora de abertura do supermercado: %s", asctime(localtime(&(supermercadoActual->horaAbertura))));
+  //printf("Hora de abertura do supermercado: %s", asctime(localtime(&(supermercadoActual->horaAbertura))));
 
   exportaLogCsv(supermercadoActual->LogApp);
 

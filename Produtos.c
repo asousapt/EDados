@@ -118,26 +118,20 @@ void AdicionarProdutoAoCliente(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC){
 void AdicionarTodosOsProdutosAosClientes(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC,Relogio *R){
   int numProd = CC->nProdutos;
 
-  for (int i = 1; i>numProd; i++){
+  for (int i = 1; i<=numProd; i++){
     AdicionarProdutoAoCliente(S,CC);
   }
 
   PRODUTOCLIENTE *PC;
   NOG *P = CC->ProdutosClientes->Inicio;
-  struct tm *tmp;
-  while (P) {
-    PC = P->Info;
-    tmp->tm_sec = tmp->tm_sec + PC->produtoCL->tempoCompra;
-    P = P->Prox;
-  }
-
   time_t horaIrCaixa = VerTimeRelogio(R);
   struct tm *local = localtime(&horaIrCaixa);
-  local->tm_hour += tmp->tm_hour;
-  local->tm_min += tmp->tm_min;
-  local->tm_sec += tmp->tm_sec;
+  while (P) {
+    PC = P->Info;
+    local->tm_sec += PC->produtoCL->tempoCompra;
+    P = P->Prox;
+  }
   horaIrCaixa = mktime(local);
-
   CC->horaEntradaFila = horaIrCaixa;
 }
 
@@ -145,11 +139,10 @@ void MostrarProdutoCliente(void* P){
   PRODUTOCLIENTE* objProdutoCliente = (PRODUTOCLIENTE *) P;
   PRODUTO* objProduto = objProdutoCliente->produtoCL;
 
-  printf("\n === Produto ===");
   printf("\n Numero: %d", objProduto->cod);
   printf("\n Descricao: %s", objProduto->designacao);
   printf("\n Quantidade: %d", objProdutoCliente->quantidade);
-  printf("\n Preco: %f", objProduto->preco);
+  printf("\n Tempo Compra: %fs", objProduto->tempoCompra);
 }
 
 void DestruirProdutoCliente(void *x){
