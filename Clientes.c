@@ -159,11 +159,20 @@ void VerificaTempoEntradaCaixa(SUPERMERCADO *S,Relogio * R){
     time_t HoraCaixa = CC->horaEntradaFila;
     struct tm *strHoraCaixa = localtime(&HoraCaixa);
     if (strHoraCaixa->tm_hour < tmp->tm_hour){
-      //AdicionaClienteCaixa();
+      //Verifica qual a caixa mais rapida 
+      CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
+      //Adiciona o cesto do cliente na fila da caixa
+      adicionarClienteComprasFila(caixaAtual, CC);
+      //Remove o cesto do cliente da lista de clientes as compras 
+      removerNoLG(S->ClientesAsCompras, P);
     }else if (strHoraCaixa->tm_hour == tmp->tm_hour && strHoraCaixa->tm_min < tmp->tm_min){
-      //AdicionaClienteCaixa();
+      CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
+      adicionarClienteComprasFila(caixaAtual, CC);
+      removerNoLG(S->ClientesAsCompras, P);
     }else if (strHoraCaixa->tm_hour == tmp->tm_hour && strHoraCaixa->tm_min == tmp->tm_min && strHoraCaixa->tm_sec <= tmp->tm_sec){
-      //AdicionaClienteCaixa();
+      CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
+      adicionarClienteComprasFila(caixaAtual, CC);
+      removerNoLG(S->ClientesAsCompras, P);
     }
     P = P->Prox;
   }

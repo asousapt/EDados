@@ -103,3 +103,10 @@ float calcularTempoTotalCompra(FILAGENERICA* fila) {
         atual = atual->Prox;
     }
 }
+
+//Coloca os clientes compras na fila 
+void adicionarClienteComprasFila(CAIXA* caixaAtual, CLIENTEASCOMPRAS* cesto) {
+    FILAGENERICA* fila = (FILAGENERICA *) caixaAtual->filaCaixa;
+    AdicionaAFila(fila, cesto);
+    caixaAtual->tempoEsperaReal = calcularTempoTotalCompra(fila);
+}
