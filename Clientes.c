@@ -165,10 +165,12 @@ void VerificaTempoEntradaCaixa(SUPERMERCADO *S,Relogio * R){
       adicionarClienteComprasFila(caixaAtual, CC);
       //Remove o cesto do cliente da lista de clientes as compras 
       removerNoLG(S->ClientesAsCompras, P);
+      
     }else if (strHoraCaixa->tm_hour == tmp->tm_hour && strHoraCaixa->tm_min < tmp->tm_min){
       CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
       adicionarClienteComprasFila(caixaAtual, CC);
       removerNoLG(S->ClientesAsCompras, P);
+      
     }else if (strHoraCaixa->tm_hour == tmp->tm_hour && strHoraCaixa->tm_min == tmp->tm_min && strHoraCaixa->tm_sec <= tmp->tm_sec){
       CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
       adicionarClienteComprasFila(caixaAtual, CC);

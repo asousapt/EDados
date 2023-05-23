@@ -3,6 +3,7 @@
 #include <string.h>
 #include "Caixa.h"
 #include "Funcionarios.h"
+#include "Fila.h"
 
 // Criar objecto caixa
 CAIXA* CriarCaixa(int numero){
@@ -25,7 +26,7 @@ CAIXA* CriarCaixa(int numero){
 
 void listarCaixas(ListaGenerica* listaCaixas) {
   printf("*****Caixas ******\n"); 
-  printf("No | Caixa  | Estado  | Operador\n");
+  printf("No | Caixa  | Estado  | Operador   |  Tempo Espera Reak\n");
   ShowLG(listaCaixas, MostrarCaixa);
 }
 
@@ -35,7 +36,7 @@ void MostrarCaixa(void* F){
   char *nome = (char *)malloc(10);
   sprintf(nome,"%s %d", "Caixa ", objCaixa->numCaixa);
  if (objCaixa->func != NULL) {
-  printf("%d - %s * %d * %s \n", objCaixa->numCaixa, nome, !objCaixa->fechado, funcionario1->nome);
+  printf("%d - %s * %d * %s * %f \n", objCaixa->numCaixa, nome, !objCaixa->fechado, funcionario1->nome, objCaixa->tempoEsperaReal);
  } else {
   printf("%d - %s * %d  \n", objCaixa->numCaixa, nome, !objCaixa->fechado);
  }
@@ -168,3 +169,43 @@ CAIXA* caixaComMenorTempo(ListaGenerica* lista) {
 }
   return caixaMenorTempoEsperaReal;
 }
+
+int nmrCaixasAbertas(SUPERMERCADO* super) {
+  int nmrCaixas = 0;
+  ListaGenerica * lg = (ListaGenerica *) super->Caixas;
+   if (!lg) return 0;
+
+  NOG* atual = lg->Inicio;
+   while (atual != NULL) {
+    CAIXA* caixaAtual = (CAIXA*)atual->Info;
+    if (caixaAtual->fechado == 0) {
+      nmrCaixas++;
+    }
+
+     atual = atual->Prox;
+   }
+   return nmrCaixas;
+}
+
+int decideAbreCaixaNova(SUPERMERCADO* super) {
+  int nmrCaixasAberta  = 0;
+  nmrCaixasAberta = nmrCaixasAbertas(super);
+  int nmrCaixasNoLimite = 0;
+  int nmrMaxFila = super->nmrMaxClientesFila; 
+  ListaGenerica * lg = (ListaGenerica *) super->Caixas;
+  
+  if (!lg) return 0;
+
+  NOG* atual = lg->Inicio;
+   while (atual != NULL) { 
+    CAIXA* caixaAtual = (CAIXA*)atual->Info;
+    if (caixaAtual->fechado == 0) {
+      FILAGENERICA* filaActual = (FILAGENERICA*) caixaAtual->filaCaixa;
+      if (filaActual->tamanho == nmrMaxFila ) nmrCaixasNoLimite++;
+    }
+
+    atual = atual->Prox;
+   }
+  return nmrCaixasAberta == nmrCaixasNoLimite;
+}
+

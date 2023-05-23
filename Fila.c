@@ -18,6 +18,7 @@ NOFILA *CriarNoFila(void *dados) {
     NOFILA *novoNo = (NOFILA *) malloc(sizeof(NOFILA));
     novoNo->Dados = dados;
     novoNo->Prox = NULL;
+
     return novoNo;
 }
 
@@ -28,6 +29,7 @@ int FilaVazia(FILAGENERICA *fila) {
 
 //adiciona na fila generica 
 void AdicionaAFila(FILAGENERICA *fila, void *dados) {
+  
     NOFILA *novoNo = CriarNoFila(dados);
     if (FilaVazia(fila)) {
         fila->cabeca = fila->cauda = novoNo;
@@ -102,11 +104,15 @@ float calcularTempoTotalCompra(FILAGENERICA* fila) {
 
         atual = atual->Prox;
     }
+    
+    return tempoTotal;
 }
 
 //Coloca os clientes compras na fila 
 void adicionarClienteComprasFila(CAIXA* caixaAtual, CLIENTEASCOMPRAS* cesto) {
     FILAGENERICA* fila = (FILAGENERICA *) caixaAtual->filaCaixa;
+  
     AdicionaAFila(fila, cesto);
     caixaAtual->tempoEsperaReal = calcularTempoTotalCompra(fila);
+    printf("Adicionei cliente na fila\n");
 }

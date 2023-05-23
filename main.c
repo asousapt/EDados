@@ -46,10 +46,12 @@ int main(void) {
   //listarCaixas(supermercadoActual->Caixas);
 
   AdicionarVariosClientesAsCompras(supermercadoActual,R);
-  
+   //ShowLG(supermercadoActual->ClientesAsCompras, MostrarClientesAsCompras);
   // indica qual a caixa com menos pessoas
  
- 
+ while (1) {
+ VerificaTempoEntradaCaixa(supermercadoActual, R); 
+ }
   
 
   //ShowLG(supermercadoActual->Caixas, MostrarCaixa);
@@ -57,7 +59,7 @@ int main(void) {
   //ShowLG(supermercadoActual->LogApp, MostrarLog);
   //ShowLG(supermercadoActual->Clientes, MostrarCliente);
   //AdicionarClienteAsCompras(supermercadoActual);
-  //ShowLG(supermercadoActual->ClientesAsCompras, MostrarClientesAsCompras);
+ 
 
   //printf("Hora de abertura do supermercado: %s", asctime(localtime(&(supermercadoActual->horaAbertura))));
 
