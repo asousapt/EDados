@@ -18,6 +18,7 @@ NOFILA *CriarNoFila(void *dados) {
     NOFILA *novoNo = (NOFILA *) malloc(sizeof(NOFILA));
     novoNo->Dados = dados;
     novoNo->Prox = NULL;
+
     return novoNo;
 }
 
@@ -28,6 +29,7 @@ int FilaVazia(FILAGENERICA *fila) {
 
 //adiciona na fila generica 
 void AdicionaAFila(FILAGENERICA *fila, void *dados) {
+  
     NOFILA *novoNo = CriarNoFila(dados);
     if (FilaVazia(fila)) {
         fila->cabeca = fila->cauda = novoNo;
@@ -57,32 +59,18 @@ void *RetirarDaFila(FILAGENERICA *fila, void (*f)(void *)) {
     return dados;
 }
 
-/*void DestruirLG(ListaGenerica *lg, void (*fdest)(void *)) {
-  if (!lg)
-    return;
-  NOG *P = lg->Inicio;
-  NOG *Pproximo;
-  while (P) {
-    Pproximo = P->Prox;
-    fdest(P->Info);
-    free(P);
-    P = Pproximo;
-  }
-  free(lg);
-}*/
-
 void DestruirFila(FILAGENERICA *fila, void (*f)(void *)){
-    if (FilaVazia(fila)) {
+    /*if (FilaVazia(fila)) {
         return NULL;
     }
     NOFILA *temp = fila->cabeca;
     NOFILA *prox;
     while (temp) {
-        prox = temp->Prox;
+        prox->Dados = temp->Prox;
         fdest(temp->Dados);
         free(temp);
         temp = prox;
-    }
+    }*/
 }
 
 void MostrarFila(FILAGENERICA *Fila, void (*f)(void *)){
@@ -94,7 +82,7 @@ void MostrarFila(FILAGENERICA *Fila, void (*f)(void *)){
     }
 }
 
-
+// Verifica qual o tempo que a compra do cliente vai demorar
 float calcularTempoTotalCompra(FILAGENERICA* fila) {
     float tempoTotal = 0.0;
     NOFILA* atual = fila->cabeca;
@@ -103,23 +91,28 @@ float calcularTempoTotalCompra(FILAGENERICA* fila) {
         CLIENTEASCOMPRAS* clienteCompras = (CLIENTEASCOMPRAS*)atual->Dados;
         ListaGenerica* listaProdutos = clienteCompras->ProdutosClientes;
 
-        // Iterar sobre a lista de produtos dentro do nó atual
         NOG* atualLista = listaProdutos->Inicio;
 
         while (atualLista != NULL) {
             PRODUTOCLIENTE* produtoCliente = (PRODUTOCLIENTE*)atualLista->Info;
 
-            // Acessar os campos da estrutura PRODUTOCLIENTE
             PRODUTO* produto = produtoCliente->produtoCL;
             tempoTotal += produto->tempoCompra;
 
-            // Faça as operações necessárias com os campos da estrutura
-
-            // Avançar para o próximo nó da lista de produtos
             atualLista = atualLista->Prox;
         }
 
-        // Avançar para o próximo nó da fila
         atual = atual->Prox;
     }
+    
+    return tempoTotal;
+}
+
+//Coloca os clientes compras na fila 
+void adicionarClienteComprasFila(CAIXA* caixaAtual, CLIENTEASCOMPRAS* cesto) {
+    FILAGENERICA* fila = (FILAGENERICA *) caixaAtual->filaCaixa;
+  
+    AdicionaAFila(fila, cesto);
+    caixaAtual->tempoEsperaReal = calcularTempoTotalCompra(fila);
+    printf("Adicionei cliente na fila\n");
 }

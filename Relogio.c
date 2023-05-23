@@ -1,14 +1,15 @@
 #include <stdio.h>
 #include "Relogio.h"
+#include "supermercado.h"
 
 void StartRelogio(Relogio *R, int Vel, SUPERMERCADO *S){
     R->START = time(0);
     R->VELOCIDADE = Vel;
 
-    struct tm *tmp = localtime(&R->START);
+    struct tm *tmp = localtime(&S->horaAbertura);
     //sscanf(S->horaAbertura, "%d:%d", &tmp->tm_hour, &tmp->tm_min);
     R->Hora_Inicio = mktime(tmp);
-    printf("Hora de Arranque = [%s]\n", asctime(localtime(&(R->Hora_Inicio))));
+    //printf("Hora de Arranque = [%s]\n", asctime(localtime(&(R->Hora_Inicio))));
 }
 
 time_t VerTimeRelogio(Relogio *R){

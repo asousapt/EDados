@@ -29,28 +29,39 @@
 int main(void) {
   printf("*** Bem-vindo ***\n"); 
 
-  //Relogio* R = (Relogio *) malloc(sizeof(Relogio));
-
   // Vamos pedir ao utilizador para criar o supermercado
   SUPERMERCADO * supermercadoActual = CriarSM();
-  
-  //StartRelogio(R, 100, supermercadoActual);
   
   //carrega dados do supermercado
   if(carregaSupermercado(supermercadoActual) == 0) {
     printf("%s", "Erro ao carregar os dados do supermercado! O programa vai ser encerrado!\n"); 
     return 0;
   }
-   CAIXA* caixa1 = caixaComMenorTempo(supermercadoActual->Caixas);
   
+  //Iniciar Relogio
+  Relogio* R = (Relogio *) malloc(sizeof(Relogio));
+  StartRelogio(R, 100, supermercadoActual);
+  
+  AbreFechaCaixa(supermercadoActual, 0, 1);
+  //listarCaixas(supermercadoActual->Caixas);
+
+  AdicionarVariosClientesAsCompras(supermercadoActual,R);
+   //ShowLG(supermercadoActual->ClientesAsCompras, MostrarClientesAsCompras);
+  // indica qual a caixa com menos pessoas
+ 
+ while (1) {
+ VerificaTempoEntradaCaixa(supermercadoActual, R); 
+ }
+  
+
   //ShowLG(supermercadoActual->Caixas, MostrarCaixa);
-  //AbreFechaCaixa(supermercadoActual->Caixas);
+  
   //ShowLG(supermercadoActual->LogApp, MostrarLog);
   //ShowLG(supermercadoActual->Clientes, MostrarCliente);
   //AdicionarClienteAsCompras(supermercadoActual);
-  //ShowLG(supermercadoActual->ClientesAsCompras, MostrarClientesAsCompras);
+ 
 
-  printf("Hora de abertura do supermercado: %s", asctime(localtime(&(supermercadoActual->horaAbertura))));
+  //printf("Hora de abertura do supermercado: %s", asctime(localtime(&(supermercadoActual->horaAbertura))));
 
   exportaLogCsv(supermercadoActual->LogApp);
 

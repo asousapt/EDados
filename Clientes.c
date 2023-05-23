@@ -4,6 +4,7 @@
 #include <time.h>
 #include "Clientes.h"
 #include "supermercado.h"
+#include "Produtos.h"
 
 CLIENTE* CriarCliente(char* numeroCliente,char* nomeCliente){
   CLIENTE* NovoCliente = (CLIENTE *) malloc(sizeof(CLIENTE));
@@ -106,13 +107,15 @@ void AdicionarClienteAsCompras(SUPERMERCADO *S,Relogio *R){
     }
   }
 
-  int nProd = aleatorio(5,40); 
+  int nProd = aleatorio(1,5); 
   CLIENTEASCOMPRAS* NovoCliente = (CLIENTEASCOMPRAS *) malloc(sizeof(CLIENTEASCOMPRAS));
   NovoCliente->cliente = cl;
   NovoCliente->nProdutos = nProd;
   NovoCliente->ProdutosClientes = CriarLG();
   NovoCliente->horaEntradaSuper = VerTimeRelogio(R);
   AddBeginLG(S->ClientesAsCompras,NovoCliente);
+
+  AdicionarTodosOsProdutosAosClientes(S,NovoCliente,R);
 } 
 
 void MostrarClientesAsCompras(void* C){
@@ -121,9 +124,16 @@ void MostrarClientesAsCompras(void* C){
   printf("\n === Cliente No Supermercado ===");
   printf("\n Numero: %d", objCliente->cod);
   printf("\n Nome: %s", objCliente->nome);
-  printf("\n === Produtos do Cliente ===");
+  printf(" Nº de Produtos: %d", objClienteCompras->nProdutos);
+  
+  struct tm *tmp = localtime(&objClienteCompras->horaEntradaSuper);
+  printf("\n Entrada Supermercado: %dh%dm", tmp->tm_hour,tmp->tm_min);
 
-  ShowLG(objClienteCompras->ProdutosClientes,MostrarProduto);
+  tmp = localtime(&objClienteCompras->horaEntradaFila);
+  printf("\n Entrada Caixa: %dh%dm%ds", tmp->tm_hour,tmp->tm_min,tmp->tm_sec);
+  printf("\n\n === Produtos do Cliente ===");
+
+  ShowLG(objClienteCompras->ProdutosClientes,MostrarProdutoCliente);
 }
 
 void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,Relogio *R){
@@ -131,13 +141,47 @@ void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,Relogio *R){
   int numVerificacao = (S->nmrClientesSupermercado) - numClientesSM;
   int numClientes = aleatorio(1,numVerificacao);
 
-  for (int i = 1; i>numClientes; i++){
+  for (int i = 1; i<=numClientes; i++){
     AdicionarClienteAsCompras(S,R);
+  }
+}
+
+void VerificaTempoEntradaCaixa(SUPERMERCADO *S,Relogio * R){
+  time_t horaAtual = VerTimeRelogio(R);
+  struct tm *tmp = localtime(&horaAtual);
+  CLIENTEASCOMPRAS * CC;
+
+  NOG *P = S->ClientesAsCompras->Inicio;
+  int retorna = 0;
+  while (P) {
+    CC = P->Info;
+
+    time_t HoraCaixa = CC->horaEntradaFila;
+    struct tm *strHoraCaixa = localtime(&HoraCaixa);
+    if (strHoraCaixa->tm_hour < tmp->tm_hour){
+      //Verifica qual a caixa mais rapida 
+      CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
+      //Adiciona o cesto do cliente na fila da caixa
+      adicionarClienteComprasFila(caixaAtual, CC);
+      //Remove o cesto do cliente da lista de clientes as compras 
+      removerNoLG(S->ClientesAsCompras, P);
+      
+    }else if (strHoraCaixa->tm_hour == tmp->tm_hour && strHoraCaixa->tm_min < tmp->tm_min){
+      CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
+      adicionarClienteComprasFila(caixaAtual, CC);
+      removerNoLG(S->ClientesAsCompras, P);
+      
+    }else if (strHoraCaixa->tm_hour == tmp->tm_hour && strHoraCaixa->tm_min == tmp->tm_min && strHoraCaixa->tm_sec <= tmp->tm_sec){
+      CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
+      adicionarClienteComprasFila(caixaAtual, CC);
+      removerNoLG(S->ClientesAsCompras, P);
+    }
+    P = P->Prox;
   }
 }
 
 void DestruirClienteAsCompras(void *obj){
   CLIENTEASCOMPRAS *x = obj;
   DestruirCliente(x->cliente);
-  DestruirLG(x->ProdutosClientes,);
+  //DestruirLG(x->ProdutosClientes,);
 }

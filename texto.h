@@ -7,6 +7,7 @@
 #include "Produtos.h"
 #include "Caixa.h"
 #include "supermercado.h"
+#include "Relogio.h"
 
 #define STRING char *
 

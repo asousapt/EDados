@@ -39,6 +39,9 @@
     "menu.h": "c",
     "caixa.h": "c",
     "string.h": "c",
-    "time.h": "c"
+    "time.h": "c",
+    "funcionarios.h": "c",
+    "supermercado.h": "c",
+    "listagenerica.h": "c"
   }
 }

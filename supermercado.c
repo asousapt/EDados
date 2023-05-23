@@ -19,7 +19,7 @@ SUPERMERCADO * CriarSM(){
     printf("\nAmbiente de desenvolvimento? (0-1)\n");
     scanf("%d", &emDesenvolvimento);
     
-    if (emDesenvolvimento = 0) {
+    if (emDesenvolvimento == 0) {
         nome = getString("Nome do Supermercado:");
     
         // pede ao utilizador a hora de abertura do supermercado

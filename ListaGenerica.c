@@ -69,3 +69,36 @@ int PertenceLG(ListaGenerica *lg, void *X, int (*fcomp)(void *, void *)) {
   }
   return 0;
 }
+
+void removerNoLG(ListaGenerica* lg, NOG* noRemover) {
+    if (lg->Inicio == NULL || noRemover == NULL) {
+      printf("NO invalido\n");
+        return; // Lista vazia ou nó inválido
+    }
+
+    // Caso especial: o nó a ser removido é o primeiro da lista
+    if (lg->Inicio == noRemover) {
+        lg->Inicio = noRemover->Prox;
+        free(noRemover);
+        lg->NEL--;
+        return;
+    }
+
+    // Procurar o nó anterior ao nó a ser removido
+    NOG* anterior = lg->Inicio;
+    while (anterior != NULL && anterior->Prox != noRemover) {
+        anterior = anterior->Prox;
+    }
+
+    // Se não encontrarmos o nó anterior, o nó a ser removido não está presente na lista
+    if (anterior == NULL) {
+        printf("No nao esta presente");
+        return;
+    }
+
+    // reconectar os nos
+    anterior->Prox = noRemover->Prox;
+    free(noRemover);
+    lg->NEL--;
+    
+}
