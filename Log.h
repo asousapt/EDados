@@ -8,14 +8,14 @@
 #include "Funcionarios.h"
 #include "ListaGenerica.h"
 #include "funcoes.h"
-
+#include "Relogio.h"
 
 typedef struct log {
     time_t *data_hora_atual;  
     char * mensagem; 
 } LOG;
 
-LOG* CriarLog(char * mensagem, time_t *dataAccao);
+LOG* CriarLog(char * mensagem, RELOGIO* R);
 void MostrarLog(void* C);
 void exportaLogCsv(ListaGenerica* ListaLog);
 void EscreveLog(void *L, FILE *ficheiro);

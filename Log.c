@@ -6,12 +6,14 @@
 #include "Log.h"
 #include "texto.h"
 
-LOG* CriarLog(char * mensagem, time_t *dataAccao){
+LOG* CriarLog(char * mensagem, RELOGIO* R){
+   time_t horaAtual = VerTimeRelogio(R);
+    struct tm *tmp = localtime(&horaAtual);
     LOG* novoLog = (LOG *) malloc(sizeof(LOG));
     
     novoLog->data_hora_atual = (time_t*) malloc(sizeof(time_t));
     novoLog->mensagem = (char*) malloc(strlen(mensagem) + 1);
-    novoLog->data_hora_atual = dataAccao;
+    novoLog->data_hora_atual = horaAtual;
     strcpy(novoLog->mensagem, mensagem);
 
     return novoLog;

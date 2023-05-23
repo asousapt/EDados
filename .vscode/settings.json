@@ -42,6 +42,7 @@
     "time.h": "c",
     "funcionarios.h": "c",
     "supermercado.h": "c",
-    "listagenerica.h": "c"
+    "listagenerica.h": "c",
+    "relogio.h": "c"
   }
 }

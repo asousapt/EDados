@@ -2,7 +2,7 @@
 #include "Relogio.h"
 #include "supermercado.h"
 
-void StartRelogio(Relogio *R, int Vel, SUPERMERCADO *S){
+void StartRELOGIO(RELOGIO *R, int Vel, SUPERMERCADO *S){
     R->START = time(0);
     R->VELOCIDADE = Vel;
 
@@ -12,7 +12,7 @@ void StartRelogio(Relogio *R, int Vel, SUPERMERCADO *S){
     //printf("Hora de Arranque = [%s]\n", asctime(localtime(&(R->Hora_Inicio))));
 }
 
-time_t VerTimeRelogio(Relogio *R){
+time_t VerTimeRELOGIO(RELOGIO *R){
     time_t Dif = difftime(time(0), R->START);
     time_t Simulada = R->Hora_Inicio + Dif * R->VELOCIDADE;
     return Simulada;

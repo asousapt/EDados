@@ -84,7 +84,7 @@ CLIENTEASCOMPRAS* ProcurarClienteAsCompras(ListaGenerica *lg,int codigoCliente){
   return clR;
 }
 
-void AdicionarClienteAsCompras(SUPERMERCADO *S,Relogio *R){
+void AdicionarClienteAsCompras(SUPERMERCADO *S,RELOGIO *R){
   int altCliente = 0,skip = 0,icr = 1;
   CLIENTE *cl;
 
@@ -136,7 +136,7 @@ void MostrarClientesAsCompras(void* C){
   ShowLG(objClienteCompras->ProdutosClientes,MostrarProdutoCliente);
 }
 
-void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,Relogio *R){
+void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,RELOGIO *R){
   int numClientesSM = S->ClientesAsCompras->NEL;
   int numVerificacao = (S->nmrClientesSupermercado) - numClientesSM;
   int numClientes = aleatorio(1,numVerificacao);
@@ -146,14 +146,16 @@ void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,Relogio *R){
   }
 }
 
-void VerificaTempoEntradaCaixa(SUPERMERCADO *S,Relogio * R){
+void VerificaTempoEntradaCaixa(SUPERMERCADO *S,RELOGIO * R){
   time_t horaAtual = VerTimeRelogio(R);
   struct tm *tmp = localtime(&horaAtual);
   CLIENTEASCOMPRAS * CC;
+  NOG * noTratar = NULL;
 
   NOG *P = S->ClientesAsCompras->Inicio;
   int retorna = 0;
   while (P) {
+    noTratar = NULL;
     CC = P->Info;
 
     time_t HoraCaixa = CC->horaEntradaFila;
@@ -163,20 +165,22 @@ void VerificaTempoEntradaCaixa(SUPERMERCADO *S,Relogio * R){
       CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
       //Adiciona o cesto do cliente na fila da caixa
       adicionarClienteComprasFila(caixaAtual, CC);
-      //Remove o cesto do cliente da lista de clientes as compras 
-      removerNoLG(S->ClientesAsCompras, P);
       
+      noTratar = P;      
     }else if (strHoraCaixa->tm_hour == tmp->tm_hour && strHoraCaixa->tm_min < tmp->tm_min){
       CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
       adicionarClienteComprasFila(caixaAtual, CC);
-      removerNoLG(S->ClientesAsCompras, P);
-      
+      noTratar = P;
     }else if (strHoraCaixa->tm_hour == tmp->tm_hour && strHoraCaixa->tm_min == tmp->tm_min && strHoraCaixa->tm_sec <= tmp->tm_sec){
       CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
       adicionarClienteComprasFila(caixaAtual, CC);
-      removerNoLG(S->ClientesAsCompras, P);
+      noTratar = P;
     }
     P = P->Prox;
+    if (noTratar != NULL) {
+      
+      removerNoLG(S->ClientesAsCompras,noTratar);
+    }
   }
 }
 

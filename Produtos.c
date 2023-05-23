@@ -115,7 +115,7 @@ void AdicionarProdutoAoCliente(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC){
   }
 }
 
-void AdicionarTodosOsProdutosAosClientes(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC,Relogio *R){
+void AdicionarTodosOsProdutosAosClientes(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC,RELOGIO *R){
   int numProd = CC->nProdutos;
 
   for (int i = 1; i<=numProd; i++){
