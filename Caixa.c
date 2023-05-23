@@ -68,7 +68,7 @@ void MostrarCaixaFechada(void* F){
 void DestruirCaixa(void* F){
   CAIXA* objCaixa = (CAIXA *) F;
   DestruirFuncionario(objCaixa->func);
-  //DestruirFila(objCaixa->filaCaixa, DestruirFuncionario); adicionar depois a funcao destruir
+  DestruirFila(objCaixa->filaCaixa, DestruirClientesAsCompras);
   free(objCaixa);
 }
 

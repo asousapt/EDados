@@ -180,8 +180,9 @@ void VerificaTempoEntradaCaixa(SUPERMERCADO *S,Relogio * R){
   }
 }
 
-void DestruirClienteAsCompras(void *obj){
+void DestruirClientesAsCompras(void *obj){
   CLIENTEASCOMPRAS *x = obj;
   DestruirCliente(x->cliente);
-  //DestruirLG(x->ProdutosClientes,);
+  DestruirLG(x->ProdutosClientes,DestruirProdutoCliente);
+  free(x);
 }
