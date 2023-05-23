@@ -8,6 +8,7 @@
 #include "Funcionarios.h"
 #include "ListaGenerica.h"
 #include "funcoes.h"
+#include "Clientes.h"
 
 typedef struct caixa {
     int numCaixa;

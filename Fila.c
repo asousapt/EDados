@@ -60,17 +60,17 @@ void *RetirarDaFila(FILAGENERICA *fila, void (*f)(void *)) {
 }
 
 void DestruirFila(FILAGENERICA *fila, void (*f)(void *)){
-    /*if (FilaVazia(fila)) {
+    if (FilaVazia(fila)) {
         return NULL;
     }
     NOFILA *temp = fila->cabeca;
     NOFILA *prox;
-        while (temp) {
-        prox->Dados = temp->Prox;
+    while (temp) {
+        prox = temp->Prox;
         fdest(temp->Dados);
         free(temp);
         temp = prox;
-    }*/
+    }
 }
 
 void MostrarFila(FILAGENERICA *Fila, void (*f)(void *)){

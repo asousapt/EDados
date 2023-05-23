@@ -19,5 +19,6 @@ LOG* CriarLog(char * mensagem, RELOGIO* R);
 void MostrarLog(void* C);
 void exportaLogCsv(ListaGenerica* ListaLog);
 void EscreveLog(void *L, FILE *ficheiro);
+void DestruirLog(void *L);
 
 #endif // LOG_H_INCLUDED

@@ -41,6 +41,7 @@ void exportaLogCsv(ListaGenerica* ListaLog) {
 		printf("Erro ao abrir o ficheiro log.csv");
 		exit(1);
 	}
+
   printf("A exportar Log...\n");
 
   EscreveLG(ListaLog, f, EscreveLog);
@@ -48,4 +49,10 @@ void exportaLogCsv(ListaGenerica* ListaLog) {
   fclose(f);
   
   printf("Log Exportado com sucesso!\n");
+}
+
+void DestruirLog(void *L){
+    LOG *x = (LOG *) L;
+    free(x->mensagem);
+    free(x);
 }

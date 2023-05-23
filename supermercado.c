@@ -131,3 +131,15 @@ int carregaSupermercado(SUPERMERCADO* supermercadoActual, RELOGIO* R){
     AddBeginLG(supermercadoActual->LogApp, logCriar2);
     return 1;
 }
+
+void DestruirSupermercado(SUPERMERCADO *mercado){
+    free(mercado->nome);
+    DestruirLG(mercado->Caixas, DestruirCaixa);
+    DestruirLG(mercado->Clientes,DestruirCliente);
+    DestruirLG(mercado->ClientesAsCompras,DestruirClientesAsCompras);
+    DestruirLG(mercado->Funcionarios, DestruirFuncionario);
+    DestruirLG(mercado->LogApp,DestruirLog);
+    DestruirLG(mercado->Produtos,DestruirProduto);
+    DestruirLG(mercado->ProdutosOferecidos,DestruirProduto);
+    free(mercado);
+}
