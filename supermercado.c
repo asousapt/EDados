@@ -5,8 +5,7 @@
 #include "Log.h"
 #include "Caixa.h"
 #include "Produtos.h"
-
-
+#include "Relogio.h"
 
 SUPERMERCADO * CriarSM(){
     
