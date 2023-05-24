@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "Relogio.h"
 #include "ListaGenerica.h"
 #include "Clientes.h"
@@ -48,19 +49,18 @@ int main(void) {
   
   // Abre uma caixa do supermercado 
   int primeiraCaixaAbrir =  buscaUmaCaixaParaAbrir(supermercadoActual->Caixas);
-  printf("%d\n", primeiraCaixaAbrir);
   AbreFechaCaixa(supermercadoActual, primeiraCaixaAbrir, 1, R);
   //listarCaixas(supermercadoActual->Caixas);
 
   
    //ShowLG(supermercadoActual->ClientesAsCompras, MostrarClientesAsCompras);
   // indica qual a caixa com menos pessoas
-// AdicionarVariosClientesAsCompras(supermercadoActual,R);
-
- //VerificaTempoEntradaCaixa(supermercadoActual, R); 
+  AdicionarVariosClientesAsCompras(supermercadoActual,R);
+sleep(10);
+ VerificaTempoEntradaCaixa(supermercadoActual, R); 
 
   
-
+ 
   //ShowLG(supermercadoActual->Caixas, MostrarCaixa);
   
   //ShowLG(supermercadoActual->LogApp, MostrarLog);

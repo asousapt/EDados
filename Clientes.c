@@ -6,6 +6,7 @@
 #include "Clientes.h"
 #include "supermercado.h"
 #include "Produtos.h"
+#include "Log.h"
 
 
 CLIENTE* CriarCliente(char* numeroCliente,char* nomeCliente){
@@ -101,6 +102,11 @@ void AdicionarClienteAsCompras(SUPERMERCADO *S,RELOGIO *R){
         if (VerificaClienteAsCompras(S,codigo) == 0){
           skip = 1;
           cl = P->Info;
+           char *texto = (char *)malloc(300);
+          sprintf(texto, "Cliente n %d entrou no supermercado", cl->cod);
+          LOG  * logCriar2 = CriarLog(texto, R);
+          AddBeginLG(S->LogApp, logCriar2);
+          free(texto);
         }
         break;
       }
@@ -164,16 +170,28 @@ void VerificaTempoEntradaCaixa(SUPERMERCADO *S,RELOGIO * R){
     struct tm *strHoraCaixa = localtime(&HoraCaixa);
     if (strHoraCaixa->tm_hour < tmp->tm_hour){
       //Verifica qual a caixa mais rapida 
+      if (decideAbreCaixaNova(S) == 1) {
+        int NumCaixaAbrir =  buscaUmaCaixaParaAbrir(S->Caixas);
+        AbreFechaCaixa(S, NumCaixaAbrir, 1, R);
+      }
       CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
       //Adiciona o cesto do cliente na fila da caixa
       adicionarClienteComprasFila(caixaAtual, CC);
       
       noTratar = P;      
     }else if (strHoraCaixa->tm_hour == tmp->tm_hour && strHoraCaixa->tm_min < tmp->tm_min){
+      if (decideAbreCaixaNova(S) == 1) {
+        int NumCaixaAbrir =  buscaUmaCaixaParaAbrir(S->Caixas);
+        AbreFechaCaixa(S, NumCaixaAbrir, 1, R);
+      }
       CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
       adicionarClienteComprasFila(caixaAtual, CC);
       noTratar = P;
     }else if (strHoraCaixa->tm_hour == tmp->tm_hour && strHoraCaixa->tm_min == tmp->tm_min && strHoraCaixa->tm_sec <= tmp->tm_sec){
+      if (decideAbreCaixaNova(S) == 1) {
+        int NumCaixaAbrir =  buscaUmaCaixaParaAbrir(S->Caixas);
+        AbreFechaCaixa(S, NumCaixaAbrir, 1, R);
+      }
       CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
       adicionarClienteComprasFila(caixaAtual, CC);
       noTratar = P;

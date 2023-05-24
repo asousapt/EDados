@@ -31,7 +31,7 @@ int validaProduto(void *elem1, void *elem2);
 //FUNCOES: PRODUTOCLIENTE
 int GetQuantidadeProdutoCliente(ListaGenerica *lg, PRODUTO *P);
 PRODUTOCLIENTE *GetProdutoCliente(ListaGenerica *lg, PRODUTO *P);
-void AdicionarProdutoAoCliente(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC);
+void AdicionarProdutoAoCliente(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC, RELOGIO* R);
 void AdicionarTodosOsProdutosAosClientes(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC,RELOGIO *R);
 void MostrarProdutoCliente(void* P);
 void DestruirProdutoCliente(void *x);
