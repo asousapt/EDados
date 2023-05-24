@@ -7,6 +7,7 @@
 #include "Caixa.h"
 #include "Funcionarios.h"
 #include "Log.h"
+#include "Produtos.h"
 
 SUPERMERCADO * CriarSM(){
     time_t dataAtual;
