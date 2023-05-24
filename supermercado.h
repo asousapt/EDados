@@ -3,9 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "ListaGenerica.h"
+#include "Relogio.h"
 #include "funcoes.h"
-
 #include "Funcionarios.h"
 
 typedef struct supermercado{
@@ -27,7 +26,7 @@ typedef struct supermercado{
 } SUPERMERCADO;
 
 SUPERMERCADO * CriarSM();
-int carregaSupermercado(SUPERMERCADO* supermercadoActual);
+int carregaSupermercado(SUPERMERCADO* supermercadoActual, RELOGIO* R);
 void carregaCaixas(SUPERMERCADO* supermercadoActual);
 void DestruirSupermercado(SUPERMERCADO *mercado);
 

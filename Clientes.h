@@ -37,11 +37,11 @@ int validaCliente(void *elem1, void *elem2);
 //Funcoes: Cliente - Supermercado
 int VerificaClienteAsCompras(SUPERMERCADO *S,int codigoCliente);
 CLIENTEASCOMPRAS* ProcurarClienteAsCompras(ListaGenerica *lg,int codigoCliente);
-void AdicionarClienteAsCompras(SUPERMERCADO *S,Relogio *R);
+void AdicionarClienteAsCompras(SUPERMERCADO *S,RELOGIO *R);
 void MostrarClientesAsCompras(void* C);
-void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,Relogio *R);
+void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,RELOGIO *R);
 void DestruirClientesAsCompras(void* obj);
-void VerificaTempoEntradaCaixa(SUPERMERCADO *S,Relogio * R);
+void VerificaTempoEntradaCaixa(SUPERMERCADO *S,RELOGIO * R);
 
 // void AdicionarClienteCaixa(ListaGenerica *lgCx,ListaGenerica *lgCl,int numeroCaixa,int codigoCliente);
 

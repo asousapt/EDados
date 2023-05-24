@@ -72,7 +72,6 @@ int PertenceLG(ListaGenerica *lg, void *X, int (*fcomp)(void *, void *)) {
 
 void removerNoLG(ListaGenerica* lg, NOG* noRemover) {
     if (lg->Inicio == NULL || noRemover == NULL) {
-      printf("NO invalido\n");
         return; // Lista vazia ou nó inválido
     }
 
@@ -92,7 +91,6 @@ void removerNoLG(ListaGenerica* lg, NOG* noRemover) {
 
     // Se não encontrarmos o nó anterior, o nó a ser removido não está presente na lista
     if (anterior == NULL) {
-        printf("No nao esta presente");
         return;
     }
 
