@@ -9,6 +9,8 @@
 #include "ListaGenerica.h"
 #include "funcoes.h"
 #include "Clientes.h"
+#include "Log.h"
+#include "Relogio.h"
 
 typedef struct caixa {
     int numCaixa;
@@ -31,8 +33,9 @@ CAIXA* ProcurarCaixaAberta(ListaGenerica *lg,int numero);
 void AbrirCaixa(ListaGenerica *lg);
 void MostrarCaixasEstado(ListaGenerica *lg,int estado);
 CAIXA* caixaComMenorTempo(ListaGenerica* lista);
-void AbreFechaCaixa(SUPERMERCADO *super, int numero, int operacao);
+void AbreFechaCaixa(SUPERMERCADO *super, int numero, int operacao, RELOGIO* R);
 void MostrarCaixa(void* F); 
 void listarCaixas(ListaGenerica* listaCaixas); 
+int buscaUmaCaixaParaAbrir(ListaGenerica *lg);
 
 #endif // CAIXA_H_INCLUDED

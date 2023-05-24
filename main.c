@@ -12,10 +12,6 @@
 #include "supermercado.h"
 #include "Fila.h"
 
-
-
-
-
 // estes ficheiros estao incluidos aqui para compilar apenas com main.c 
 #include "funcoes.c"
 #include "Relogio.c"
@@ -45,11 +41,15 @@ int main(void) {
   if(carregaSupermercado(supermercadoActual) == 0) {
     printf("%s", "Erro ao carregar os dados do supermercado! O programa vai ser encerrado!\n"); 
     return 0;
+  } else {
+    logCriar = CriarLog("Supermercado carregado com sucesso!", R);
+    AddBeginLG(supermercadoActual->LogApp, logCriar);
   }
   
-
-  
-  //AbreFechaCaixa(supermercadoActual, 0, 1);
+  // Abre uma caixa do supermercado 
+  int primeiraCaixaAbrir =  buscaUmaCaixaParaAbrir(supermercadoActual->Caixas);
+  printf("%d\n", primeiraCaixaAbrir);
+  AbreFechaCaixa(supermercadoActual, primeiraCaixaAbrir, 1, R);
   //listarCaixas(supermercadoActual->Caixas);
 
   
