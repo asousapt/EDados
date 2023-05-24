@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "funcoes.h"
 #include "supermercado.h"
-#include "ListaGenerica.h"
-#include "Caixa.h"
-#include "Funcionarios.h"
 #include "Log.h"
-#include "Relogio.h"
+#include "Caixa.h"
+#include "Produtos.h"
+
+
 
 SUPERMERCADO * CriarSM(){
     
@@ -115,20 +114,20 @@ void carregaCaixas(SUPERMERCADO* supermercadoActual){
     AddBeginLG(supermercadoActual->LogApp, logCriar3);
 }
 
-int carregaSupermercado(SUPERMERCADO* supermercadoActual, RELOGIO* R){
+int carregaSupermercado(SUPERMERCADO* supermercadoActual){
     
-    LOG  * logCriar1 = CriarLog("Inicio do carregamento do supermercado.", R);
-    AddBeginLG(supermercadoActual->LogApp, logCriar1);
+    // LOG  * logCriar1 = CriarLog("Inicio do carregamento do supermercado.", R);
+    // AddBeginLG(supermercadoActual->LogApp, logCriar1);
 
-    // Lê dos ficheiros e alimenta as listas com dados dos clientes, funcionarios e produtos 
-    if (LerficheiroClientes("Clientes.txt",supermercadoActual) == 0) return 0; 
-    if (LerficheiroFuncionarios("Funcionarios.txt", supermercadoActual) == 0) return 0;
-    if (LerficheiroProdutos("Produtos.txt", supermercadoActual) == 0) return 0;
-    carregaCaixas(supermercadoActual);
+    // // Lê dos ficheiros e alimenta as listas com dados dos clientes, funcionarios e produtos 
+    // if (LerficheiroClientes("Clientes.txt",supermercadoActual) == 0) return 0; 
+    // if (LerficheiroFuncionarios("Funcionarios.txt", supermercadoActual) == 0) return 0;
+    // if (LerficheiroProdutos("Produtos.txt", supermercadoActual) == 0) return 0;
+    // carregaCaixas(supermercadoActual);
     
     
-    LOG  * logCriar2 = CriarLog("Supermercado carregado cum sucesso!.", R);
-    AddBeginLG(supermercadoActual->LogApp, logCriar2);
+    // LOG  * logCriar2 = CriarLog("Supermercado carregado cum sucesso!.", R);
+    // AddBeginLG(supermercadoActual->LogApp, logCriar2);
     return 1;
 }
 

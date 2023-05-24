@@ -67,7 +67,7 @@ void DestruirFila(FILAGENERICA *fila, void (*f)(void *)){
     NOFILA *prox;
     while (temp) {
         prox = temp->Prox;
-        fdest(temp->Dados);
+        f(temp->Dados);
         free(temp);
         temp = prox;
     }

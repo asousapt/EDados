@@ -43,6 +43,14 @@
     "funcionarios.h": "c",
     "supermercado.h": "c",
     "listagenerica.h": "c",
-    "relogio.h": "c"
+    "Relogio.h": "c",
+    "produtos.h": "c",
+    "stdio.h": "c",
+    "log.h": "c",
+    "funcoes.h": "c",
+    "texto.h": "c",
+    "clientes.h": "c",
+    "stdlib.h": "c",
+    "fila.h": "c"
   }
 }

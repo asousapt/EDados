@@ -2,9 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include "Relogio.h"
 #include "Clientes.h"
 #include "supermercado.h"
 #include "Produtos.h"
+
 
 CLIENTE* CriarCliente(char* numeroCliente,char* nomeCliente){
   CLIENTE* NovoCliente = (CLIENTE *) malloc(sizeof(CLIENTE));

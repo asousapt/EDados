@@ -12,9 +12,11 @@ typedef struct relogio{
     time_t Hora_Inicio;
 }RELOGIO;
 
-void StartRelogio(RELOGIO *R, int Vel, SUPERMERCADO *S);
+
 time_t VerTimeRelogio(RELOGIO *R);
 void WaitSegundos(int s);
 void Wait(int s);
+
+void StartRelogio(RELOGIO *R, int Vel, SUPERMERCADO *S);
 
 #endif // RELOGIO_H_INCLUDED
