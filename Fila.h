@@ -26,4 +26,5 @@ void DestruirFila(FILAGENERICA *fila, void (*f)(void *));
 
 float calcularTempoTotalCompra(FILAGENERICA* fila);
 
+
 #endif

@@ -156,3 +156,31 @@ void DestruirProdutoCliente(void *x){
   DestruirProduto(obj->produtoCL);
   free(obj);
 }
+
+// funcao que retorna o produto mais barado do cesto do cliente
+PRODUTO* produtoMaisBarato(CLIENTEASCOMPRAS* CC) {
+  float precoMaisBaixo = 9999999;
+  ListaGenerica* lg = (ListaGenerica *) CC->ProdutosClientes;
+
+  PRODUTO* prodAct;
+  PRODUTO* prodRet;
+
+  NOG *P = lg->Inicio;
+  
+  PRODUTOCLIENTE *PC;
+  while (P)
+  {
+    PC = P->Info;
+    prodAct = (PRODUTO *) PC->produtoCL;
+    printf("%f", prodAct->cod);
+    if (prodAct->preco < precoMaisBaixo) {
+      prodRet = PC->produtoCL;
+    }
+
+    P = P->Prox;
+  }
+  
+  return prodRet;
+}
+
+

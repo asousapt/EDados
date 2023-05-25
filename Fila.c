@@ -112,6 +112,7 @@ float calcularTempoTotalCompra(FILAGENERICA* fila) {
 void adicionarClienteComprasFila(CAIXA* caixaAtual, CLIENTEASCOMPRAS* cesto) {
     FILAGENERICA* fila = (FILAGENERICA *) caixaAtual->filaCaixa;
     AdicionaAFila(fila, cesto);
+    PRODUTO* prod =  produtoMaisBarato(cesto);
     
     caixaAtual->tempoEsperaReal = calcularTempoTotalCompra(fila);
 

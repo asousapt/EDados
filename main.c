@@ -63,7 +63,7 @@ sleep(10);
  
   //ShowLG(supermercadoActual->Caixas, MostrarCaixa);
   
-  //ShowLG(supermercadoActual->LogApp, MostrarLog);
+ // ShowLG(supermercadoActual->ProdutosOferecidos, MostrarProduto);
   //ShowLG(supermercadoActual->Clientes, MostrarCliente);
   //AdicionarClienteAsCompras(supermercadoActual);
  
