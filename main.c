@@ -48,7 +48,7 @@ int main(void) {
   }
   
   // Abre uma caixa do supermercado 
-  int primeiraCaixaAbrir =  buscaUmaCaixaParaAbrir(supermercadoActual->Caixas);
+  int primeiraCaixaAbrir = buscaUmaCaixaParaAbrir(supermercadoActual->Caixas);
   AbreFechaCaixa(supermercadoActual, primeiraCaixaAbrir, 1, R);
   //listarCaixas(supermercadoActual->Caixas);
 

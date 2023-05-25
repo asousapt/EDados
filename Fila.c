@@ -42,7 +42,7 @@ void AdicionaAFila(FILAGENERICA *fila, void *dados) {
 }
 
 //retira elemento da fila generica 
-void *RetirarDaFila(FILAGENERICA *fila, void (*f)(void *)) {
+void *RetirarDaFilaInicio(FILAGENERICA *fila) {
     if (FilaVazia(fila)) {
         return NULL;
     }
@@ -52,9 +52,42 @@ void *RetirarDaFila(FILAGENERICA *fila, void (*f)(void *)) {
     if (fila->cabeca == NULL) {
         fila->cauda = NULL;
     }
-    f(dados);
     free(temp->Prox);
     free(temp);
+    fila->tamanho--;
+    return dados;
+}
+
+void *RetirarDaFila(FILAGENERICA *fila, int (comp)(void *, void *), void *dadosRemover) {
+    void *dados;
+    NOFILA *temp = fila->cabeca;
+    if (FilaVazia(fila) || dadosRemover==NULL) {
+        printf("Fila Vazia\n");
+        return NULL;
+    }
+    
+    NOFILA *seguinte = temp->Prox;
+
+    // Caso especial: o nó a ser removido é o primeiro da lista
+    if (comp(temp->Dados,dadosRemover)==0) {
+        fila->cabeca = seguinte;
+        dados = temp->Dados;
+        free(temp);
+        fila->tamanho--;
+        return dados;
+    }
+
+    // Procurar o nó a ser removido
+    while (!temp && comp(seguinte->Dados,dadosRemover) !=0) {
+        temp = temp->Prox;
+        seguinte = temp->Prox;
+    }
+    if (fila->cabeca == NULL) {
+        fila->cauda = NULL;
+    }
+    dados = seguinte->Dados;
+    temp->Prox = seguinte->Prox;
+    free(seguinte);
     fila->tamanho--;
     return dados;
 }

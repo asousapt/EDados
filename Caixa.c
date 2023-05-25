@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "Caixa.h"
 #include "Funcionarios.h"
 #include "Fila.h"
@@ -242,3 +243,88 @@ int decideAbreCaixaNova(SUPERMERCADO* super) {
   return nmrCaixasAberta == nmrCaixasNoLimite;
 }
 
+// Verifica qual o tempo que a compra do cliente vai demorar
+float calcularTempoTotalCompra(FILAGENERICA* fila) {
+    float tempoTotal = 0.0;
+    NOFILA* atual = fila->cabeca;
+
+    while (atual != NULL) {
+        CLIENTEASCOMPRAS* clienteCompras = (CLIENTEASCOMPRAS*)atual->Dados;
+        ListaGenerica* listaProdutos = clienteCompras->ProdutosClientes;
+
+        NOG* atualLista = listaProdutos->Inicio;
+
+        while (atualLista != NULL) {
+            PRODUTOCLIENTE* produtoCliente = (PRODUTOCLIENTE*)atualLista->Info;
+
+            PRODUTO* produto = produtoCliente->produtoCL;
+
+            int qtd = produtoCliente->quantidade;
+            float tempoCompra = produto->tempoCompra * qtd;
+            tempoTotal += tempoCompra;
+
+            atualLista = atualLista->Prox;
+        }
+
+        atual = atual->Prox;
+    }
+    
+    return tempoTotal;
+}
+
+void atendeClientesCaixas(ListaGenerica *lg,RELOGIO *R){
+  NOG* P = lg->Inicio;
+  while (P) {
+    CAIXA *cx = P->Info;
+    if (FilaVazia(cx->filaCaixa) == 0){
+      atendeClientesPorCaixa(cx,R);
+    }
+  }
+}
+
+void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R){
+  NOFILA *P = cx->filaCaixa->cabeca;
+  time_t tempoAtual = VerTimeRelogio(R);
+  struct tm *tmp = localtime(&tempoAtual);
+
+  double tempo = 0;
+
+  int remove = 0;
+
+  while(P){
+    CLIENTEASCOMPRAS *CC = P->Dados;
+    time_t HoraSaida = CC->horaSaidaSupermercado;
+    struct tm *strHoraSaida = localtime(&HoraSaida);
+
+    if (strHoraSaida->tm_hour < tmp->tm_hour){
+      remove = 1; 
+    }else if (strHoraSaida->tm_hour == tmp->tm_hour && strHoraSaida->tm_min < tmp->tm_min){
+      remove = 1;
+    }else if (strHoraSaida->tm_hour == tmp->tm_hour && strHoraSaida->tm_min == tmp->tm_min && strHoraSaida->tm_sec <= tmp->tm_sec){
+      remove = 1;
+    }
+
+    P = P->Prox;
+
+    if (remove = 1) {
+      tempo += difftime(CC->horaEntradaFila,CC->horaSaidaSupermercado);
+      //insere lista cliente atendedidos da caixa;
+      RetirarDaFilaInicio(cx->filaCaixa);
+      remove = 0;
+    }
+  }
+
+  float tempoTotal = (float) tempo;
+
+  cx->tempoEsperaReal = calcularTempoTotalCompra(cx->filaCaixa);
+  cx->tempoTotal = tempo;
+  cx->tempoEsperaMed = calcularTempoEsperaMedio(cx);
+}
+
+float calcularTempoEsperaMedio(CAIXA *cx){
+  if (cx->contadorPessoas < 1) return 0;
+
+  float tempoMedio = cx->tempoTotal/cx->contadorPessoas;
+
+  return tempoMedio;
+}

@@ -37,5 +37,9 @@ void AbreFechaCaixa(SUPERMERCADO *super, int numero, int operacao, RELOGIO* R);
 void MostrarCaixa(void* F); 
 void listarCaixas(ListaGenerica* listaCaixas); 
 int buscaUmaCaixaParaAbrir(ListaGenerica *lg);
+float calcularTempoTotalCompra(FILAGENERICA* fila);
+void atendeClientesCaixas(ListaGenerica *lg,RELOGIO *R);
+void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R);
+float calcularTempoEsperaMedio(CAIXA *cx);
 
 #endif // CAIXA_H_INCLUDED
