@@ -84,6 +84,11 @@ CLIENTEASCOMPRAS* ProcurarClienteAsCompras(ListaGenerica *lg,int codigoCliente){
   return clR;
 }
 
+int CompararCliente(void *c1, void *c2){
+  CLIENTE *cl1 = c1,*cl2 = c2;
+  return cl1->cod - cl2->cod;
+}
+
 void AdicionarClienteAsCompras(SUPERMERCADO *S,RELOGIO *R){
   int altCliente = 0,skip = 0,icr = 1;
   CLIENTE *cl;

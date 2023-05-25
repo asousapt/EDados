@@ -42,6 +42,7 @@ void MostrarClientesAsCompras(void* C);
 void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,RELOGIO *R);
 void DestruirClientesAsCompras(void* obj);
 void VerificaTempoEntradaCaixa(SUPERMERCADO *S,RELOGIO * R);
+int CompararCliente(void *c1, void *c2);
 
 // void AdicionarClienteCaixa(ListaGenerica *lgCx,ListaGenerica *lgCl,int numeroCaixa,int codigoCliente);
 

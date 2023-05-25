@@ -42,7 +42,7 @@ void AdicionaAFila(FILAGENERICA *fila, void *dados) {
 }
 
 //retira elemento da fila generica 
-void *RetirarDaFila(FILAGENERICA *fila, void (*f)(void *)) {
+void *RetirarDaFilaInicio(FILAGENERICA *fila, void (*f)(void *)) {
     if (FilaVazia(fila)) {
         return NULL;
     }
@@ -52,12 +52,68 @@ void *RetirarDaFila(FILAGENERICA *fila, void (*f)(void *)) {
     if (fila->cabeca == NULL) {
         fila->cauda = NULL;
     }
-    f(dados);
     free(temp->Prox);
     free(temp);
     fila->tamanho--;
     return dados;
 }
+
+/*void *RetirarDaFila(FILAGENERICA *fila, int (comp)(void *, void *), NOFILA *noRemover) {
+    if (FilaVazia(fila) || noRemover==NULL) {
+        printf("Fila Vazia\n");
+        return NULL;
+    }
+    void *dados;
+    NOFILA *temp = fila->cabeca;
+    NOFILA *seguinte = temp->Prox;
+
+    // Procurar o nó a ser removido
+    while (temp != NULL && comp(seguinte->Dados,noRemover->Dados) !=0) {
+        if (comp(seguinte->Dados,noRemover)==0) {
+            dados = seguinte->Dados;
+            free(temp->Prox);
+            free(temp);
+            fila->tamanho--;
+        }
+       temp = seguinte;
+    }
+    if (fila->cabeca == NULL) {
+        fila->cauda = NULL;
+    }
+    void *dados = temp->Dados;
+    return dados;
+}
+
+void removerNoLG(ListaGenerica* lg, NOG* noRemover) {
+    if (lg->Inicio == NULL || noRemover == NULL) {
+        return; // Lista vazia ou nó inválido
+    }
+
+    // Caso especial: o nó a ser removido é o primeiro da lista
+    if (lg->Inicio == noRemover) {
+        lg->Inicio = noRemover->Prox;
+        free(noRemover);
+        lg->NEL--;
+        return;
+    }
+
+    // Procurar o nó seguinte ao nó a ser removido
+    NOG* seguinte = lg->Inicio;
+    while (seguinte != NULL && seguinte->Prox != noRemover) {
+        seguinte = seguinte->Prox;
+    }
+
+    // Se não encontrarmos o nó seguinte, o nó a ser removido não está presente na lista
+    if (seguinte == NULL) {
+        return;
+    }
+
+    // reconectar os nos
+    seguinte->Prox = noRemover->Prox;
+    free(noRemover);
+    lg->NEL--;
+    
+}*/
 
 void DestruirFila(FILAGENERICA *fila, void (*f)(void *)){
     if (FilaVazia(fila)) {
