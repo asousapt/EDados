@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include "Log.h"
 #include "Produtos.h"
 #include "ListaGenerica.h"
 
@@ -88,7 +88,7 @@ PRODUTOCLIENTE *GetProdutoCliente(ListaGenerica *lg, PRODUTO *Prod){
   return PCReturn;
 }
 
-void AdicionarProdutoAoCliente(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC){
+void AdicionarProdutoAoCliente(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC, RELOGIO* R){
   int icr = 1, altProd = aleatorio(1,1000);
 
   PRODUTO *Prod;
@@ -108,6 +108,12 @@ void AdicionarProdutoAoCliente(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC){
     PC->produtoCL = Prod;
     PC->quantidade = 1;
     AddBeginLG(CC->ProdutosClientes,PC);
+    
+    char *texto1 = (char *)malloc(500);
+    sprintf(texto1, "O cliente %d colocou no ceste %d unidade(s) de %s.",CC->cliente->cod,PC->quantidade, Prod->designacao  );
+    LOG  * logCriar = CriarLog(texto1, R);
+    AddBeginLG(S->LogApp, logCriar);
+    free(texto1);
   }else{
     PRODUTOCLIENTE* PC = GetProdutoCliente(CC->ProdutosClientes,Prod);
     if (!PC) return;
@@ -119,7 +125,7 @@ void AdicionarTodosOsProdutosAosClientes(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC,RE
   int numProd = CC->nProdutos;
 
   for (int i = 1; i<=numProd; i++){
-    AdicionarProdutoAoCliente(S,CC);
+    AdicionarProdutoAoCliente(S,CC, R);
   }
 
   PRODUTOCLIENTE *PC;

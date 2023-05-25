@@ -69,11 +69,6 @@ int LerficheiroProdutos(char *ficheiro, SUPERMERCADO * supermercadoActual) {
     }
     printf("A importar produtos...\n");
     
-    time_t dataAtual;
-    time(&dataAtual);
-    LOG  * logCriar1 = CriarLog("Inicio de importação de produtos.", dataAtual);
-    AddBeginLG(supermercadoActual->LogApp, logCriar1);
-    
      while(!feof(F1))
     {
         STRING *V = Read_Split_Line_File(F1, n_campos_max, &n_campos_lidos, "\t\r"); 
@@ -88,10 +83,6 @@ int LerficheiroProdutos(char *ficheiro, SUPERMERCADO * supermercadoActual) {
     }
    
     fclose(F1);
-
-    time(&dataAtual);
-    LOG  * logCriar2 = CriarLog("Produtos importados com sucesso!", dataAtual);
-    AddBeginLG(supermercadoActual->LogApp, logCriar2);
 
     printf("Produtos importados com sucesso!\n");
     return 1;
@@ -109,10 +100,6 @@ int LerficheiroFuncionarios(char *ficheiro, SUPERMERCADO * supermercadoActual) {
         return 0;
     }
     
-    time_t dataAtual;
-    time(&dataAtual);
-    LOG  * logCriar1 = CriarLog("Inicio de importação de funcionarios.", dataAtual);
-    AddBeginLG(supermercadoActual->LogApp, logCriar1);
 
     while(!feof(F1)) {
         STRING *V = Read_Split_Line_File(F1, n_campos_max, &n_campos_lidos, "\t\r"); 
@@ -127,9 +114,6 @@ int LerficheiroFuncionarios(char *ficheiro, SUPERMERCADO * supermercadoActual) {
    
     fclose(F1);
     
-    time(&dataAtual);
-    LOG  * logCriar2 = CriarLog("Funcionários importados com sucesso!", dataAtual);
-    AddBeginLG(supermercadoActual->LogApp, logCriar2);
     printf("Funcionários importados com sucesso!\n");
 
     return 1;
@@ -147,10 +131,6 @@ int LerficheiroClientes(char *ficheiro , SUPERMERCADO * supermercadoActual){
         printf("\n\n\tImpossivel abrir Ficheiro de Clientes!\n\n");
         return 0;
     }
-    time_t dataAtual;
-    time(&dataAtual);
-    LOG  * logCriar1 = CriarLog("Inicio de importação de clientes.", dataAtual);
-    AddBeginLG(supermercadoActual->LogApp, logCriar1);
 
     int linhas = 0; 
     while(!feof(F1))
@@ -169,9 +149,6 @@ int LerficheiroClientes(char *ficheiro , SUPERMERCADO * supermercadoActual){
    
     fclose(F1);
     
-    time(&dataAtual);
-    LOG  * logCriar2 = CriarLog("Clientes importados com sucesso!", dataAtual);
-    AddBeginLG(supermercadoActual->LogApp, logCriar2);
     printf("Clientes importados com sucesso!\n");
     return 1;
 }

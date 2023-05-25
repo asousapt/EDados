@@ -123,7 +123,7 @@ void DestruirFila(FILAGENERICA *fila, void (*f)(void *)){
     NOFILA *prox;
     while (temp) {
         prox = temp->Prox;
-        fdest(temp->Dados);
+        f(temp->Dados);
         free(temp);
         temp = prox;
     }
@@ -168,6 +168,12 @@ float calcularTempoTotalCompra(FILAGENERICA* fila) {
 void adicionarClienteComprasFila(CAIXA* caixaAtual, CLIENTEASCOMPRAS* cesto) {
     FILAGENERICA* fila = (FILAGENERICA *) caixaAtual->filaCaixa;
     AdicionaAFila(fila, cesto);
+    
     caixaAtual->tempoEsperaReal = calcularTempoTotalCompra(fila);
+
     printf("Adicionei cliente na fila\n");
 }
+
+// void atenderClienteFilaCaixa(SUPERMERCADO * S, RELOGIO* R) {
+
+// }

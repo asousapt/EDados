@@ -1,12 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "funcoes.h"
 #include "supermercado.h"
-#include "ListaGenerica.h"
-#include "Caixa.h"
-#include "Funcionarios.h"
 #include "Log.h"
+#include "Caixa.h"
 #include "Produtos.h"
 #include "Relogio.h"
 
@@ -89,10 +86,6 @@ SUPERMERCADO * CriarSM(){
 }
 
 void carregaCaixas(SUPERMERCADO* supermercadoActual){
-    time_t dataAtual;
-    time(&dataAtual);
-    LOG  * logCriar1 = CriarLog("Inicio de criacao de caixas do supermercado!", dataAtual);
-    AddBeginLG(supermercadoActual->LogApp, logCriar1);
 
     int numeroCaixas = supermercadoActual->numCaixas+10;
     int i = 10;
@@ -103,23 +96,11 @@ void carregaCaixas(SUPERMERCADO* supermercadoActual){
                 
         AddBeginLG(supermercadoActual->Caixas,caixaInserir);
         
-        time(&dataAtual);
-        char caixastr[30];
-        sprintf(caixastr, "Caixa %d criada com sucesso", i);
-
-        LOG  * logCriar2 = CriarLog(caixastr, dataAtual);
-        AddBeginLG(supermercadoActual->LogApp, logCriar2);
     }
     
-    time(&dataAtual);
-    LOG  * logCriar3 = CriarLog("Caixas criadas com sucesso!", dataAtual);
-    AddBeginLG(supermercadoActual->LogApp, logCriar3);
 }
 
-int carregaSupermercado(SUPERMERCADO* supermercadoActual, RELOGIO* R){
-    
-    LOG  * logCriar1 = CriarLog("Inicio do carregamento do supermercado.", R);
-    AddBeginLG(supermercadoActual->LogApp, logCriar1);
+int carregaSupermercado(SUPERMERCADO* supermercadoActual){
 
     // Lê dos ficheiros e alimenta as listas com dados dos clientes, funcionarios e produtos 
     if (LerficheiroClientes("Clientes.txt",supermercadoActual) == 0) return 0; 
@@ -127,9 +108,6 @@ int carregaSupermercado(SUPERMERCADO* supermercadoActual, RELOGIO* R){
     if (LerficheiroProdutos("Produtos.txt", supermercadoActual) == 0) return 0;
     carregaCaixas(supermercadoActual);
     
-    
-    LOG  * logCriar2 = CriarLog("Supermercado carregado cum sucesso!.", R);
-    AddBeginLG(supermercadoActual->LogApp, logCriar2);
     return 1;
 }
 

@@ -4,11 +4,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-
+#include "Relogio.h"
 #include "Funcionarios.h"
 #include "ListaGenerica.h"
 #include "funcoes.h"
-#include "Relogio.h"
+
 
 typedef struct log {
     time_t *data_hora_atual;  

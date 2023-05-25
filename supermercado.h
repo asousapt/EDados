@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "Relogio.h"
+
 #include "funcoes.h"
 #include "Funcionarios.h"
 
@@ -26,7 +26,7 @@ typedef struct supermercado{
 } SUPERMERCADO;
 
 SUPERMERCADO * CriarSM();
-int carregaSupermercado(SUPERMERCADO* supermercadoActual, RELOGIO* R);
+int carregaSupermercado(SUPERMERCADO* supermercadoActual);
 void carregaCaixas(SUPERMERCADO* supermercadoActual);
 void DestruirSupermercado(SUPERMERCADO *mercado);
 

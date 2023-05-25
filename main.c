@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "supermercado.h"
+#include <unistd.h>
 #include "Relogio.h"
 #include "ListaGenerica.h"
 #include "Clientes.h"
@@ -10,13 +10,13 @@
 #include "Funcionarios.h"
 #include "texto.h"
 #include "Log.h"
+#include "supermercado.h"
 #include "Fila.h"
-
 
 // estes ficheiros estao incluidos aqui para compilar apenas com main.c 
 #include "funcoes.c"
-#include "supermercado.c"
 #include "Relogio.c"
+#include "supermercado.c"
 #include "ListaGenerica.c"
 #include "Fila.c"
 #include "texto.c"
@@ -39,25 +39,28 @@ int main(void) {
     AddBeginLG(supermercadoActual->LogApp, logCriar);
 
   //carrega dados do supermercado
-  if(carregaSupermercado(supermercadoActual,R) == 0) {
+  if(carregaSupermercado(supermercadoActual) == 0) {
     printf("%s", "Erro ao carregar os dados do supermercado! O programa vai ser encerrado!\n"); 
     return 0;
+  } else {
+    logCriar = CriarLog("Supermercado carregado com sucesso!", R);
+    AddBeginLG(supermercadoActual->LogApp, logCriar);
   }
   
-
-  
-  //AbreFechaCaixa(supermercadoActual, 0, 1);
+  // Abre uma caixa do supermercado 
+  int primeiraCaixaAbrir =  buscaUmaCaixaParaAbrir(supermercadoActual->Caixas);
+  AbreFechaCaixa(supermercadoActual, primeiraCaixaAbrir, 1, R);
   //listarCaixas(supermercadoActual->Caixas);
 
   
    //ShowLG(supermercadoActual->ClientesAsCompras, MostrarClientesAsCompras);
   // indica qual a caixa com menos pessoas
-// AdicionarVariosClientesAsCompras(supermercadoActual,R);
-
- //VerificaTempoEntradaCaixa(supermercadoActual, R); 
+  AdicionarVariosClientesAsCompras(supermercadoActual,R);
+sleep(10);
+ VerificaTempoEntradaCaixa(supermercadoActual, R); 
 
   
-
+ 
   //ShowLG(supermercadoActual->Caixas, MostrarCaixa);
   
   //ShowLG(supermercadoActual->LogApp, MostrarLog);

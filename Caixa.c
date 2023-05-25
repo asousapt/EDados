@@ -85,6 +85,19 @@ CAIXA* ProcurarCaixa(ListaGenerica *lg,int numero){
   return cxR;
 }
 
+// Retorna o numero de uma caixa que esteja fechada
+int buscaUmaCaixaParaAbrir(ListaGenerica *lg){
+  CAIXA *cx;
+  NOG *P = lg->Inicio;
+  while (P) {
+    cx = P->Info;
+    if (cx->fechado == 1) {
+     return cx->numCaixa;
+    }
+    P = P->Prox;
+  }
+  return 0;
+}
 
 CAIXA* ProcurarCaixaAberta(ListaGenerica *lg,int numero){
   CAIXA *cx,*cxR;
@@ -106,7 +119,7 @@ CAIXA* ProcurarCaixaAberta(ListaGenerica *lg,int numero){
 // Param operacao : 
 //        0 - Fechar caixa 
 //        1 - abrir caixa
-void AbreFechaCaixa(SUPERMERCADO *super, int numero, int operacao){
+void AbreFechaCaixa(SUPERMERCADO *super, int numero, int operacao, RELOGIO* R){
   ListaGenerica * lg = (ListaGenerica *) super->Caixas;
   CAIXA* caixaEscolhida = (CAIXA *) malloc(sizeof(CAIXA));
 
@@ -135,15 +148,35 @@ void AbreFechaCaixa(SUPERMERCADO *super, int numero, int operacao){
       caixaEscolhida = ProcurarCaixa(super->Caixas, numero); 
     } while (!caixaEscolhida || caixaEscolhida->fechado <= 0 || caixaEscolhida->fechado >1);
   }
-   
+
+  if (numero >0) {
+    caixaEscolhida = ProcurarCaixa(super->Caixas, numero);
+  } 
+
   if (operacao == 0) {
     caixaEscolhida->fechado = 1;
     caixaEscolhida->func = NULL;
+    char *texto = (char *)malloc(50);
+     sprintf(texto, "Caixa %d fechada!", caixaEscolhida->numCaixa);
+    LOG  * logCriar = CriarLog(texto, R);
+    AddBeginLG(super->LogApp, logCriar);
+    free(texto);
   } 
   else {
     caixaEscolhida->fechado = 0; 
+    char *texto = (char *)malloc(50);
+    sprintf(texto, "Caixa %d aberta!", caixaEscolhida->numCaixa);
+    LOG  * logCriar = CriarLog(texto, R);
+    AddBeginLG(super->LogApp, logCriar);
     FUNCIONARIO* funcionarioAtribuir =  encontrarFuncionarioLivre(super->Funcionarios, super->Caixas);
     caixaEscolhida->func = funcionarioAtribuir;
+    
+    char *texto1 = (char *)malloc(300);
+    sprintf(texto1, "Funcionario %s atribuido a caixa %d.",funcionarioAtribuir->nome,  caixaEscolhida->numCaixa);
+    LOG  * logCriar2 = CriarLog(texto1, R);
+    AddBeginLG(super->LogApp, logCriar2);
+    free(texto);
+    free(texto1);
   }
 }
 
