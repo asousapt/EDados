@@ -172,7 +172,6 @@ PRODUTO* produtoMaisBarato(CLIENTEASCOMPRAS* CC) {
   {
     PC = P->Info;
     prodAct = (PRODUTO *) PC->produtoCL;
-    printf("%f", prodAct->cod);
     if (prodAct->preco < precoMaisBaixo) {
       prodRet = PC->produtoCL;
     }

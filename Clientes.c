@@ -216,12 +216,3 @@ void DestruirClientesAsCompras(void *obj){
   free(x);
 }
 
-//Coloca os clientes compras na fila 
-void adicionarClienteComprasFila(CAIXA* caixaAtual, CLIENTEASCOMPRAS* cesto) {
-  FILAGENERICA* fila = (FILAGENERICA *) caixaAtual->filaCaixa;
-  AdicionaAFila(fila, cesto);
-  
-  caixaAtual->tempoEsperaReal = calcularTempoTotalCompra(fila);
-
-  printf("Adicionei cliente na fila\n");
-}

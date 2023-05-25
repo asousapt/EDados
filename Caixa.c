@@ -243,34 +243,34 @@ int decideAbreCaixaNova(SUPERMERCADO* super) {
   return nmrCaixasAberta == nmrCaixasNoLimite;
 }
 
-// Verifica qual o tempo que a compra do cliente vai demorar
-float calcularTempoTotalCompra(FILAGENERICA* fila) {
-    float tempoTotal = 0.0;
-    NOFILA* atual = fila->cabeca;
+// // Verifica qual o tempo que a compra do cliente vai demorar
+// float calcularTempoTotalCompra(FILAGENERICA* fila) {
+//     float tempoTotal = 0.0;
+//     NOFILA* atual = fila->cabeca;
 
-    while (atual != NULL) {
-        CLIENTEASCOMPRAS* clienteCompras = (CLIENTEASCOMPRAS*)atual->Dados;
-        ListaGenerica* listaProdutos = clienteCompras->ProdutosClientes;
+//     while (atual != NULL) {
+//         CLIENTEASCOMPRAS* clienteCompras = (CLIENTEASCOMPRAS*)atual->Dados;
+//         ListaGenerica* listaProdutos = clienteCompras->ProdutosClientes;
 
-        NOG* atualLista = listaProdutos->Inicio;
+//         NOG* atualLista = listaProdutos->Inicio;
 
-        while (atualLista != NULL) {
-            PRODUTOCLIENTE* produtoCliente = (PRODUTOCLIENTE*)atualLista->Info;
+//         while (atualLista != NULL) {
+//             PRODUTOCLIENTE* produtoCliente = (PRODUTOCLIENTE*)atualLista->Info;
 
-            PRODUTO* produto = produtoCliente->produtoCL;
+//             PRODUTO* produto = produtoCliente->produtoCL;
 
-            int qtd = produtoCliente->quantidade;
-            float tempoCompra = produto->tempoCompra * qtd;
-            tempoTotal += tempoCompra;
+//             int qtd = produtoCliente->quantidade;
+//             float tempoCompra = produto->tempoCompra * qtd;
+//             tempoTotal += tempoCompra;
 
-            atualLista = atualLista->Prox;
-        }
+//             atualLista = atualLista->Prox;
+//         }
 
-        atual = atual->Prox;
-    }
+//         atual = atual->Prox;
+//     }
     
-    return tempoTotal;
-}
+//     return tempoTotal;
+// }
 
 void atendeClientesCaixas(ListaGenerica *lg,RELOGIO *R){
   NOG* P = lg->Inicio;
