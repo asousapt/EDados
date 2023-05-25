@@ -242,3 +242,67 @@ int decideAbreCaixaNova(SUPERMERCADO* super) {
   return nmrCaixasAberta == nmrCaixasNoLimite;
 }
 
+// Verifica qual o tempo que a compra do cliente vai demorar
+float calcularTempoTotalCompra(FILAGENERICA* fila) {
+    float tempoTotal = 0.0;
+    NOFILA* atual = fila->cabeca;
+
+    while (atual != NULL) {
+        CLIENTEASCOMPRAS* clienteCompras = (CLIENTEASCOMPRAS*)atual->Dados;
+        ListaGenerica* listaProdutos = clienteCompras->ProdutosClientes;
+
+        NOG* atualLista = listaProdutos->Inicio;
+
+        while (atualLista != NULL) {
+            PRODUTOCLIENTE* produtoCliente = (PRODUTOCLIENTE*)atualLista->Info;
+
+            PRODUTO* produto = produtoCliente->produtoCL;
+            tempoTotal += produto->tempoCompra;
+
+            atualLista = atualLista->Prox;
+        }
+
+        atual = atual->Prox;
+    }
+    
+    return tempoTotal;
+}
+
+void atendeClientesCaixas(ListaGenerica *lg,RELOGIO *R){
+  NOG* P = lg->Inicio;
+  while (P) {
+    CAIXA *cx = P->Info;
+    if (FilaVazia(cx->filaCaixa) == 0){
+      atendeClientesPorCaixa(cx,R);
+    }
+  }
+}
+
+void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R){
+  NOFILA *P = cx->filaCaixa->cabeca;
+  time_t tempoAtual = VerTimeRelogio(R);
+  struct tm *tmp = localtime(&tempoAtual);
+
+  int remove = 0;
+  
+  while(P){
+    CLIENTEASCOMPRAS *CC = P->Dados;
+    time_t HoraSaida = CC->horaSaidaSupermercado;
+    struct tm *strHoraSaida = localtime(&HoraSaida);
+
+    if (strHoraSaida->tm_hour < tmp->tm_hour){
+      remove = 1; 
+    }else if (strHoraSaida->tm_hour == tmp->tm_hour && strHoraSaida->tm_min < tmp->tm_min){
+      remove = 1;
+    }else if (strHoraSaida->tm_hour == tmp->tm_hour && strHoraSaida->tm_min == tmp->tm_min && strHoraSaida->tm_sec <= tmp->tm_sec){
+      remove = 1;
+    }
+
+    P = P->Prox;
+
+    if (remove = 1) {
+      RetirarDaFilaInicio(cx->filaCaixa);
+      remove = 0;
+    }
+  }
+}

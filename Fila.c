@@ -42,7 +42,7 @@ void AdicionaAFila(FILAGENERICA *fila, void *dados) {
 }
 
 //retira elemento da fila generica 
-void *RetirarDaFilaInicio(FILAGENERICA *fila, void (*f)(void *)) {
+void *RetirarDaFilaInicio(FILAGENERICA *fila) {
     if (FilaVazia(fila)) {
         return NULL;
     }
@@ -66,8 +66,6 @@ void *RetirarDaFila(FILAGENERICA *fila, int (comp)(void *, void *), void *dadosR
         return NULL;
     }
     
-    void *dados;
-    NOFILA *temp = fila->cabeca;
     NOFILA *seguinte = temp->Prox;
 
     // Caso especial: o nó a ser removido é o primeiro da lista
@@ -116,43 +114,3 @@ void MostrarFila(FILAGENERICA *Fila, void (*f)(void *)){
         p=p->Prox;
     }
 }
-
-// Verifica qual o tempo que a compra do cliente vai demorar
-float calcularTempoTotalCompra(FILAGENERICA* fila) {
-    float tempoTotal = 0.0;
-    NOFILA* atual = fila->cabeca;
-
-    while (atual != NULL) {
-        CLIENTEASCOMPRAS* clienteCompras = (CLIENTEASCOMPRAS*)atual->Dados;
-        ListaGenerica* listaProdutos = clienteCompras->ProdutosClientes;
-
-        NOG* atualLista = listaProdutos->Inicio;
-
-        while (atualLista != NULL) {
-            PRODUTOCLIENTE* produtoCliente = (PRODUTOCLIENTE*)atualLista->Info;
-
-            PRODUTO* produto = produtoCliente->produtoCL;
-            tempoTotal += produto->tempoCompra;
-
-            atualLista = atualLista->Prox;
-        }
-
-        atual = atual->Prox;
-    }
-    
-    return tempoTotal;
-}
-
-//Coloca os clientes compras na fila 
-void adicionarClienteComprasFila(CAIXA* caixaAtual, CLIENTEASCOMPRAS* cesto) {
-    FILAGENERICA* fila = (FILAGENERICA *) caixaAtual->filaCaixa;
-    AdicionaAFila(fila, cesto);
-    
-    caixaAtual->tempoEsperaReal = calcularTempoTotalCompra(fila);
-
-    printf("Adicionei cliente na fila\n");
-}
-
-// void atenderClienteFilaCaixa(SUPERMERCADO * S, RELOGIO* R) {
-
-// }
