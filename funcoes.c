@@ -66,7 +66,7 @@ int validaHorasFecho(int hora,int minutos,time_t abertura){
 }
 
 //Caixa que mais atendeu pessoas
-CAIXA *CaixaMaisAtendeu(ListaGenerica *lg{
+CAIXA *CaixaMaisAtendeu(ListaGenerica *lg){
 	CAIXA *caixa = Maior(lg,CompararPessoas);
 	return caixa;
 }

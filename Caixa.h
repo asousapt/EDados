@@ -40,5 +40,9 @@ void listarCaixas(ListaGenerica* listaCaixas);
 int buscaUmaCaixaParaAbrir(ListaGenerica *lg);
 int CompararPessoas(void *obj1,void *obj2);
 int CompararProdutos(void *obj1,void *obj2);
+float calcularTempoTotalCompra(FILAGENERICA* fila);
+void atendeClientesCaixas(ListaGenerica *lg,RELOGIO *R);
+void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R);
+float calcularTempoEsperaMedio(CAIXA *cx);
 
 #endif // CAIXA_H_INCLUDED

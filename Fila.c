@@ -42,7 +42,7 @@ void AdicionaAFila(FILAGENERICA *fila, void *dados) {
 }
 
 //retira elemento da fila generica 
-void *RetirarDaFilaInicio(FILAGENERICA *fila, void (*f)(void *)) {
+void *RetirarDaFilaInicio(FILAGENERICA *fila) {
     if (FilaVazia(fila)) {
         return NULL;
     }
@@ -66,8 +66,6 @@ void *RetirarDaFila(FILAGENERICA *fila, int (comp)(void *, void *), void *dadosR
         return NULL;
     }
     
-    void *dados;
-    NOFILA *temp = fila->cabeca;
     NOFILA *seguinte = temp->Prox;
 
     // Caso especial: o nó a ser removido é o primeiro da lista
@@ -147,6 +145,7 @@ float calcularTempoTotalCompra(FILAGENERICA* fila) {
 void adicionarClienteComprasFila(CAIXA* caixaAtual, CLIENTEASCOMPRAS* cesto) {
     FILAGENERICA* fila = (FILAGENERICA *) caixaAtual->filaCaixa;
     AdicionaAFila(fila, cesto);
+    PRODUTO* prod =  produtoMaisBarato(cesto);
     
     caixaAtual->tempoEsperaReal = calcularTempoTotalCompra(fila);
 

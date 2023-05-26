@@ -35,5 +35,6 @@ void AdicionarProdutoAoCliente(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC, RELOGIO* R)
 void AdicionarTodosOsProdutosAosClientes(SUPERMERCADO *S,CLIENTEASCOMPRAS *CC,RELOGIO *R);
 void MostrarProdutoCliente(void* P);
 void DestruirProdutoCliente(void *x);
+PRODUTO* produtoMaisBarato(CLIENTEASCOMPRAS* CC);
 
 #endif // PRODUTOS_H_INCLUDED

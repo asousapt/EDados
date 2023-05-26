@@ -5,7 +5,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
-
+#include <Caixa.h>
+#include <Clientes.h>
 
 int validarInt(char *pergunta, int menor,int maior);
 char *getString(char *pergunta);

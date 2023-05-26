@@ -215,3 +215,4 @@ void DestruirClientesAsCompras(void *obj){
   DestruirLG(x->ProdutosClientes,DestruirProdutoCliente);
   free(x);
 }
+
