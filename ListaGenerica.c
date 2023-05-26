@@ -100,3 +100,29 @@ void removerNoLG(ListaGenerica* lg, NOG* noRemover) {
     lg->NEL--;
     
 }
+
+//Devolve o maior elemento da Lista lg com o metodo de comparacao fcomp
+void *Maior(ListaGenerica *lg, int (*fcomp)(void *, void *)){
+  NOG *no = lg->Inicio;
+  void *maior = no->Info;
+  while(no){
+    if(fcomp(no->Info,maior)>0){
+      maior = no->Info;
+    }
+    no = no->Prox;
+  }
+  return maior;
+}
+
+//Devolve o menor elemento da Lista lg com o metodo de comparacao fcomp
+void *Menor(ListaGenerica *lg, int (*fcomp)(void *, void *)){
+  NOG *no = lg->Inicio;
+  void *menor = no->Info;
+  while(no){
+    if(fcomp(no->Info,menor)<0){
+      menor = no->Info;
+    }
+    no = no->Prox;
+  }
+  return menor;
+}

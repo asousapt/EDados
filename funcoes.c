@@ -64,3 +64,15 @@ int validaHorasFecho(int hora,int minutos,time_t abertura){
 	}
 	return 1;
 }
+
+//Caixa que mais atendeu pessoas
+CAIXA *CaixaMaisAtendeu(ListaGenerica *lg{
+	CAIXA *caixa = Maior(lg,CompararPessoas);
+	return caixa;
+}
+
+//Caixa que mais vendeu
+CAIXA *CaixaMaisAtendeu(ListaGenerica *lg){
+	CAIXA *caixa = Maior(lg,CompararProdutos);
+	return caixa;
+}

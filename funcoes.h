@@ -13,5 +13,5 @@ int aleatorio(int min, int max);
 int validaHoras(int hora, int minutos);
 int validaHorasFecho(int hora, int minutos,time_t abertura);
 time_t convertToTime(int hora, int minutos);
-
+CAIXA *CaixaMaisAtendeu(ListaGenerica *lg);
 #endif // FUNCOES_H_INCLUDED

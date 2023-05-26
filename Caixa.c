@@ -242,3 +242,15 @@ int decideAbreCaixaNova(SUPERMERCADO* super) {
   return nmrCaixasAberta == nmrCaixasNoLimite;
 }
 
+//Devolve a diferenca entre o numero de pessoas atendidas numa caixa e outra
+int CompararPessoas(void *obj1,void *obj2){
+  CAIXA *caixa1 = (CAIXA *) obj1,*caixa2 = (CAIXA *) obj2;
+  return caixa1->contadorPessoas - caixa2->contadorPessoas;
+};
+
+//Devolve a diferenca entre o numero de produtos vendidos numa caixa e outra
+
+int CompararProdutos(void *obj1,void *obj2){
+  CAIXA *caixa1 = (CAIXA *) obj1,*caixa2 = (CAIXA *) obj2;
+  return caixa1->contadorProdutos - caixa2->contadorProdutos;
+}

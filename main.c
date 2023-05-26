@@ -32,11 +32,11 @@ int main(void) {
 
   // Vamos pedir ao utilizador para criar o supermercado
   SUPERMERCADO * supermercadoActual = CriarSM();
-    //Iniciar Relogio
+  //Iniciar Relogio
   RELOGIO* R = (RELOGIO *) malloc(sizeof(RELOGIO));
   StartRelogio(R, 100, supermercadoActual);
   LOG  * logCriar = CriarLog("Supermercado inicializado com sucesso!", R);
-    AddBeginLG(supermercadoActual->LogApp, logCriar);
+  AddBeginLG(supermercadoActual->LogApp, logCriar);
 
   //carrega dados do supermercado
   if(carregaSupermercado(supermercadoActual) == 0) {

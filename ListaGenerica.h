@@ -25,4 +25,7 @@ void AddBeginLG(ListaGenerica *lg, void *X);
 int PertenceLG(ListaGenerica *lg, void *X, int (*fcomp)(void *, void *));
 void EscreveLG(ListaGenerica *lg, FILE *ficheiro, void (*f)(void *, FILE *));
 void removerNoLG(ListaGenerica* lg, NOG* noRemover);
+void *Maior(ListaGenerica *lg, int (*fcomp)(void *, void *));
+void *Menor(ListaGenerica *lg, int (*fcomp)(void *, void *));
+int Total(ListaGenerica *lg, int (*fcomp)(void *, void *));
 #endif // LISTAGENERICA_H_INCLUDED

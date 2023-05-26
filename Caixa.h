@@ -21,6 +21,7 @@ typedef struct caixa {
     int contadorPessoas,contadorProdutos;
     FUNCIONARIO* func;
     FILAGENERICA* filaCaixa;
+    ListaGenerica *pessoasAtendidas;
 } CAIXA;
 
 int tempoEsperaMin(void* C);
@@ -37,5 +38,7 @@ void AbreFechaCaixa(SUPERMERCADO *super, int numero, int operacao, RELOGIO* R);
 void MostrarCaixa(void* F); 
 void listarCaixas(ListaGenerica* listaCaixas); 
 int buscaUmaCaixaParaAbrir(ListaGenerica *lg);
+int CompararPessoas(void *obj1,void *obj2);
+int CompararProdutos(void *obj1,void *obj2);
 
 #endif // CAIXA_H_INCLUDED
