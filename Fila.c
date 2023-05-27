@@ -93,9 +93,7 @@ void *RetirarDaFila(FILAGENERICA *fila, int (comp)(void *, void *), void *dadosR
 }
 
 void DestruirFila(FILAGENERICA *fila, void (*f)(void *)){
-    if (FilaVazia(fila)) {
-        return NULL;
-    }
+    if (FilaVazia(fila) == 0) {
     NOFILA *temp = fila->cabeca;
     NOFILA *prox;
     while (temp) {
@@ -103,6 +101,7 @@ void DestruirFila(FILAGENERICA *fila, void (*f)(void *)){
         f(temp->Dados);
         free(temp);
         temp = prox;
+    }
     }
 }
 

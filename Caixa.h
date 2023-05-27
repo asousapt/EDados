@@ -45,5 +45,6 @@ void atendeClientesCaixas(ListaGenerica *lg,RELOGIO *R);
 void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R);
 float calcularTempoEsperaMedio(CAIXA *cx);
 CAIXA *CaixaMaisAtendeu(ListaGenerica *lg);
+int decideAbreCaixaNova(SUPERMERCADO* super);
 
 #endif // CAIXA_H_INCLUDED
