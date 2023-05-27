@@ -44,5 +44,6 @@ float calcularTempoTotalCompra(FILAGENERICA* fila);
 void atendeClientesCaixas(ListaGenerica *lg,RELOGIO *R);
 void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R);
 float calcularTempoEsperaMedio(CAIXA *cx);
+CAIXA *CaixaMaisAtendeu(ListaGenerica *lg);
 
 #endif // CAIXA_H_INCLUDED

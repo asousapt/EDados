@@ -45,7 +45,4 @@ void VerificaTempoEntradaCaixa(SUPERMERCADO *S,RELOGIO * R);
 int CompararCliente(void *c1, void *c2);
 void adicionarClienteComprasFila(CAIXA* caixaAtual, CLIENTEASCOMPRAS* cesto);
 
-
-// void AdicionarClienteCaixa(ListaGenerica *lgCx,ListaGenerica *lgCl,int numeroCaixa,int codigoCliente);
-
 #endif // CLIENTES_H_INCLUDED

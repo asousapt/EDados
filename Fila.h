@@ -25,7 +25,6 @@ void *RetirarDaFila(FILAGENERICA *fila, int (comp)(void *, void *), void *dadosR
 void MostrarFila(FILAGENERICA *Fila, void (*f)(void *));
 void DestruirFila(FILAGENERICA *fila, void (*f)(void *));
 
-float calcularTempoTotalCompra(FILAGENERICA* fila);
 
 
 #endif

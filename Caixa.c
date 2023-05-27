@@ -20,6 +20,7 @@ CAIXA* CriarCaixa(int numero){
   novaCaixa->tempoEsperaReal = 0;
   novaCaixa->tempoEsperaMed = 0;
   novaCaixa->tempoTotal = 0;
+  novaCaixa->pessoasAtendidas = CriarLG();
 
   return novaCaixa;
 }
@@ -250,38 +251,38 @@ int CompararPessoas(void *obj1,void *obj2){
 };
 
 //Devolve a diferenca entre o numero de produtos vendidos numa caixa e outra
-
 int CompararProdutos(void *obj1,void *obj2){
   CAIXA *caixa1 = (CAIXA *) obj1,*caixa2 = (CAIXA *) obj2;
   return caixa1->contadorProdutos - caixa2->contadorProdutos;
-// // Verifica qual o tempo que a compra do cliente vai demorar
-// float calcularTempoTotalCompra(FILAGENERICA* fila) {
-//     float tempoTotal = 0.0;
-//     NOFILA* atual = fila->cabeca;
+}
 
-//     while (atual != NULL) {
-//         CLIENTEASCOMPRAS* clienteCompras = (CLIENTEASCOMPRAS*)atual->Dados;
-//         ListaGenerica* listaProdutos = clienteCompras->ProdutosClientes;
+ // Verifica qual o tempo que a compra do cliente vai demorar
+  float calcularTempoTotalCompra(FILAGENERICA* fila) {
+  float tempoTotal = 0.0;
+  NOFILA* atual = fila->cabeca;
 
-//         NOG* atualLista = listaProdutos->Inicio;
+  while (atual != NULL) {
+    CLIENTEASCOMPRAS* clienteCompras = (CLIENTEASCOMPRAS*)atual->Dados;
+    ListaGenerica* listaProdutos = clienteCompras->ProdutosClientes;
 
-//         while (atualLista != NULL) {
-//             PRODUTOCLIENTE* produtoCliente = (PRODUTOCLIENTE*)atualLista->Info;
+    NOG* atualLista = listaProdutos->Inicio;
 
-//             PRODUTO* produto = produtoCliente->produtoCL;
+    while (atualLista != NULL) {
+      PRODUTOCLIENTE* produtoCliente = (PRODUTOCLIENTE*)atualLista->Info;
 
-//             int qtd = produtoCliente->quantidade;
-//             float tempoCompra = produto->tempoCompra * qtd;
-//             tempoTotal += tempoCompra;
+      PRODUTO* produto = produtoCliente->produtoCL;
 
-//             atualLista = atualLista->Prox;
-//         }
+      int qtd = produtoCliente->quantidade;
+      float tempoCompra = produto->tempoCompra * qtd;
+      tempoTotal += tempoCompra;
+      atualLista = atualLista->Prox;
+      }
 
-//         atual = atual->Prox;
-//     }
+      atual = atual->Prox;
+  }
     
-//     return tempoTotal;
-// }
+  return tempoTotal;
+}
 
 void atendeClientesCaixas(ListaGenerica *lg,RELOGIO *R){
   NOG* P = lg->Inicio;
@@ -308,18 +309,24 @@ void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R){
     struct tm *strHoraSaida = localtime(&HoraSaida);
 
     if (strHoraSaida->tm_hour < tmp->tm_hour){
+      AddBeginLG(cx->pessoasAtendidas,CC);
       remove = 1; 
     }else if (strHoraSaida->tm_hour == tmp->tm_hour && strHoraSaida->tm_min < tmp->tm_min){
+      AddBeginLG(cx->pessoasAtendidas,CC);
       remove = 1;
     }else if (strHoraSaida->tm_hour == tmp->tm_hour && strHoraSaida->tm_min == tmp->tm_min && strHoraSaida->tm_sec <= tmp->tm_sec){
+      AddBeginLG(cx->pessoasAtendidas,CC);
       remove = 1;
     }
 
     P = P->Prox;
 
     if (remove = 1) {
+      cx->contadorPessoas = cx->contadorPessoas+1;
+      cx->contadorPessoas = cx->contadorPessoas + CC->nProdutos;
+
       tempo += difftime(CC->horaEntradaFila,CC->horaSaidaSupermercado);
-      //insere lista cliente atendedidos da caixa;
+      //Produtos Oferecidos
       RetirarDaFilaInicio(cx->filaCaixa);
       remove = 0;
     }
@@ -338,4 +345,10 @@ float calcularTempoEsperaMedio(CAIXA *cx){
   float tempoMedio = cx->tempoTotal/cx->contadorPessoas;
 
   return tempoMedio;
+}
+
+//Caixa que mais atendeu pessoas
+CAIXA *CaixaMaisAtendeu(ListaGenerica *lg){
+	CAIXA *caixa = Maior(lg,CompararPessoas);
+	return caixa;
 }
