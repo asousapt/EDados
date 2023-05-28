@@ -254,6 +254,7 @@ int CompararPessoas(void *obj1,void *obj2){
 int CompararProdutos(void *obj1,void *obj2){
   CAIXA *caixa1 = (CAIXA *) obj1,*caixa2 = (CAIXA *) obj2;
   return caixa1->contadorProdutos - caixa2->contadorProdutos;
+}
 // // Verifica qual o tempo que a compra do cliente vai demorar
 // float calcularTempoTotalCompra(FILAGENERICA* fila) {
 //     float tempoTotal = 0.0;
