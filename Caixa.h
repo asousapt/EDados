@@ -11,6 +11,7 @@
 #include "Clientes.h"
 #include "Log.h"
 #include "Relogio.h"
+#include <Produtos.h>
 
 typedef struct caixa {
     int numCaixa;
@@ -44,5 +45,7 @@ float calcularTempoTotalCompra(FILAGENERICA* fila);
 void atendeClientesCaixas(ListaGenerica *lg,RELOGIO *R);
 void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R);
 float calcularTempoEsperaMedio(CAIXA *cx);
+CAIXA *CaixaMaisAtendeu(ListaGenerica *lg);
+int decideAbreCaixaNova(SUPERMERCADO* super);
 
 #endif // CAIXA_H_INCLUDED
