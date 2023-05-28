@@ -44,6 +44,7 @@ void AdicionaAFila(FILAGENERICA *fila, void *dados) {
 //retira elemento da fila generica 
 void *RetirarDaFilaInicio(FILAGENERICA *fila) {
     if (FilaVazia(fila)) {
+        printf("fila VAzia\n");
         return NULL;
     }
     NOFILA *temp = fila->cabeca;
@@ -52,7 +53,7 @@ void *RetirarDaFilaInicio(FILAGENERICA *fila) {
     if (fila->cabeca == NULL) {
         fila->cauda = NULL;
     }
-    free(temp->Prox);
+    
     free(temp);
     fila->tamanho--;
     return dados;
@@ -113,5 +114,7 @@ void MostrarFila(FILAGENERICA *Fila, void (*f)(void *)){
         p=p->Prox;
     }
 }
+
+
 
 

@@ -37,5 +37,7 @@ void MostrarProdutoCliente(void* P);
 void DestruirProdutoCliente(void *x);
 int ofereceProduto(SUPERMERCADO * S, float tempoEsparaNaFila);
 PRODUTO* produtoMaisBarato(CLIENTEASCOMPRAS* CC);
+float tempoProcessarProdutosCaixa(CLIENTEASCOMPRAS* CC);
+float totalValorProdutosOferecidos(ListaGenerica* lg);
 
 #endif // PRODUTOS_H_INCLUDED

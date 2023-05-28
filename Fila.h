@@ -5,6 +5,7 @@
 #include <string.h>
 #include <time.h>
 #include "Relogio.h"
+#include "ListaGenerica.h"
 
 typedef struct NOFILA{
     void *Dados;
@@ -24,6 +25,7 @@ void *RetirarDaFilaInicio(FILAGENERICA *fila);
 void *RetirarDaFila(FILAGENERICA *fila, int (comp)(void *, void *), void *dadosRemover);
 void MostrarFila(FILAGENERICA *Fila, void (*f)(void *));
 void DestruirFila(FILAGENERICA *fila, void (*f)(void *));
+
 
 
 

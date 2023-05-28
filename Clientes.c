@@ -220,8 +220,7 @@ void DestruirClientesAsCompras(void *obj){
 void adicionarClienteComprasFila(CAIXA* caixaAtual, CLIENTEASCOMPRAS* cesto) {
     FILAGENERICA* fila = (FILAGENERICA *) caixaAtual->filaCaixa;
     AdicionaAFila(fila, cesto);
-    PRODUTO* prod =  produtoMaisBarato(cesto);
-    
+        
     caixaAtual->tempoEsperaReal = calculaTempoRealEspera(fila);
 
 }

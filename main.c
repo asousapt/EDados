@@ -56,11 +56,16 @@ int main(void) {
    //ShowLG(supermercadoActual->ClientesAsCompras, MostrarClientesAsCompras);
   // indica qual a caixa com menos pessoas
   AdicionarVariosClientesAsCompras(supermercadoActual,R);
-sleep(10);
+sleep(3);
  VerificaTempoEntradaCaixa(supermercadoActual, R); 
- printf("Adicionei clientes as filas \n");
-sleep(10);
- atendeClientesCaixas(supermercadoActual->Caixas,R, supermercadoActual); 
+
+sleep(3);
+int i = 1;
+while (i < 100 ) {
+  
+  atendeClientesCaixas(supermercadoActual->Caixas,R, supermercadoActual); 
+  i++;
+}
  
   //ShowLG(supermercadoActual->Caixas, MostrarCaixa);
   
@@ -72,7 +77,7 @@ sleep(10);
   //printf("Hora de abertura do supermercado: %s", asctime(localtime(&(supermercadoActual->horaAbertura))));
 
   exportaLogCsv(supermercadoActual->LogApp);
-
+  exportaProdutosG(supermercadoActual->ProdutosOferecidos);
   // while(1){
   //   if(kbhit()){
   //     puts("Key was pressed");

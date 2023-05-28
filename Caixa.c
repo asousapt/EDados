@@ -123,6 +123,7 @@ CAIXA* ProcurarCaixaAberta(ListaGenerica *lg,int numero){
 //        0 - Fechar caixa 
 //        1 - abrir caixa
 void AbreFechaCaixa(SUPERMERCADO *super, int numero, int operacao, RELOGIO* R){
+  int caixaOriginal = numero;
   ListaGenerica * lg = (ListaGenerica *) super->Caixas;
   CAIXA* caixaEscolhida = (CAIXA *) malloc(sizeof(CAIXA));
 
@@ -155,10 +156,17 @@ void AbreFechaCaixa(SUPERMERCADO *super, int numero, int operacao, RELOGIO* R){
   if (numero >0) {
     caixaEscolhida = ProcurarCaixa(super->Caixas, numero);
   } 
-
+  caixaEscolhida->fechado = 1;
   if (operacao == 0) {
-    caixaEscolhida->fechado = 1;
-    caixaEscolhida->func = NULL;
+    if (caixaOriginal == 0) {
+      int distribui = 0;
+      distribui = validarInt("Pretende distribuir os clientes pelas caixas abertas (1 -Sim /0 -Nao )",0,1 );
+      if (distribui == 1) {
+        redistribuirClientes(caixaEscolhida->filaCaixa, super->Caixas);
+      }
+    }
+    
+    //caixaEscolhida->func = NULL;
     char *texto = (char *)malloc(50);
      sprintf(texto, "Caixa %d fechada!", caixaEscolhida->numCaixa);
     LOG  * logCriar = CriarLog(texto, R);
@@ -223,6 +231,7 @@ int nmrCaixasAbertas(SUPERMERCADO* super) {
    return nmrCaixas;
 }
 
+// Funcao que avalia se é necessario abrir uma nova caixa
 int decideAbreCaixaNova(SUPERMERCADO* super) {
   int nmrCaixasAberta  = 0;
   nmrCaixasAberta = nmrCaixasAbertas(super);
@@ -243,6 +252,30 @@ int decideAbreCaixaNova(SUPERMERCADO* super) {
     atual = atual->Prox;
    }
   return nmrCaixasAberta == nmrCaixasNoLimite;
+}
+
+// Funcao que avalia se deve ser fechada uma caixa automaticamente
+int decideFechaCaixa(SUPERMERCADO* super) {
+  int caixaFechar = 0;
+  int nmrCaixasAberta  = 0;
+  nmrCaixasAberta = nmrCaixasAbertas(super);
+  int nmrCaixasNoLimiteMin = 0;
+  int nmrMinFila = super->nmrMinCliFechaCaixa; 
+  ListaGenerica * lg = (ListaGenerica *) super->Caixas;
+  
+  if (!lg) return 0;
+
+  NOG* atual = lg->Inicio;
+   while (atual != NULL) { 
+    CAIXA* caixaAtual = (CAIXA*)atual->Info;
+    if (caixaAtual->fechado == 0) {
+      FILAGENERICA* filaActual = (FILAGENERICA*) caixaAtual->filaCaixa;
+      if (filaActual->tamanho == nmrMinFila ) return caixaAtual->numCaixa;
+    }
+
+    atual = atual->Prox;
+   }
+  return 0;
 }
 
 //Devolve a diferenca entre o numero de pessoas atendidas numa caixa e outra
@@ -286,6 +319,7 @@ int CompararProdutos(void *obj1,void *obj2){
   return tempoTotal;
 }
 
+//Percorre as caixas e atende clientes
 void atendeClientesCaixas(ListaGenerica *lg,RELOGIO *R, SUPERMERCADO* S){
   NOG* P = lg->Inicio;
   while (P) {
@@ -293,11 +327,13 @@ void atendeClientesCaixas(ListaGenerica *lg,RELOGIO *R, SUPERMERCADO* S){
     if (FilaVazia(cx->filaCaixa) == 0){
       atendeClientesPorCaixa(cx,R,S);
     }
+    P = P->Prox;
   }
 }
 
 void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R, SUPERMERCADO* S){
   NOFILA *P = cx->filaCaixa->cabeca;
+ 
   time_t tempoAtual = VerTimeRelogio(R);
   struct tm *tmp = localtime(&tempoAtual);
 
@@ -307,36 +343,79 @@ void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R, SUPERMERCADO* S){
 
   while(P){
     CLIENTEASCOMPRAS *CC = P->Dados;
-    time_t HoraSaida = CC->horaSaidadaFila;
+    time_t HoraSaida, HoraSaidaSuper = VerTimeRelogio(R);
+    
+    char *texto = (char *)malloc(300);
+    sprintf(texto, "Cliente n %d saiu da fila da caixa %d", CC->cliente->cod, cx->numCaixa);
+    LOG  * logCriar = CriarLog(texto, R);
+    AddBeginLG(S->LogApp, logCriar);
+    free(texto);      
+
     struct tm *strHoraSaida = localtime(&HoraSaida);
-
-    if (strHoraSaida->tm_hour < tmp->tm_hour){
+    struct tm *strHoraSaidaSuper = localtime(&HoraSaidaSuper);
+    // Atualiza a hora de saida da fila
+    CC->horaSaidadaFila = mktime(strHoraSaida);
+    // Atualiza a hora de saida do supermercado
+    int tempoProcCaixa =  (int) tempoProcessarProdutosCaixa(CC);
+    
+    strHoraSaidaSuper->tm_sec += tempoProcCaixa;
+    HoraSaidaSuper = mktime(strHoraSaidaSuper);
+    CC->horaSaidaSupermercado =  HoraSaidaSuper;
+   
+    if (strHoraSaidaSuper->tm_hour < tmp->tm_hour){
       AddBeginLG(cx->pessoasAtendidas,CC);
+      char *texto1 = (char *)malloc(300);
+      sprintf(texto1, "Cliente n %d saiu do supermercado", CC->cliente->cod);
+      LOG  * logCriar1 = CriarLog(texto1, R);
+      AddBeginLG(S->LogApp, logCriar1);
+      free(texto1);  
       remove = 1; 
-    }else if (strHoraSaida->tm_hour == tmp->tm_hour && strHoraSaida->tm_min < tmp->tm_min){
+    }else if (strHoraSaidaSuper->tm_hour == tmp->tm_hour && strHoraSaidaSuper->tm_min < tmp->tm_min){
+      char *texto1 = (char *)malloc(300);
+      sprintf(texto1, "Cliente n %d saiu do supermercado", CC->cliente->cod);
+      LOG  * logCriar1 = CriarLog(texto1, R);
+      AddBeginLG(S->LogApp, logCriar1);
+      free(texto1);  
       AddBeginLG(cx->pessoasAtendidas,CC);
       remove = 1;
-    }else if (strHoraSaida->tm_hour == tmp->tm_hour && strHoraSaida->tm_min == tmp->tm_min && strHoraSaida->tm_sec <= tmp->tm_sec){
-      AddBeginLG(cx->pessoasAtendidas,CC);
-      remove = 1;
-    }
+   }else if (strHoraSaidaSuper->tm_hour == tmp->tm_hour && strHoraSaidaSuper->tm_min == tmp->tm_min && strHoraSaidaSuper->tm_sec <= tmp->tm_sec){
+    char *texto1 = (char *)malloc(300);
+    sprintf(texto1, "Cliente n %d saiu do supermercado", CC->cliente->cod);
+    LOG  * logCriar1 = CriarLog(texto1, R);
+    AddBeginLG(S->LogApp, logCriar1);
+    free(texto1);  
+     AddBeginLG(cx->pessoasAtendidas,CC);
+     remove = 1;
+   }
+    
+     P = P->Prox;
 
-    P = P->Prox;
-
-    if (remove = 1) {
+    if (remove == 1) {
       cx->contadorPessoas = cx->contadorPessoas+1;
       cx->contadorProdutos = cx->contadorProdutos + CC->nProdutos;
 
-      tempo += difftime(CC->horaEntradaFila,CC->horaSaidadaFila);
+      tempo += difftime(CC->horaSaidadaFila, CC->horaEntradaFila);
 
       // determina se é necessario oferecer algum produto ao cliente 
       if (ofereceProduto(S, tempo) == 1) {
         PRODUTO* prodOfer = produtoMaisBarato(CC);
         AddBeginLG(S->ProdutosOferecidos, prodOfer);
+        char *texto1 = (char *)malloc(300);
+        sprintf(texto1, "Produto %d, %s, com o preco de %f foi oferecido!", prodOfer->cod, prodOfer->designacao, prodOfer->preco);
+        LOG  * logCriar1 = CriarLog(texto1, R);
+        AddBeginLG(S->LogApp, logCriar1);
+        free(texto1);  
       }
-
+        
       RetirarDaFilaInicio(cx->filaCaixa);
+     
       remove = 0;
+
+      // Verifica se existe alguma caixa que reune os requisitos para fechar 
+      int caixaFechar = decideFechaCaixa(S); 
+      if (caixaFechar > 0 ) {
+        AbreFechaCaixa(S,caixaFechar,0, R);
+      }
     }
   }
 
@@ -361,5 +440,20 @@ CAIXA *CaixaMaisAtendeu(ListaGenerica *lg){
 	return caixa;
 }
 
+// Funcao que distribui os clientes pelas caixas abertas
+void redistribuirClientes(FILAGENERICA* fila, ListaGenerica* lg) {
+    if(!fila || !fila->cabeca) return;
+     NOFILA *p = (NOFILA *)fila->cabeca;
 
+     while(p){
+        CLIENTEASCOMPRAS* CC = (CLIENTEASCOMPRAS *) p->Dados; 
+        CC->horaSaidadaFila = NULL;
+        CAIXA* caixaNova = caixaComMenorTempo(lg);
+        
+        adicionarClienteComprasFila(caixaNova, CC);
+
+        p = p->Prox;
+        RetirarDaFilaInicio(fila);
+     }
+}
 

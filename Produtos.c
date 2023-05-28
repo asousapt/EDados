@@ -188,4 +188,37 @@ PRODUTO* produtoMaisBarato(CLIENTEASCOMPRAS* CC) {
   return prodRet;
 }
 
+float tempoProcessarProdutosCaixa(CLIENTEASCOMPRAS* CC) {
+  float tempo = 0;
+  ListaGenerica* lg = (ListaGenerica *) CC->ProdutosClientes;
+
+  PRODUTO* prodAct;
+
+  NOG *P = lg->Inicio;
+  
+  PRODUTOCLIENTE *PC;
+  while (P)
+  {
+    PC = P->Info;
+    prodAct = (PRODUTO *) PC->produtoCL;
+    tempo += (prodAct->tempoCaixa*PC->quantidade);
+
+    P = P->Prox;
+  }
+  
+  return tempo;
+}
+
+// calcula o total em valor de produtos oferecidos
+float totalValorProdutosOferecidos(ListaGenerica* lg) {
+  float valorTotal = 0;
+  NOG *P = lg->Inicio;
+
+  while(P) {
+  PRODUTO* prodAct = (PRODUTO*) P->Info;
+  valorTotal += prodAct->preco;
+  P = P->Prox;
+  }
+  return valorTotal;
+}
 

@@ -35,6 +35,11 @@ void EscreveLog(void *L, FILE *ficheiro) {
     fprintf(ficheiro, "%s;%s;\n", trim(data_hora), trim(objLog->mensagem));
 }
 
+void EscreveProdutosGratis(void *L, FILE *ficheiro) {
+  PRODUTO* objProd = (PRODUTO *) L;
+    fprintf(ficheiro, "%d;%s;%f\n", objProd->cod, objProd->designacao, objProd->preco);
+}
+
 // Exporta p log para um ficheiro CSV
 void exportaLogCsv(ListaGenerica* ListaLog) {
   FILE *f = fopen("log.csv", "w");
@@ -56,4 +61,22 @@ void DestruirLog(void *L){
     LOG *x = (LOG *) L;
     free(x->mensagem);
     free(x);
+}
+
+// Exporta Lista Produtos gratis
+void exportaProdutosG(ListaGenerica* ListaProdGratis) {
+  FILE *f = fopen("produtosGratuitos.csv", "w");
+  if (f == NULL){
+		printf("Erro ao abrir o ficheiro produtosGratuitos.csv");
+		exit(1);
+	}
+
+  printf("A exportar Log de Produtos oferecedos...\n");
+
+  EscreveLG(ListaProdGratis, f, EscreveProdutosGratis);
+  fprintf(f, "%s;%d\n","Numero Produtos oferecidos", ListaProdGratis->NEL);
+  fprintf(f, "%s;%f\n","Total Produtos oferecidos", totalValorProdutosOferecidos(ListaProdGratis));
+  fclose(f);
+  
+  printf("Log de produtos oferecidos Exportado com sucesso!\n");
 }
