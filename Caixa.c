@@ -5,6 +5,7 @@
 #include "Caixa.h"
 #include "Funcionarios.h"
 #include "Fila.h"
+#include "Produtos.h"
 
 // Criar objecto caixa
 CAIXA* CriarCaixa(int numero){
@@ -256,13 +257,9 @@ int CompararProdutos(void *obj1,void *obj2){
   return caixa1->contadorProdutos - caixa2->contadorProdutos;
 }
 
-// // Verifica qual o tempo que a compra do cliente vai demorar
-// float calcularTempoTotalCompra(FILAGENERICA* fila) {
-//     float tempoTotal = 0.0;
-//     NOFILA* atual = fila->cabeca;
 
- // Verifica qual o tempo que a compra do cliente vai demorar
-  float calcularTempoTotalCompra(FILAGENERICA* fila) {
+ // Verifica qual o tempo de espara real da fila 
+  float calculaTempoRealEspera(FILAGENERICA* fila) {
   float tempoTotal = 0.0;
   NOFILA* atual = fila->cabeca;
 
@@ -273,7 +270,7 @@ int CompararProdutos(void *obj1,void *obj2){
     NOG* atualLista = listaProdutos->Inicio;
 
     while (atualLista != NULL) {
-      PRODUTOCLIENTE* produtoCliente = (PRODUTOCLIENTE*)atualLista->Info;
+      PRODUTOCLIENTE* produtoCliente = (PRODUTOCLIENTE*) atualLista->Info;
 
       PRODUTO* produto = produtoCliente->produtoCL;
 
@@ -289,17 +286,17 @@ int CompararProdutos(void *obj1,void *obj2){
   return tempoTotal;
 }
 
-void atendeClientesCaixas(ListaGenerica *lg,RELOGIO *R){
+void atendeClientesCaixas(ListaGenerica *lg,RELOGIO *R, SUPERMERCADO* S){
   NOG* P = lg->Inicio;
   while (P) {
     CAIXA *cx = P->Info;
     if (FilaVazia(cx->filaCaixa) == 0){
-      atendeClientesPorCaixa(cx,R);
+      atendeClientesPorCaixa(cx,R,S);
     }
   }
 }
 
-void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R){
+void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R, SUPERMERCADO* S){
   NOFILA *P = cx->filaCaixa->cabeca;
   time_t tempoAtual = VerTimeRelogio(R);
   struct tm *tmp = localtime(&tempoAtual);
@@ -310,7 +307,7 @@ void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R){
 
   while(P){
     CLIENTEASCOMPRAS *CC = P->Dados;
-    time_t HoraSaida = CC->horaSaidaSupermercado;
+    time_t HoraSaida = CC->horaSaidadaFila;
     struct tm *strHoraSaida = localtime(&HoraSaida);
 
     if (strHoraSaida->tm_hour < tmp->tm_hour){
@@ -328,10 +325,16 @@ void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R){
 
     if (remove = 1) {
       cx->contadorPessoas = cx->contadorPessoas+1;
-      cx->contadorPessoas = cx->contadorPessoas + CC->nProdutos;
+      cx->contadorProdutos = cx->contadorProdutos + CC->nProdutos;
 
-      tempo += difftime(CC->horaEntradaFila,CC->horaSaidaSupermercado);
-      //Produtos Oferecidos
+      tempo += difftime(CC->horaEntradaFila,CC->horaSaidadaFila);
+
+      // determina se é necessario oferecer algum produto ao cliente 
+      if (ofereceProduto(S, tempo) == 1) {
+        PRODUTO* prodOfer = produtoMaisBarato(CC);
+        AddBeginLG(S->ProdutosOferecidos, prodOfer);
+      }
+
       RetirarDaFilaInicio(cx->filaCaixa);
       remove = 0;
     }
@@ -339,8 +342,8 @@ void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R){
 
   float tempoTotal = (float) tempo;
 
-  cx->tempoEsperaReal = calcularTempoTotalCompra(cx->filaCaixa);
-  cx->tempoTotal = tempo;
+  cx->tempoEsperaReal = calculaTempoRealEspera(cx->filaCaixa);
+  cx->tempoTotal += tempoTotal;
   cx->tempoEsperaMed = calcularTempoEsperaMedio(cx);
 }
 
@@ -357,3 +360,6 @@ CAIXA *CaixaMaisAtendeu(ListaGenerica *lg){
 	CAIXA *caixa = Maior(lg,CompararPessoas);
 	return caixa;
 }
+
+
+

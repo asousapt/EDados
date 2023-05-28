@@ -20,6 +20,7 @@ typedef struct ClientesAsCompras {
     ListaGenerica *ProdutosClientes;
     time_t horaEntradaSuper;
     time_t horaEntradaFila;
+    time_t horaSaidadaFila;
     time_t horaSaidaSupermercado;
     float tempoEspera;
     int nProdutos;

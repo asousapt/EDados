@@ -11,7 +11,7 @@
 #include "Clientes.h"
 #include "Log.h"
 #include "Relogio.h"
-#include <Produtos.h>
+
 
 typedef struct caixa {
     int numCaixa;
@@ -41,9 +41,9 @@ void listarCaixas(ListaGenerica* listaCaixas);
 int buscaUmaCaixaParaAbrir(ListaGenerica *lg);
 int CompararPessoas(void *obj1,void *obj2);
 int CompararProdutos(void *obj1,void *obj2);
-float calcularTempoTotalCompra(FILAGENERICA* fila);
-void atendeClientesCaixas(ListaGenerica *lg,RELOGIO *R);
-void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R);
+float calculaTempoRealEspera(FILAGENERICA* fila);
+void atendeClientesCaixas(ListaGenerica *lg,RELOGIO *R,SUPERMERCADO* S);
+void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R,SUPERMERCADO* S);
 float calcularTempoEsperaMedio(CAIXA *cx);
 CAIXA *CaixaMaisAtendeu(ListaGenerica *lg);
 int decideAbreCaixaNova(SUPERMERCADO* super);

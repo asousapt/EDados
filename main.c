@@ -58,12 +58,13 @@ int main(void) {
   AdicionarVariosClientesAsCompras(supermercadoActual,R);
 sleep(10);
  VerificaTempoEntradaCaixa(supermercadoActual, R); 
-
-  
+ printf("Adicionei clientes as filas \n");
+sleep(10);
+ atendeClientesCaixas(supermercadoActual->Caixas,R, supermercadoActual); 
  
   //ShowLG(supermercadoActual->Caixas, MostrarCaixa);
   
- // ShowLG(supermercadoActual->ProdutosOferecidos, MostrarProduto);
+  //ShowLG(supermercadoActual->ProdutosOferecidos, MostrarProduto);
   //ShowLG(supermercadoActual->Clientes, MostrarCliente);
   //AdicionarClienteAsCompras(supermercadoActual);
  

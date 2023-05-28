@@ -222,8 +222,7 @@ void adicionarClienteComprasFila(CAIXA* caixaAtual, CLIENTEASCOMPRAS* cesto) {
     AdicionaAFila(fila, cesto);
     PRODUTO* prod =  produtoMaisBarato(cesto);
     
-    caixaAtual->tempoEsperaReal = calcularTempoTotalCompra(fila);
+    caixaAtual->tempoEsperaReal = calculaTempoRealEspera(fila);
 
-    printf("Adicionei cliente na fila\n");
 }
 

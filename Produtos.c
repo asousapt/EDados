@@ -4,6 +4,7 @@
 #include "Log.h"
 #include "Produtos.h"
 #include "ListaGenerica.h"
+#include "Clientes.h"
 
 // cria um novo objecto produto 
 PRODUTO* CriarProduto(char* codigo, char* designacao, char* preco, char* tempoCompra, char* tempoCaixa ){
@@ -155,6 +156,11 @@ void DestruirProdutoCliente(void *x){
   PRODUTOCLIENTE *obj = (PRODUTOCLIENTE *) x;
   DestruirProduto(obj->produtoCL);
   free(obj);
+}
+
+// Funcao que determina se é necessario oferecer algum produto ao cliente 
+int ofereceProduto(SUPERMERCADO * S, float tempoEsparaNaFila) {
+  return tempoEsparaNaFila > S->tempoEsperaMax; 
 }
 
 // funcao que retorna o produto mais barado do cesto do cliente
