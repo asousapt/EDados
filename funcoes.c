@@ -18,6 +18,7 @@ int validarInt(char *pergunta, int menor,int maior){
 }
 
 char *getString(char *pergunta){
+	fflush(stdin);
 	char *string;
 	string = malloc(sizeof(char)*100);
 	printf("%s",pergunta);
