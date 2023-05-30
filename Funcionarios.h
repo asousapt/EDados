@@ -19,4 +19,8 @@ void DestruirFuncionario(void* F);
 FUNCIONARIO* ProcurarFuncionario(ListaGenerica *lg,int codFuncionario);
 int validaFuncionario(void *elem1, void *elem2);
 FUNCIONARIO* encontrarFuncionarioLivre(ListaGenerica* listaFuncionarios, ListaGenerica* listaCaixas);
+FUNCIONARIO* funcionarioAtendeuMaisMenos(ListaGenerica* listaFuncionarios,int operacao);
+void EscreveFuncionario(void *L, FILE *ficheiro);
+void exportaFuncionarios(ListaGenerica* lg);
+
 #endif // FUNCIONARIOS_H_INCLUDED

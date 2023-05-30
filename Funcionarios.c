@@ -76,3 +76,63 @@ FUNCIONARIO* encontrarFuncionarioLivre(ListaGenerica* listaFuncionarios, ListaGe
     }
     return NULL;
 }
+
+// Funcao que retorna o funcionario que atendeu mais e menos 
+// 0 - menor 
+// 1 - maior 
+FUNCIONARIO* funcionarioAtendeuMaisMenos(ListaGenerica* listaFuncionarios,int operacao) {
+    NOG* atualFunc = listaFuncionarios->Inicio;
+    FUNCIONARIO* funcRetornar = NULL; 
+    int numero = 0; 
+
+    while (atualFunc != NULL) {
+      FUNCIONARIO* func = (FUNCIONARIO*)atualFunc->Info;
+      
+      if (func->nmrClientesAtendidos > 0) {
+        if (operacao == 1) {
+          if (func->nmrClientesAtendidos > numero) {
+            numero = func->nmrClientesAtendidos; 
+            funcRetornar = func;
+          }
+        } else {
+          if (numero == 0) { 
+            numero = func->nmrClientesAtendidos; 
+            funcRetornar = func;
+          } else {
+            if (func->nmrClientesAtendidos < numero) {
+               numero = func->nmrClientesAtendidos; 
+            funcRetornar = func;
+            }
+          }
+        }
+      }
+      atualFunc = atualFunc->Prox;
+    }
+    return funcRetornar;
+}
+
+void EscreveFuncionario(void *L, FILE *ficheiro) {
+  FUNCIONARIO* objFunc = (FUNCIONARIO *) L;
+    fprintf(ficheiro, "%d;%s;%d\n", objFunc->cod, trim(objFunc->nome), objFunc->nmrClientesAtendidos);
+}
+
+// Exporta Lista Produtos gratis
+void exportaFuncionarios(ListaGenerica* lg) {
+  FILE *f = fopen("funcionarios-est.csv", "w");
+  if (f == NULL){
+		printf("Erro ao abrir o ficheiro funcionarios-est.csv");
+		exit(1);
+	}
+
+  printf("A exportar Log de funcionarios...\n");
+
+  EscreveLG(lg, f, EscreveFuncionario);
+  
+  FUNCIONARIO* funcMais =  funcionarioAtendeuMaisMenos(lg,1);
+  FUNCIONARIO* funcMenos =  funcionarioAtendeuMaisMenos(lg,0);
+  fprintf(f, "%s;%s;%d\n","Funcionario que atendeu mais clientes", funcMais->nome, funcMais->nmrClientesAtendidos);
+  fprintf(f, "%s;%s;%d\n","Funcionario que atendeu menos clientes", funcMenos->nome, funcMenos->nmrClientesAtendidos);
+  fclose(f);
+  
+  printf("Log de produtos oferecidos Exportado com sucesso!\n");
+}
