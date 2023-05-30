@@ -255,9 +255,9 @@ int decideAbreCaixaNova(SUPERMERCADO* super) {
 
     atual = atual->Prox;
    }
-
-  int media = nPessoasCaixas / nmrCaixasAberta;
-  if (media > nmrMaxFila) {
+  
+  float media = nPessoasCaixas / nmrCaixasAberta;
+  if (media >  nmrMaxFila) {
     return 1;
   }
   else {
@@ -501,11 +501,13 @@ void redistribuirClientes(FILAGENERICA* fila, ListaGenerica* lg) {
      }
 }
 
+//Funcao que calcula o tempo medio das caixas
 float calculaTempoMedioCaixas(ListaGenerica* lg) {
   if (!lg) return 0;
+  
   float media = 0;
   float soma = 0; 
-  int nmrRegistos = 0;
+  float nmrRegistos = 0;
 
   NOG* atual = lg->Inicio;
   
@@ -517,11 +519,12 @@ float calculaTempoMedioCaixas(ListaGenerica* lg) {
     atual = atual->Prox;
   }
 
-  media = soma / nmrRegistos;
-  
+  media = soma /  nmrRegistos;
+
   return media;
   
 }
+
 CAIXA* procurarCaixaCliente(ListaGenerica *lg,int codigoCliente){
   CAIXA *cx;
   NOG *P = lg->Inicio;
