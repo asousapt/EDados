@@ -78,6 +78,7 @@ while (i < 100 ) {
 
   exportaLogCsv(supermercadoActual->LogApp);
   exportaProdutosG(supermercadoActual->ProdutosOferecidos);
+  exportaFuncionarios(supermercadoActual->Funcionarios);
   // while(1){
   //   if(kbhit()){
   //     puts("Key was pressed");
