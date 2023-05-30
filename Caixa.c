@@ -166,7 +166,6 @@ void AbreFechaCaixa(SUPERMERCADO *super, int numero, int operacao, RELOGIO* R){
       }
     }
     
-    //caixaEscolhida->func = NULL;
     char *texto = (char *)malloc(50);
      sprintf(texto, "Caixa %d fechada!", caixaEscolhida->numCaixa);
     LOG  * logCriar = CriarLog(texto, R);
@@ -188,6 +187,24 @@ void AbreFechaCaixa(SUPERMERCADO *super, int numero, int operacao, RELOGIO* R){
     AddBeginLG(super->LogApp, logCriar2);
     free(texto);
     free(texto1);
+  }
+}
+
+// Tira funcionario da caixa 
+void retiraFuncionarioCaixas(ListaGenerica* lg) {
+  if (!lg) return; 
+  NOG* atual = lg->Inicio;
+
+  atual = lg->Inicio; 
+
+  while(atual) {
+    CAIXA* cx = (CAIXA*) atual->Info;
+    FILAGENERICA* fila = (FILAGENERICA*) cx->filaCaixa; 
+    if (cx->fechado == 1 && fila->tamanho == 0 && cx->func != NULL) {
+      cx->func = NULL;
+    }
+
+    atual = atual->Prox;
   }
 }
 
@@ -346,6 +363,7 @@ void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R, SUPERMERCADO* S){
     time_t HoraSaida, HoraSaidaSuper = VerTimeRelogio(R);
     
     char *texto = (char *)malloc(300);
+    
     sprintf(texto, "Cliente n %d saiu da fila da caixa %d", CC->cliente->cod, cx->numCaixa);
     LOG  * logCriar = CriarLog(texto, R);
     AddBeginLG(S->LogApp, logCriar);
@@ -384,6 +402,7 @@ void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R, SUPERMERCADO* S){
     LOG  * logCriar1 = CriarLog(texto1, R);
     AddBeginLG(S->LogApp, logCriar1);
     free(texto1);  
+    
      AddBeginLG(cx->pessoasAtendidas,CC);
      remove = 1;
    }
@@ -391,6 +410,7 @@ void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R, SUPERMERCADO* S){
      P = P->Prox;
 
     if (remove == 1) {
+      cx->func->nmrClientesAtendidos++;
       cx->contadorPessoas = cx->contadorPessoas+1;
       cx->contadorProdutos = cx->contadorProdutos + CC->nProdutos;
 

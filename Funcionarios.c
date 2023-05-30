@@ -7,13 +7,11 @@
 //Cria um novo objecto funcionario 
 FUNCIONARIO* CriarFuncionario(char* numeroFuncionario,char* nomeFuncionario) {
   FUNCIONARIO* novoFuncionario = (FUNCIONARIO *) malloc(sizeof(FUNCIONARIO));
-  ListaGenerica* carrinhos = (ListaGenerica *) malloc(sizeof(ListaGenerica));
-  carrinhos = CriarLG();
 
   novoFuncionario->cod = atoi(numeroFuncionario);
   novoFuncionario->nome = (char*) malloc(strlen(nomeFuncionario) + 1);
   novoFuncionario->nmrClientesAtendidos = 0; 
-  novoFuncionario->ListaCarrinhos = carrinhos;
+
 
   strcpy(novoFuncionario->nome, nomeFuncionario);
 

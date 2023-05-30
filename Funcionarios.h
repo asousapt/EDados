@@ -10,7 +10,6 @@ typedef struct funcionario {
     int cod;
     char *nome;
     int nmrClientesAtendidos;
-    ListaGenerica *ListaCarrinhos;
 } FUNCIONARIO;
 
 
