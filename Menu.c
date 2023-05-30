@@ -11,7 +11,7 @@ int menuUtilizador(){
   printf("= 3 - Mostrar Caixas               =");
   printf("= 4 - Mostrar Clientes da Caixa    =");
   printf("= 5 - Pesquisar Cliente            =");
-  printf("= 5 - Mos Cliente            =");
+  printf("=              =");
   printf("= 6 - Continuar                    =");
   printf("= 0 - Terminar o programa          =");
   printf("====================================");
