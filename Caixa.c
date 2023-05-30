@@ -503,16 +503,22 @@ void redistribuirClientes(FILAGENERICA* fila, ListaGenerica* lg) {
 
 float calculaTempoMedioCaixas(ListaGenerica* lg) {
   if (!lg) return 0;
-  float media = 0; 
+  float media = 0;
+  float soma = 0; 
   int nmrRegistos = 0;
 
   NOG* atual = lg->Inicio;
   
   while(atual) {
     CAIXA* cx = (CAIXA*) atual->Info;
+
+    soma += cx->tempoEsperaMed;
+    nmrRegistos++;
     atual = atual->Prox;
   }
 
+  media = soma / nmrRegistos;
+  
   return media;
   
 }
