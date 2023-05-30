@@ -50,5 +50,6 @@ int decideAbreCaixaNova(SUPERMERCADO* super);
 int decideFechaCaixa(SUPERMERCADO* super); 
 void redistribuirClientes(FILAGENERICA* fila, ListaGenerica* lg);
 CAIXA* procurarCaixaCliente(ListaGenerica *lg,int codigoCliente);
+float calculaTempoMedioCaixas(ListaGenerica* lg);
 
 #endif // CAIXA_H_INCLUDED
