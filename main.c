@@ -56,7 +56,7 @@ int main(void) {
    //ShowLG(supermercadoActual->ClientesAsCompras, MostrarClientesAsCompras);
   // indica qual a caixa com menos pessoas
   AdicionarVariosClientesAsCompras(supermercadoActual,R);
-sleep(3);
+ sleep(3);
  VerificaTempoEntradaCaixa(supermercadoActual, R); 
 
 sleep(3);

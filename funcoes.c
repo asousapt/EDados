@@ -17,7 +17,7 @@ int validarInt(char *pergunta, int menor,int maior){
 	return num;
 }
 
-char *getString(char *pergunta){
+char *getFrase(char *pergunta){
 	char string[100];
 	printf("%s",pergunta);
 	gets(string);
