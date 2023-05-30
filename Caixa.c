@@ -56,6 +56,7 @@ void MostrarCaixaAberta(void* F){
   if (objCaixa->fechado == 0) {
     printf("%d - %s\n", objCaixa->numCaixa, nome);
   }
+  free(nome);
 }
 
 void MostrarCaixaFechada(void* F){
@@ -65,6 +66,7 @@ void MostrarCaixaFechada(void* F){
   if (objCaixa->fechado == 1) {
     printf("%d - %s\n", objCaixa->numCaixa, nome);
   }
+  free(nome);
 }
 
 
@@ -542,4 +544,44 @@ CAIXA* procurarCaixaCliente(ListaGenerica *lg,int codigoCliente){
     P = P->Prox;
   }
   return NULL;
+}
+
+// escreve no ficheiro 
+void EscreveCaixaLog(void *L, FILE *ficheiro) {
+  CAIXA* objCx = (CAIXA *) L;
+    fprintf(ficheiro, "%d;%d;%d;%f\n", objCx->numCaixa,objCx->pessoasAtendidas,objCx->contadorProdutos,objCx->tempoEsperaMed);
+}
+
+// Exporta o ficheiro de log de caixas 
+void exportaCaixas(ListaGenerica* lg) {
+  FILE *f = fopen("caixas-est.csv", "w");
+  if (f == NULL){
+		printf("Erro ao abrir o ficheiro caixas-est.csv");
+		exit(1);
+	}
+
+  printf("A exportar Log de caixas...\n");
+
+  EscreveLG(lg, f, EscreveCaixaLog);
+  
+  float tempoMedioTotal = calculaTempoMedioCaixas(lg);
+  fprintf(f, "%s;%f;\n","Tempo medio total", tempoMedioTotal);
+  
+  fclose(f);
+  
+  printf("Log de Caixas Exportado com sucesso!\n");
+}
+
+int numeroTotalClientesAtendidos(ListaGenerica* lg) {
+  CAIXA *cx;
+  NOG *P = lg->Inicio;
+  int nmrTotalClientesAtendidos = 0;
+
+  while(P) {
+    cx = P->Info;
+    nmrTotalClientesAtendidos += cx->contadorPessoas;
+
+    P = P->Prox;
+  }
+  return nmrTotalClientesAtendidos;
 }

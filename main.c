@@ -75,8 +75,7 @@ while (i < 100 ) {
  
 
   //printf("Hora de abertura do supermercado: %s", asctime(localtime(&(supermercadoActual->horaAbertura))));
-  float teste = calculaTempoMedioCaixas(supermercadoActual->Caixas);
-  printf("%f\n", teste);
+  exportaCaixas(supermercadoActual->Caixas);
   exportaLogCsv(supermercadoActual->LogApp);
   exportaProdutosG(supermercadoActual->ProdutosOferecidos);
   exportaFuncionarios(supermercadoActual->Funcionarios);
