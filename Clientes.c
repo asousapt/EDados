@@ -104,7 +104,8 @@ void AdicionarClienteAsCompras(SUPERMERCADO *S,RELOGIO *R){
       if (icr == altCliente) {
         CLIENTE *temp = P->Info;
         int codigo = temp->cod;
-        if (VerificaClienteAsCompras(S,codigo) == 0){
+        CLIENTEASCOMPRAS* CC = procurarClienteCaixa(S->Caixas,codigo);
+        if (VerificaClienteAsCompras(S,codigo) == 0 && CC == NULL){
           skip = 1;
           cl = P->Info;
            char *texto = (char *)malloc(300);
