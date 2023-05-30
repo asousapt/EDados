@@ -150,13 +150,20 @@ void MostrarClientesAsCompras(void* C){
 }
 
 void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,RELOGIO *R){
-  int numClientesSM = S->ClientesAsCompras->NEL;
-  int numVerificacao = (S->nmrClientesSupermercado) - numClientesSM;
-  int numClientes = aleatorio(1,numVerificacao);
+  time_t horaActual = VerTimeRelogio(R);
+  struct tm *strHoraActual = localtime(&horaActual);
+  struct tm *strHoraFecho = localtime(&S->horaFecho);
 
-  for (int i = 1; i<=numClientes; i++){
-    AdicionarClienteAsCompras(S,R);
+  if (strHoraActual->tm_hour <= strHoraFecho->tm_hour && strHoraActual->tm_min <= strHoraFecho->tm_min && strHoraActual->tm_sec <= strHoraFecho->tm_sec ) {
+    int numClientesSM = S->ClientesAsCompras->NEL;
+    int numVerificacao = (S->nmrClientesSupermercado) - numClientesSM;
+    int numClientes = aleatorio(1,numVerificacao);
+
+    for (int i = 1; i<=numClientes; i++){
+      AdicionarClienteAsCompras(S,R);
+    }
   }
+ 
 }
 
 void VerificaTempoEntradaCaixa(SUPERMERCADO *S,RELOGIO * R){

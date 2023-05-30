@@ -190,24 +190,6 @@ void AbreFechaCaixa(SUPERMERCADO *super, int numero, int operacao, RELOGIO* R){
   }
 }
 
-// Tira funcionario da caixa 
-void retiraFuncionarioCaixas(ListaGenerica* lg) {
-  if (!lg) return; 
-  NOG* atual = lg->Inicio;
-
-  atual = lg->Inicio; 
-
-  while(atual) {
-    CAIXA* cx = (CAIXA*) atual->Info;
-    FILAGENERICA* fila = (FILAGENERICA*) cx->filaCaixa; 
-    if (cx->fechado == 1 && fila->tamanho == 0 && cx->func != NULL) {
-      cx->func = NULL;
-    }
-
-    atual = atual->Prox;
-  }
-}
-
 // Retorna o ponteiro com a caixa mais rapida ja contando com os clientes que estao na fila
 CAIXA* caixaComMenorTempo(ListaGenerica* lista) {
   NOG* atual = lista->Inicio;
@@ -344,8 +326,21 @@ void atendeClientesCaixas(ListaGenerica *lg,RELOGIO *R, SUPERMERCADO* S){
     if (FilaVazia(cx->filaCaixa) == 0){
       atendeClientesPorCaixa(cx,R,S);
     }
+    else {
+      FUNCIONARIO* f = (FUNCIONARIO*)  cx->func;
+      if(f != NULL) {
+        char *texto = (char *)malloc(1000);
+      
+        sprintf(texto, "O funcionario %s saiu da caixa %d.",f->nome, cx->numCaixa);
+        LOG  * logCriar2 = CriarLog(texto, R);
+        AddBeginLG(S->LogApp, logCriar2);
+        free(texto);
+        cx->func = NULL;
+      }
+    }
     P = P->Prox;
   }
+  
 }
 
 void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R, SUPERMERCADO* S){
