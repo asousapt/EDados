@@ -291,7 +291,7 @@ int CompararProdutos(void *obj1,void *obj2){
 
 
  // Verifica qual o tempo de espara real da fila 
-  float calculaTempoRealEspera(FILAGENERICA* fila) {
+float calculaTempoRealEspera(FILAGENERICA* fila) {
   float tempoTotal = 0.0;
   NOFILA* atual = fila->cabeca;
 
@@ -472,3 +472,21 @@ void redistribuirClientes(FILAGENERICA* fila, ListaGenerica* lg) {
      }
 }
 
+CAIXA* procurarCaixaCliente(ListaGenerica *lg,int codigoCliente){
+  CAIXA *cx;
+  NOG *P = lg->Inicio;
+ 
+  while (P) {
+    cx = P->Info;
+    NOFILA* PF = cx->filaCaixa->cabeca;
+    while (PF){
+      CLIENTEASCOMPRAS *CC = PF->Dados;
+      if (CC->cliente->cod == codigoCliente){
+        return cx;
+      }
+      PF = PF->Prox;
+    }
+    P = P->Prox;
+  }
+  return NULL;
+}

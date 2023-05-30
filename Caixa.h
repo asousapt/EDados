@@ -49,5 +49,6 @@ CAIXA *CaixaMaisAtendeu(ListaGenerica *lg);
 int decideAbreCaixaNova(SUPERMERCADO* super);
 int decideFechaCaixa(SUPERMERCADO* super); 
 void redistribuirClientes(FILAGENERICA* fila, ListaGenerica* lg);
+CAIXA* procurarCaixaCliente(ListaGenerica *lg,int codigoCliente);
 
 #endif // CAIXA_H_INCLUDED

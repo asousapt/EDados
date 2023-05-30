@@ -232,3 +232,31 @@ void adicionarClienteComprasFila(CAIXA* caixaAtual, CLIENTEASCOMPRAS* cesto) {
 
 }
 
+void trocarClientedeFila(SUPERMERCADO *S,CAIXA *cxDestino,CLIENTEASCOMPRAS *CC){
+  CAIXA *cxOrigem = procurarCaixaCliente(S->Caixas,CC->cliente->cod);
+
+  if (cxOrigem != NULL){
+    AdicionaAFila(cxDestino->filaCaixa,CC);
+    RetirarDaFila(cxOrigem->filaCaixa,CompararCliente,CC);
+  }
+}
+
+CLIENTEASCOMPRAS* procurarClienteCaixa(ListaGenerica *lg,int codigoCliente){
+  CAIXA *cx;
+  NOG *P = lg->Inicio;
+ 
+  while (P) {
+    cx = P->Info;
+    NOFILA* PF = cx->filaCaixa->cabeca;
+    while (PF){
+      CLIENTEASCOMPRAS *CC = PF->Dados;
+      if (CC->cliente->cod == codigoCliente){
+        return CC;
+      }
+      PF = PF->Prox;
+    }
+    P = P->Prox;
+  }
+  return NULL;
+}
+
