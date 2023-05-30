@@ -239,7 +239,7 @@ int decideAbreCaixaNova(SUPERMERCADO* super) {
   
   if (!lg) return 0;
 
-  if (nmrCaixasAberta == super->Caixas->NEL){
+  if (nmrCaixasAberta == super->Caixas->NEL || nmrCaixasAberta == 0){
     return 0;
   }
 
@@ -275,7 +275,7 @@ int decideFechaCaixa(SUPERMERCADO* super) {
   
   if (!lg) return 0;
 
-  if (nmrCaixasAberta == 1){
+  if (nmrCaixasAberta < 2){
     return 0;
   }
 
@@ -297,7 +297,7 @@ int decideFechaCaixa(SUPERMERCADO* super) {
     atual = atual->Prox;
   }
 
-  int media = nPessoasCaixas / nmrCaixasAberta;
+  float media = nPessoasCaixas / nmrCaixasAberta;
   if (media < nmrMinFila) {
     return caixaFechar;
   }
