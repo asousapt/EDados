@@ -34,7 +34,6 @@ void DestruirCliente(void* C);
 CLIENTE* ProcurarCliente (ListaGenerica *lg,int codigoCliente);
 int validaCliente(void *elem1, void *elem2);
 
-
 //Funcoes: Cliente - Supermercado
 int VerificaClienteAsCompras(SUPERMERCADO *S,int codigoCliente);
 CLIENTEASCOMPRAS* ProcurarClienteAsCompras(ListaGenerica *lg,int codigoCliente);
@@ -45,5 +44,7 @@ void DestruirClientesAsCompras(void* obj);
 void VerificaTempoEntradaCaixa(SUPERMERCADO *S,RELOGIO * R);
 int CompararCliente(void *c1, void *c2);
 void adicionarClienteComprasFila(CAIXA* caixaAtual, CLIENTEASCOMPRAS* cesto);
+void trocarClientedeFila(SUPERMERCADO *S,CAIXA *cxDestino,CLIENTEASCOMPRAS *CC);
+CLIENTEASCOMPRAS* procurarClienteCaixa(ListaGenerica *lg,int codigoCliente);
 
 #endif // CLIENTES_H_INCLUDED
