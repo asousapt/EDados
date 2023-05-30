@@ -232,49 +232,78 @@ int nmrCaixasAbertas(SUPERMERCADO* super) {
 
 // Funcao que avalia se é necessario abrir uma nova caixa
 int decideAbreCaixaNova(SUPERMERCADO* super) {
-  int nmrCaixasAberta  = 0;
-  nmrCaixasAberta = nmrCaixasAbertas(super);
-  int nmrCaixasNoLimite = 0;
+  int nmrCaixasAberta  = nmrCaixasAbertas(super);
+  int nPessoasCaixas = 0;
   int nmrMaxFila = super->nmrMaxClientesFila; 
   ListaGenerica * lg = (ListaGenerica *) super->Caixas;
   
   if (!lg) return 0;
 
+  if (nmrCaixasAberta == super->Caixas->NEL){
+    return 0;
+  }
+
   NOG* atual = lg->Inicio;
    while (atual != NULL) { 
     CAIXA* caixaAtual = (CAIXA*)atual->Info;
-    if (caixaAtual->fechado == 0) {
-      FILAGENERICA* filaActual = (FILAGENERICA*) caixaAtual->filaCaixa;
-      if (filaActual->tamanho == nmrMaxFila ) nmrCaixasNoLimite++;
-    }
+    nPessoasCaixas = nPessoasCaixas+caixaAtual->filaCaixa->tamanho;
+
+    // if (caixaAtual->fechado == 0) {
+    //   FILAGENERICA* filaActual = (FILAGENERICA*) caixaAtual->filaCaixa;
+    //   if (filaActual->tamanho == nmrMaxFila ) nmrCaixasNoLimite++;
+    // }
 
     atual = atual->Prox;
    }
-  return nmrCaixasAberta == nmrCaixasNoLimite;
+
+  int media = nPessoasCaixas / nmrCaixasAberta;
+  if (media > nmrMaxFila) {
+    return 1;
+  }
+  else {
+    return 0;
+  }
 }
 
 // Funcao que avalia se deve ser fechada uma caixa automaticamente
 int decideFechaCaixa(SUPERMERCADO* super) {
   int caixaFechar = 0;
-  int nmrCaixasAberta  = 0;
-  nmrCaixasAberta = nmrCaixasAbertas(super);
-  int nmrCaixasNoLimiteMin = 0;
+  int nPessoasCaixas = 0, nPessoasComp = 0;
+  int nmrCaixasAberta  = nmrCaixasAbertas(super);
   int nmrMinFila = super->nmrMinCliFechaCaixa; 
   ListaGenerica * lg = (ListaGenerica *) super->Caixas;
   
   if (!lg) return 0;
 
+  if (nmrCaixasAberta == 1){
+    return 0;
+  }
+
   NOG* atual = lg->Inicio;
-   while (atual != NULL) { 
+  while (atual != NULL) { 
     CAIXA* caixaAtual = (CAIXA*)atual->Info;
-    if (caixaAtual->fechado == 0) {
-      FILAGENERICA* filaActual = (FILAGENERICA*) caixaAtual->filaCaixa;
-      if (filaActual->tamanho == nmrMinFila ) return caixaAtual->numCaixa;
+    nPessoasCaixas = nPessoasCaixas+caixaAtual->filaCaixa->tamanho;
+
+    if (caixaAtual->filaCaixa->tamanho < nPessoasComp || nPessoasComp == 0){
+      caixaFechar = caixaAtual->numCaixa;
+      nPessoasComp = caixaAtual->filaCaixa->tamanho;
     }
 
+    // if (caixaAtual->fechado == 0) {
+    //     FILAGENERICA* filaActual = (FILAGENERICA*) caixaAtual->filaCaixa;
+    //     if (filaActual->tamanho == nmrMinFila ) return caixaAtual->numCaixa;
+    // }
+
     atual = atual->Prox;
-   }
-  return 0;
+  }
+
+  int media = nPessoasCaixas / nmrCaixasAberta;
+  if (media < nmrMinFila) {
+    return caixaFechar;
+  }
+  else {
+    return 0;
+  }
 }
 
 //Devolve a diferenca entre o numero de pessoas atendidas numa caixa e outra

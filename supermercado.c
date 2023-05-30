@@ -40,8 +40,8 @@ SUPERMERCADO * CriarSM(){
         SM->horaFecho = convertToTime(horaFecho, minutoFecho);
 
         nCaixas = validarInt("\nNúmero de caixas do supermercado:",1,10);
-        nmrMaxClientesFila = validarInt("\nNumero maximo de clientes na fila:",1,20);
-        nmrMinCliFechaCaixa = validarInt("\nNúmero minimo de clientes para fechar a caixa:",1,5);
+        nmrMaxClientesFila = validarInt("\nNumero medio maximo de clientes na fila:",1,20);
+        nmrMinCliFechaCaixa = validarInt("\nNúmero medio minimo de clientes para fechar a caixa:",1,5);
         tempoMaxEspera = validarInt("\nTempo maximo de espera de clientes na fila em minutos",1,60);
         nmrClientesSupermercado = validarInt("\nNúmero maximo de clientes em simultaneo no supermercado",1,100);
         
