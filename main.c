@@ -35,7 +35,7 @@ int main(void) {
 
   //Iniciar Relogio
   RELOGIO* R = (RELOGIO *) malloc(sizeof(RELOGIO));
-  StartRelogio(R, 75, supermercadoActual);
+  StartRelogio(R, 500, supermercadoActual);
 
   LOG  * logCriar = CriarLog("Supermercado inicializado com sucesso!", R);
   AddBeginLG(supermercadoActual->LogApp, logCriar);
@@ -66,6 +66,8 @@ int main(void) {
       AdicionarVariosClientesAsCompras(supermercadoActual,R);
       PessoasSuper = supermercadoActual->ClientesAsCompras->NEL;
     }
+    
+
     time_t horaRelogio = VerTimeRelogio(R);
     struct tm *tmp = localtime(&horaRelogio);
     int nmrcaixas = nmrCaixasAbertas(supermercadoActual);
@@ -75,8 +77,8 @@ int main(void) {
     printf("Hora Relógio: %dh %dm %ds\n",tmp->tm_hour,tmp->tm_min,tmp->tm_sec);
 
 
+    
     atendeClientesCaixas(supermercadoActual->Caixas,R,supermercadoActual);
-
     Wait(2);
   }
 

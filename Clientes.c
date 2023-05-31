@@ -97,7 +97,7 @@ void AdicionarClienteAsCompras(SUPERMERCADO *S,RELOGIO *R){
   CLIENTE *cl;
 
   while (skip == 0){
-    altCliente = aleatorio(1,10000);
+    altCliente = aleatorio(1,1000);
     
     NOG *P = S->Clientes->Inicio;
     while (P) {
