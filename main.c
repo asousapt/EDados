@@ -58,22 +58,21 @@ int main(void) {
 
   int PessoasSuper = supermercadoActual->ClientesAsCompras->NEL;
   int PessoasFila = 0;
-  while (PessoasSuper > 0 || PessoasFila > 0) {
+  while (PessoasSuper > 0 || PessoasFila > 0 ) {
     VerificaTempoEntradaCaixa(supermercadoActual,R);
-    
-    atendeClientesCaixas(supermercadoActual->Caixas,R,supermercadoActual);
-
-    AdicionarVariosClientesAsCompras(supermercadoActual,R);
-    
     PessoasFila = totalClientesFila(supermercadoActual->Caixas);
+    AdicionarVariosClientesAsCompras(supermercadoActual,R);
     PessoasSuper = supermercadoActual->ClientesAsCompras->NEL;
 
     time_t horaRelogio = VerTimeRelogio(R);
     struct tm *tmp = localtime(&horaRelogio);
 
     printf("Pessoas no supermercado: %d\n",PessoasSuper);
-    printf("Pessoas em filas na caixa: %d\n",PessoasFila);
+    printf("Pessoas nas filas: %d\n",PessoasFila);
     printf("Hora Relógio: %dh %dm %ds\n",tmp->tm_hour,tmp->tm_min,tmp->tm_sec);
+
+
+    atendeClientesCaixas(supermercadoActual->Caixas,R,supermercadoActual);
 
     Wait(2);
   }

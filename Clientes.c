@@ -121,7 +121,7 @@ void AdicionarClienteAsCompras(SUPERMERCADO *S,RELOGIO *R){
     }
   }
 
-  int nProd = aleatorio(1,10); 
+  int nProd = aleatorio(1,5); 
   CLIENTEASCOMPRAS* NovoCliente = (CLIENTEASCOMPRAS *) malloc(sizeof(CLIENTEASCOMPRAS));
   NovoCliente->cliente = cl;
   NovoCliente->nProdutos = nProd;
@@ -155,15 +155,18 @@ void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,RELOGIO *R){
   struct tm *strHoraActual = localtime(&horaActual);
   struct tm *strHoraFecho = localtime(&S->horaFecho);
 
-  if (strHoraActual->tm_hour <= strHoraFecho->tm_hour && strHoraActual->tm_min <= strHoraFecho->tm_min && strHoraActual->tm_sec <= strHoraFecho->tm_sec ) {
-    int numClientesSM = S->ClientesAsCompras->NEL;
-    int numVerificacao = (S->nmrClientesSupermercado) - numClientesSM;
-    if (numVerificacao > 0) {
-      int numClientes = aleatorio(1,numVerificacao);
+  if (difftime(horaActual,S->horaFecho) > 0) {
+    printf("Nº de clientes adicionados: 0\n");
+    return;
+  }
 
-      for (int i = 1; i<=numClientes; i++){
-        AdicionarClienteAsCompras(S,R);
-      }
+  int numClientesSM = S->ClientesAsCompras->NEL;
+  int numVerificacao = (S->nmrClientesSupermercado) - numClientesSM;
+  if (numVerificacao > 0) {
+    int numClientes = aleatorio(1,numVerificacao);
+    printf("Nº de clientes adicionados: %d\n",numClientes);
+    for (int i = 1; i<=numClientes; i++){
+      AdicionarClienteAsCompras(S,R);
     }
   }
  
@@ -183,7 +186,7 @@ void VerificaTempoEntradaCaixa(SUPERMERCADO *S,RELOGIO * R){
 
     time_t HoraCaixa = CC->horaEntradaFila;
     struct tm *strHoraCaixa = localtime(&HoraCaixa);
-    if (strHoraCaixa->tm_hour < tmp->tm_hour){
+    if (difftime(horaAtual,HoraCaixa) > 0){
       //Verifica qual a caixa mais rapida 
       if (decideAbreCaixaNova(S) == 1) {
         int NumCaixaAbrir =  buscaUmaCaixaParaAbrir(S->Caixas);
@@ -193,7 +196,20 @@ void VerificaTempoEntradaCaixa(SUPERMERCADO *S,RELOGIO * R){
       //Adiciona o cesto do cliente na fila da caixa
       adicionarClienteComprasFila(caixaAtual, CC,R);
       
-      noTratar = P;      
+      noTratar = P;    
+    }
+
+    /*if (strHoraCaixa->tm_hour < tmp->tm_hour){
+        //Verifica qual a caixa mais rapida 
+      if (decideAbreCaixaNova(S) == 1) {
+        int NumCaixaAbrir =  buscaUmaCaixaParaAbrir(S->Caixas);
+        AbreFechaCaixa(S, NumCaixaAbrir, 1, R);
+      }
+      CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
+      //Adiciona o cesto do cliente na fila da caixa
+      adicionarClienteComprasFila(caixaAtual, CC,R);
+      
+      noTratar = P; 
     }else if (strHoraCaixa->tm_hour == tmp->tm_hour && strHoraCaixa->tm_min < tmp->tm_min){
       if (decideAbreCaixaNova(S) == 1) {
         int NumCaixaAbrir =  buscaUmaCaixaParaAbrir(S->Caixas);
@@ -210,7 +226,7 @@ void VerificaTempoEntradaCaixa(SUPERMERCADO *S,RELOGIO * R){
       CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
       adicionarClienteComprasFila(caixaAtual, CC,R);
       noTratar = P;
-    }
+    }*/
     P = P->Prox;
     if (noTratar != NULL) {
       
