@@ -33,7 +33,6 @@ int main(void) {
 
   //Cria o supermecado com dados introduzidos pelo usuario ou autopreenchidos
   SUPERMERCADO * supermercadoActual = CriarSM();
-  switchPrincipal();
 
   //Iniciar Relogio
   RELOGIO* R = (RELOGIO *) malloc(sizeof(RELOGIO));
