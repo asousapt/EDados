@@ -189,7 +189,7 @@ void VerificaTempoEntradaCaixa(SUPERMERCADO *S,RELOGIO * R){
       }
       CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
       //Adiciona o cesto do cliente na fila da caixa
-      adicionarClienteComprasFila(caixaAtual, CC);
+      adicionarClienteComprasFila(caixaAtual, CC,R);
       
       noTratar = P;      
     }else if (strHoraCaixa->tm_hour == tmp->tm_hour && strHoraCaixa->tm_min < tmp->tm_min){
@@ -198,7 +198,7 @@ void VerificaTempoEntradaCaixa(SUPERMERCADO *S,RELOGIO * R){
         AbreFechaCaixa(S, NumCaixaAbrir, 1, R);
       }
       CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
-      adicionarClienteComprasFila(caixaAtual, CC);
+      adicionarClienteComprasFila(caixaAtual, CC,R);
       noTratar = P;
     }else if (strHoraCaixa->tm_hour == tmp->tm_hour && strHoraCaixa->tm_min == tmp->tm_min && strHoraCaixa->tm_sec <= tmp->tm_sec){
       if (decideAbreCaixaNova(S) == 1) {
@@ -206,7 +206,7 @@ void VerificaTempoEntradaCaixa(SUPERMERCADO *S,RELOGIO * R){
         AbreFechaCaixa(S, NumCaixaAbrir, 1, R);
       }
       CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
-      adicionarClienteComprasFila(caixaAtual, CC);
+      adicionarClienteComprasFila(caixaAtual, CC,R);
       noTratar = P;
     }
     P = P->Prox;
@@ -225,12 +225,18 @@ void DestruirClientesAsCompras(void *obj){
 }
 
 //Coloca os clientes compras na fila 
-void adicionarClienteComprasFila(CAIXA* caixaAtual, CLIENTEASCOMPRAS* cesto) {
-    FILAGENERICA* fila = (FILAGENERICA *) caixaAtual->filaCaixa;
-    AdicionaAFila(fila, cesto);
+void adicionarClienteComprasFila(CAIXA* caixaAtual, CLIENTEASCOMPRAS* cesto,RELOGIO *R) {
+  FILAGENERICA* fila = (FILAGENERICA *) caixaAtual->filaCaixa;
+  AdicionaAFila(fila, cesto);
         
-    caixaAtual->tempoEsperaReal = calculaTempoRealEspera(fila);
+  float tempoEspera = calculaTempoRealEspera(fila);
+  caixaAtual->tempoEsperaReal = tempoEspera;
 
+  time_t horaSaida = VerTimeRelogio(R);
+  struct tm *tmp = localtime(&horaSaida);
+  tmp->tm_sec += tempoEspera;
+  horaSaida = mktime(tmp);
+  cesto->horaSaidaSupermercado = horaSaida; 
 }
 
 void trocarClientedeFila(SUPERMERCADO *S,CAIXA *cxDestino,CLIENTEASCOMPRAS *CC){

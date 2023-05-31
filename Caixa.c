@@ -164,7 +164,7 @@ void AbreFechaCaixa(SUPERMERCADO *super, int numero, int operacao, RELOGIO* R){
       int distribui = 0;
       distribui = validarInt("Pretende distribuir os clientes pelas caixas abertas (1 -Sim /0 -Nao )",0,1 );
       if (distribui == 1) {
-        redistribuirClientes(caixaEscolhida->filaCaixa, super->Caixas);
+        redistribuirClientes(caixaEscolhida->filaCaixa, super->Caixas,R);
       }
     }
     
@@ -487,7 +487,7 @@ CAIXA *CaixaMaisAtendeu(ListaGenerica *lg){
 }
 
 // Funcao que distribui os clientes pelas caixas abertas
-void redistribuirClientes(FILAGENERICA* fila, ListaGenerica* lg) {
+void redistribuirClientes(FILAGENERICA* fila, ListaGenerica* lg,RELOGIO *R) {
     if(!fila || !fila->cabeca) return;
      NOFILA *p = (NOFILA *)fila->cabeca;
 
@@ -496,7 +496,7 @@ void redistribuirClientes(FILAGENERICA* fila, ListaGenerica* lg) {
         CC->horaSaidadaFila = NULL;
         CAIXA* caixaNova = caixaComMenorTempo(lg);
         
-        adicionarClienteComprasFila(caixaNova, CC);
+        adicionarClienteComprasFila(caixaNova, CC,R);
 
         p = p->Prox;
         RetirarDaFilaInicio(fila);
@@ -584,4 +584,17 @@ int numeroTotalClientesAtendidos(ListaGenerica* lg) {
     P = P->Prox;
   }
   return nmrTotalClientesAtendidos;
+}
+
+int totalClientesFila(ListaGenerica* lg){
+  NOG* atual = lg->Inicio;
+  int nPessoasCaixas = 0;
+  while (atual != NULL) { 
+    CAIXA* caixaAtual = (CAIXA*)atual->Info;
+    nPessoasCaixas = nPessoasCaixas+caixaAtual->filaCaixa->tamanho;
+
+    atual = atual->Prox;
+  }
+
+  return nPessoasCaixas;
 }
