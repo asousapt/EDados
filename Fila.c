@@ -56,6 +56,7 @@ void *RetirarDaFilaInicio(FILAGENERICA *fila) {
     
     free(temp);
     fila->tamanho--;
+    //printf("%d\n", fila->tamanho);
     return dados;
 }
 

@@ -35,7 +35,7 @@ int main(void) {
 
   //Iniciar Relogio
   RELOGIO* R = (RELOGIO *) malloc(sizeof(RELOGIO));
-  StartRelogio(R, 1000, supermercadoActual);
+  StartRelogio(R, 75, supermercadoActual);
 
   LOG  * logCriar = CriarLog("Supermercado inicializado com sucesso!", R);
   AddBeginLG(supermercadoActual->LogApp, logCriar);
@@ -59,20 +59,24 @@ int main(void) {
   int PessoasSuper = supermercadoActual->ClientesAsCompras->NEL;
   int PessoasFila = 0;
   while (PessoasSuper > 0 || PessoasFila > 0 ) {
+    
     VerificaTempoEntradaCaixa(supermercadoActual,R);
     PessoasFila = totalClientesFila(supermercadoActual->Caixas);
+     atendeClientesCaixas(supermercadoActual->Caixas,R,supermercadoActual);
+    
     AdicionarVariosClientesAsCompras(supermercadoActual,R);
     PessoasSuper = supermercadoActual->ClientesAsCompras->NEL;
 
     time_t horaRelogio = VerTimeRelogio(R);
     struct tm *tmp = localtime(&horaRelogio);
-
+    int nmrcaixas = nmrCaixasAbertas(supermercadoActual);
     printf("Pessoas no supermercado: %d\n",PessoasSuper);
+    printf("Caixas Abertas:%d\n", nmrcaixas);
     printf("Pessoas nas filas: %d\n",PessoasFila);
     printf("Hora Relógio: %dh %dm %ds\n",tmp->tm_hour,tmp->tm_min,tmp->tm_sec);
 
 
-    atendeClientesCaixas(supermercadoActual->Caixas,R,supermercadoActual);
+   
 
     Wait(2);
   }
@@ -101,7 +105,7 @@ while (i < 100 ) {
   //ShowLG(supermercadoActual->Clientes, MostrarCliente);
   //AdicionarClienteAsCompras(supermercadoActual);
  
-  mostraEstatisticasGerais(supermercadoActual);
+  //mostraEstatisticasGerais(supermercadoActual);
   //printf("Hora de abertura do supermercado: %s", asctime(localtime(&(supermercadoActual->horaAbertura))));
   exportaCaixas(supermercadoActual->Caixas);
   exportaLogCsv(supermercadoActual->LogApp);
