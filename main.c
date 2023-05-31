@@ -30,10 +30,12 @@
 int main(void) {
   printf("*** Bem-vindo ***\n"); 
 
+  //Cria o supermecado com dados introduzidos pelo usuario ou autopreenchidos
   SUPERMERCADO * supermercadoActual = CriarSM();
   //Iniciar Relogio
   RELOGIO* R = (RELOGIO *) malloc(sizeof(RELOGIO));
   StartRelogio(R, 100, supermercadoActual);
+  //Primeiro Log
   LOG  * logCriar = CriarLog("Supermercado inicializado com sucesso!", R);
   AddBeginLG(supermercadoActual->LogApp, logCriar);
   

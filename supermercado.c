@@ -15,12 +15,7 @@ SUPERMERCADO * CriarSM(){
     char *nome = (char *)malloc(100);
 
     SUPERMERCADO *SM = (SUPERMERCADO *)malloc(sizeof(SUPERMERCADO));
-    
-    printf("\nAmbiente de desenvolvimento? (0-1)\n");
-    scanf("%d", &emDesenvolvimento);
-    fflush(stdin);
-    char *rando = (char *)malloc(100);
-    strcpy(rando,getString("Coloque qualquer coisa: "));
+    emDesenvolvimento = validarInt("\nAmbiente de desenvolvimento?",0,1);
     
     if (emDesenvolvimento == 0) {
         strcpy(nome, getString("Qual e o nome do supermercado?:"));
@@ -39,7 +34,7 @@ SUPERMERCADO * CriarSM(){
         {
             printf("\nHora de fecho (HH:MM):");
             scanf("%d:%d",&horaFecho, &minutoFecho);
-        } while (validaHorasFecho(horaAbertura, minutoAbertura,SM->horaAbertura) == 0);
+        } while (validaHorasFecho(horaFecho, minutoFecho,SM->horaAbertura) == 0);
         
         SM->horaFecho = convertToTime(horaFecho, minutoFecho);
 
