@@ -54,4 +54,5 @@ void EscreveCaixaLog(void *L, FILE *ficheiro);
 void exportaCaixas(ListaGenerica* lg);
 CAIXA *CaixaMaisVendeu(ListaGenerica *lg);
 int totalClientesFila(ListaGenerica* lg);
+int clienteJaFoiAtendido(ListaGenerica* lg, int numero);
 #endif // CAIXA_H_INCLUDED

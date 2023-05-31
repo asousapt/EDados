@@ -27,9 +27,13 @@ char *getString(char *pergunta){
 	return string;
 }
 
-int aleatorio(int min, int max){ 
-	srand ((unsigned) time(0));
-	return min + rand()%(max-min+1);
+//Inicializa a semente do aleatorio
+void inicializarAleatorio() {
+    srand((unsigned) time(0));
+}
+
+int aleatorio(int min, int max) {
+    return min + rand() % (max - min + 1);
 }
 
 int validaHoras(int hora, int minutos) {

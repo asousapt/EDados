@@ -644,3 +644,27 @@ int totalClientesFila(ListaGenerica* lg){
 
   return nPessoasCaixas;
 }
+
+// Verifica se o cliente ja foi atendido em alguma caixa 
+int clienteJaFoiAtendido(ListaGenerica* lg, int numero) {
+  NOG* p = lg->Inicio; 
+
+  while(p) {
+    CAIXA* cx = p->Info;
+    ListaGenerica* lgC = (ListaGenerica* ) cx->pessoasAtendidas;
+    NOG* p1 = lgC->Inicio;
+
+    while (p1)
+    {
+      CLIENTE* cl = (CLIENTE *) p1->Info;
+
+      if (cl->cod == numero) {
+        return 1;
+      }
+
+      p1 = p1->Prox;
+    }
+    p = p->Prox;
+  }
+  return 0;
+}

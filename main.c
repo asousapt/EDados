@@ -29,11 +29,12 @@
 
 
 int main(void) {
+  inicializarAleatorio();
   printf("*** Bem-vindo ***\n"); 
 
   //Cria o supermecado com dados introduzidos pelo usuario ou autopreenchidos
   SUPERMERCADO * supermercadoActual = CriarSM();
-  switchPrincipal();
+  //switchPrincipal();
 
   //Iniciar Relogio
   RELOGIO* R = (RELOGIO *) malloc(sizeof(RELOGIO));

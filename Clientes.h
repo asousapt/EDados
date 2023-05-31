@@ -46,5 +46,7 @@ int CompararCliente(void *c1, void *c2);
 void adicionarClienteComprasFila(CAIXA* caixaAtual, CLIENTEASCOMPRAS* cesto,RELOGIO *R);
 void trocarClientedeFila(SUPERMERCADO *S,CAIXA *cxDestino,CLIENTEASCOMPRAS *CC);
 CLIENTEASCOMPRAS* procurarClienteCaixa(ListaGenerica *lg,int codigoCliente);
+CLIENTE* retornaClienteLivre(SUPERMERCADO* S);
+int devolveClientePosicao(ListaGenerica* lg, int posicao);
 
 #endif // CLIENTES_H_INCLUDED

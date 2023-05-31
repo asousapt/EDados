@@ -45,7 +45,9 @@ void DestruirCliente(void* C){
 }
 
 CLIENTE* ProcurarCliente(ListaGenerica *lg,int codigoCliente){
-  CLIENTE *cl,*clR;
+  CLIENTE *cl = NULL; 
+  CLIENTE *clR = NULL;
+
   NOG *P = lg->Inicio;
   while (P) {
     cl = P->Info;
@@ -75,7 +77,8 @@ int VerificaClienteAsCompras(SUPERMERCADO *S,int codigoCliente){
 }
 
 CLIENTEASCOMPRAS* ProcurarClienteAsCompras(ListaGenerica *lg,int codigoCliente){
-  CLIENTEASCOMPRAS *cl,*clR;
+  CLIENTEASCOMPRAS *cl = NULL;
+  CLIENTEASCOMPRAS *clR = NULL;
   NOG *P = lg->Inicio;
   while (P) {
     cl = P->Info;
@@ -92,34 +95,50 @@ int CompararCliente(void *c1, void *c2){
   return cl1->cod - cl2->cod;
 }
 
+int devolveClientePosicao(ListaGenerica* lg, int posicao){ 
+  int nmrCl = 0;
+  int i = 0;  
+  NOG* p = lg->Inicio;
+
+  while (p)
+  {
+    CLIENTE* cl = p->Info; 
+    if (i == posicao) {
+      return cl->cod;
+    }
+    i++;
+    p = p->Prox;
+  }
+}
+
+//retorna um cliente livre da lista 
+CLIENTE* retornaClienteLivre(SUPERMERCADO* S) {
+  CLIENTEASCOMPRAS* CC = NULL;
+  CLIENTEASCOMPRAS* CCC = NULL;
+  CLIENTE* ClLivre = NULL;
+  int numeroClienteAleatorio = 0;
+  int posicaoClienteAl = 0;
+  int clienteFoiAtendido = 0;
+
+  do
+  {
+    posicaoClienteAl = aleatorio(1, 10000); 
+    numeroClienteAleatorio =  devolveClientePosicao(S->Clientes,posicaoClienteAl);
+
+    CC = ProcurarClienteAsCompras(S->ClientesAsCompras, numeroClienteAleatorio); 
+    CCC = procurarClienteCaixa(S->Caixas, numeroClienteAleatorio);
+    clienteFoiAtendido = clienteJaFoiAtendido(S->Caixas, numeroClienteAleatorio);
+    ClLivre = ProcurarCliente(S->Clientes, numeroClienteAleatorio);
+   
+  } while (CC != NULL || CCC != NULL || ClLivre == NULL || clienteFoiAtendido == 1 );
+ 
+  return ClLivre;
+}
+
+
 void AdicionarClienteAsCompras(SUPERMERCADO *S,RELOGIO *R){
   int altCliente = 0,skip = 0,icr = 1;
-  CLIENTE *cl;
-
-  while (skip == 0){
-    altCliente = aleatorio(1,1000);
-    
-    NOG *P = S->Clientes->Inicio;
-    while (P) {
-      if (icr == altCliente) {
-        CLIENTE *temp = P->Info;
-        int codigo = temp->cod;
-        CLIENTEASCOMPRAS* CC = procurarClienteCaixa(S->Caixas,codigo);
-        if (VerificaClienteAsCompras(S,codigo) == 0 && CC == NULL){
-          skip = 1;
-          cl = P->Info;
-           char *texto = (char *)malloc(300);
-          sprintf(texto, "Cliente n %d entrou no supermercado", cl->cod);
-          LOG  * logCriar2 = CriarLog(texto, R);
-          AddBeginLG(S->LogApp, logCriar2);
-          free(texto);
-        }
-        break;
-      }
-      P = P->Prox;
-      icr++;
-    }
-  }
+  CLIENTE *cl = retornaClienteLivre(S);
 
   int nProd = aleatorio(1,5); 
   CLIENTEASCOMPRAS* NovoCliente = (CLIENTEASCOMPRAS *) malloc(sizeof(CLIENTEASCOMPRAS));
@@ -163,7 +182,7 @@ void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,RELOGIO *R){
   int numClientesSM = S->ClientesAsCompras->NEL;
   int numVerificacao = (S->nmrClientesSupermercado) - numClientesSM;
   if (numVerificacao > 0) {
-    int numClientes = aleatorio(1,20);
+    int numClientes = aleatorio(1,numVerificacao);
     printf("Nº de clientes adicionados: %d\n",numClientes);
     for (int i = 1; i<=numClientes; i++){
       AdicionarClienteAsCompras(S,R);
