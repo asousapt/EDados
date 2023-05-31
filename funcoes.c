@@ -20,9 +20,10 @@ int validarInt(char *pergunta, int menor,int maior){
 char *getString(char *pergunta){
 	fflush(stdin);
 	char *string;
-	string = malloc(sizeof(char)*100);
+	string = (char *)malloc(sizeof(char)*100);
 	printf("%s",pergunta);
 	gets(string);
+	printf("nome : %s",string);
 	fflush(stdin);
 	return string;
 }

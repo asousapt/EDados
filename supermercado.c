@@ -12,14 +12,18 @@ SUPERMERCADO * CriarSM(){
     int emDesenvolvimento = 0; 
     int nCaixas, nmrMinCliFechaCaixa, nmrMaxClientesFila;
     int horaAbertura, minutoAbertura, horaFecho, minutoFecho,nmrClientesSupermercado, tempoMaxEspera = 0;
-    char *nome;
+    char *nome = (char *)malloc(100);
 
     SUPERMERCADO *SM = (SUPERMERCADO *)malloc(sizeof(SUPERMERCADO));
+    
     printf("\nAmbiente de desenvolvimento? (0-1)\n");
     scanf("%d", &emDesenvolvimento);
+    fflush(stdin);
+    char *rando = (char *)malloc(100);
+    strcpy(rando,getString("Coloque qualquer coisa: "));
     
     if (emDesenvolvimento == 0) {
-        nome = getString("Nome do Supermercado:");
+        strcpy(nome, getString("Qual e o nome do supermercado?:"));
     
         // pede ao utilizador a hora de abertura do supermercado
         do
