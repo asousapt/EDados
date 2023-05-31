@@ -496,7 +496,7 @@ void redistribuirClientes(FILAGENERICA* fila, ListaGenerica* lg,RELOGIO *R) {
         CC->horaSaidadaFila = NULL;
         CAIXA* caixaNova = caixaComMenorTempo(lg);
         
-        adicionarClienteComprasFila(caixaNova, CC);
+        adicionarClienteComprasFila(caixaNova, CC,R);
 
         p = p->Prox;
         RetirarDaFilaInicio(fila);
