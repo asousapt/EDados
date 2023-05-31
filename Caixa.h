@@ -12,7 +12,6 @@
 #include "Log.h"
 #include "Relogio.h"
 
-
 typedef struct caixa {
     int numCaixa;
     int fechado; //1-fechado; 0-aberto
@@ -51,5 +50,6 @@ int decideFechaCaixa(SUPERMERCADO* super);
 void redistribuirClientes(FILAGENERICA* fila, ListaGenerica* lg);
 CAIXA* procurarCaixaCliente(ListaGenerica *lg,int codigoCliente);
 float calculaTempoMedioCaixas(ListaGenerica* lg);
-
+void EscreveCaixaLog(void *L, FILE *ficheiro);
+void exportaCaixas(ListaGenerica* lg);
 #endif // CAIXA_H_INCLUDED

@@ -116,7 +116,7 @@ void EscreveFuncionario(void *L, FILE *ficheiro) {
     fprintf(ficheiro, "%d;%s;%d\n", objFunc->cod, trim(objFunc->nome), objFunc->nmrClientesAtendidos);
 }
 
-// Exporta Lista Produtos gratis
+// Exporta Lista de funcionarios 
 void exportaFuncionarios(ListaGenerica* lg) {
   FILE *f = fopen("funcionarios-est.csv", "w");
   if (f == NULL){
@@ -134,5 +134,5 @@ void exportaFuncionarios(ListaGenerica* lg) {
   fprintf(f, "%s;%s;%d\n","Funcionario que atendeu menos clientes", funcMenos->nome, funcMenos->nmrClientesAtendidos);
   fclose(f);
   
-  printf("Log de produtos oferecidos Exportado com sucesso!\n");
+  printf("Log de funcionarios Exportado com sucesso!\n");
 }
