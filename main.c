@@ -12,6 +12,7 @@
 #include "Log.h"
 #include "supermercado.h"
 #include "Fila.h"
+#include "Switch.h"
 
 // estes ficheiros estao incluidos aqui para compilar apenas com main.c 
 #include "funcoes.c"
@@ -32,6 +33,7 @@ int main(void) {
 
   //Cria o supermecado com dados introduzidos pelo usuario ou autopreenchidos
   SUPERMERCADO * supermercadoActual = CriarSM();
+  switchPrincipal();
 
   //Iniciar Relogio
   RELOGIO* R = (RELOGIO *) malloc(sizeof(RELOGIO));

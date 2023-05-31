@@ -28,6 +28,7 @@ char *getString(char *pergunta){
 }
 
 int aleatorio(int min, int max){ 
+	srand ((unsigned) time(0));
 	return min + rand()%(max-min+1);
 }
 
