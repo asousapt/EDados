@@ -431,7 +431,6 @@ void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R, SUPERMERCADO* S){
     //CC->horaSaidaSupermercado =  HoraSaidaSuper;
     
     if (difftime(tempoAtual,CC->horaSaidaSupermercado) > 0){
-      
       AddBeginLG(cx->pessoasAtendidas,CC);
       char *texto1 = (char *)malloc(300);
       sprintf(texto1, "Cliente n %d saiu do supermercado", CC->cliente->cod);
