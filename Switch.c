@@ -17,7 +17,7 @@ void switchPrincipal(){
     int op;
     do
     {
-        menuUtilizador();
+        //menuUtilizador();
         op = validarInt("Escolha uma opcao", 0,4);
         switch (op)
         {

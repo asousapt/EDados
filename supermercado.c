@@ -17,7 +17,7 @@ SUPERMERCADO * CriarSM(){
     emDesenvolvimento = validarInt("\nAmbiente de desenvolvimento?",0,1);
     
     if (emDesenvolvimento == 0) {
-        strcpy(nome, getString("Qual e o nome do supermercado?:"));
+        strcpy(nome, getString("Nome do supermercado?:"));
     
         // pede ao utilizador a hora de abertura do supermercado
         do
