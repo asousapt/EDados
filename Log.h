@@ -9,7 +9,6 @@
 #include "ListaGenerica.h"
 #include "funcoes.h"
 
-
 typedef struct log {
     time_t *data_hora_atual;  
     char * mensagem; 

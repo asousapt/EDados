@@ -29,21 +29,17 @@ CAIXA* CriarCaixa(int numero){
 
 void listarCaixas(ListaGenerica* listaCaixas) {
   printf("*****Caixas ******\n"); 
-  printf("No | Caixa  | Estado  | Operador   |  Tempo Espera Reak\n");
+  printf("No | Caixa  | Estado  | Tempo Espera Medio\n");
   ShowLG(listaCaixas, MostrarCaixa);
 }
 
 void MostrarCaixa(void* F){
   CAIXA* objCaixa = (CAIXA *) F;
-  FUNCIONARIO* funcionario1 = objCaixa->func;
+ 
   char *nome = (char *)malloc(10);
   sprintf(nome,"%s %d", "Caixa ", objCaixa->numCaixa);
- if (objCaixa->func != NULL) {
-  printf("%d - %s * %d * %s * %f \n", objCaixa->numCaixa, nome, !objCaixa->fechado, funcionario1->nome, objCaixa->tempoEsperaReal);
- } else {
-  printf("%d - %s * %d  \n", objCaixa->numCaixa, nome, !objCaixa->fechado);
- }
-
+  printf("%d - %s * %d  * %f \n", objCaixa->numCaixa, nome, !objCaixa->fechado, objCaixa->tempoEsperaMed);
+ 
   free(nome);
   }
 
@@ -472,6 +468,7 @@ void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R, SUPERMERCADO* S){
   cx->tempoEsperaMed = calcularTempoEsperaMedio(cx);
 }
 
+// Calcula o tempo medio de espera de uma caixa 
 float calcularTempoEsperaMedio(CAIXA *cx){
   if (cx->contadorPessoas < 1) return 0;
 
@@ -483,6 +480,12 @@ float calcularTempoEsperaMedio(CAIXA *cx){
 //Caixa que mais atendeu pessoas
 CAIXA *CaixaMaisAtendeu(ListaGenerica *lg){
 	CAIXA *caixa = Maior(lg,CompararPessoas);
+	return caixa;
+}
+
+//Caixa que vendeu mais produtos
+CAIXA *CaixaMaisVendeu(ListaGenerica *lg){
+	CAIXA *caixa = Maior(lg,CompararProdutos);
 	return caixa;
 }
 
@@ -572,6 +575,7 @@ void exportaCaixas(ListaGenerica* lg) {
   printf("Log de Caixas Exportado com sucesso!\n");
 }
 
+// devolve um total de clientes atendidos
 int numeroTotalClientesAtendidos(ListaGenerica* lg) {
   CAIXA *cx;
   NOG *P = lg->Inicio;
