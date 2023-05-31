@@ -607,10 +607,11 @@ int numeroTotalClientesAtendidos(ListaGenerica* lg) {
 int totalClientesFila(ListaGenerica* lg){
   int nPessoasCaixas = 0;
   NOG* atual = lg->Inicio;
-  while (atual != NULL) { 
+  while (atual) { 
     CAIXA* caixaAtual = (CAIXA*)atual->Info;
-    nPessoasCaixas = nPessoasCaixas+caixaAtual->filaCaixa->tamanho;
-
+    FILAGENERICA* Fila = (FILAGENERICA*) caixaAtual->filaCaixa;
+    nPessoasCaixas += Fila->tamanho;
+    
     atual = atual->Prox;
   }
 

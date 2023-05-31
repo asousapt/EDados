@@ -95,5 +95,24 @@ void mostraEstatisticasGerais(SUPERMERCADO* S) {
   printf("\n");
   listarCaixas(S->Caixas);
   int caixaConsultar = validarInt("Qual a caixa da qual quer ver os clientes atendidos?\n", 10, 10+S->numCaixas-1);
-  
+
+  printf("Clientes atendidos na caixa %d\n", caixaConsultar);
+
+  CAIXA* cx3 = ProcurarCaixa(S->Caixas, caixaConsultar);
+  ListaGenerica* lg = (ListaGenerica*) cx3->pessoasAtendidas;
+  ShowLG(lg, MostrarCliente);
+
+  FUNCIONARIO* func1 = funcionarioAtendeuMaisMenos(S->Funcionarios, 1);
+  FUNCIONARIO* func2 = funcionarioAtendeuMaisMenos(S->Funcionarios, 0);
+
+  printf("\n");
+  printf("Funcionario que mais clientes atendeu: %s\n", func1->nome); 
+  printf("N clientes atendidos %d\n", func1->nmrClientesAtendidos);
+  printf("Funcionario que menos clientes atendeu: %s\n", func2->nome); 
+  printf("N clientes atendidos %d\n", func2->nmrClientesAtendidos);
+
+  ListaGenerica* lgProd = (ListaGenerica*) S->ProdutosOferecidos;
+  printf("\n"); 
+  printf("Numero de produtos Oferecidos %d\n", lgProd->NEL);
+  printf("Valor monetario dos produtos oferecidos %f\n", totalValorProdutosOferecidos(lgProd) );
 }
