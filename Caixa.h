@@ -52,4 +52,5 @@ CAIXA* procurarCaixaCliente(ListaGenerica *lg,int codigoCliente);
 float calculaTempoMedioCaixas(ListaGenerica* lg);
 void EscreveCaixaLog(void *L, FILE *ficheiro);
 void exportaCaixas(ListaGenerica* lg);
+int totalClientesFila(ListaGenerica* lg);
 #endif // CAIXA_H_INCLUDED

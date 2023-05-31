@@ -31,13 +31,14 @@ int main(void) {
   printf("*** Bem-vindo ***\n"); 
 
   SUPERMERCADO * supermercadoActual = CriarSM();
+
   //Iniciar Relogio
   RELOGIO* R = (RELOGIO *) malloc(sizeof(RELOGIO));
   StartRelogio(R, 100, supermercadoActual);
+
   LOG  * logCriar = CriarLog("Supermercado inicializado com sucesso!", R);
   AddBeginLG(supermercadoActual->LogApp, logCriar);
   
-
   //carrega dados do supermercado
   if(carregaSupermercado(supermercadoActual) == 0) {
     printf("%s", "Erro ao carregar os dados do supermercado! O programa vai ser encerrado!\n"); 
@@ -50,13 +51,28 @@ int main(void) {
   // Abre uma caixa do supermercado 
   int primeiraCaixaAbrir = buscaUmaCaixaParaAbrir(supermercadoActual->Caixas);
   AbreFechaCaixa(supermercadoActual, primeiraCaixaAbrir, 1, R);
+
+  //Adicionar primeiros clientes
+  AdicionarVariosClientesAsCompras(supermercadoActual,R); 
+  
+  printf("Estou a trabalhar... entre as [%d] e as [%d]\n", supermercadoActual->horaAbertura, supermercadoActual->horaFecho);
+
+  NOG *P = supermercadoActual->ClientesAsCompras->Inicio;
+  int Pessoas = totalClientesFila(supermercadoActual->Caixas);
+  while (P != NULL || Pessoas > 0) {
+    AdicionarVariosClientesAsCompras(supermercadoActual,R);
+    
+    Pessoas = totalClientesFila(supermercadoActual->Caixas);
+    P = P->Prox;
+  }
+
+
   //listarCaixas(supermercadoActual->Caixas);
 
   
    //ShowLG(supermercadoActual->ClientesAsCompras, MostrarClientesAsCompras);
   // indica qual a caixa com menos pessoas
 
-  AdicionarVariosClientesAsCompras(supermercadoActual,R);
  sleep(3);
  VerificaTempoEntradaCaixa(supermercadoActual, R); 
 

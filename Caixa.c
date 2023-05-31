@@ -585,3 +585,16 @@ int numeroTotalClientesAtendidos(ListaGenerica* lg) {
   }
   return nmrTotalClientesAtendidos;
 }
+
+int totalClientesFila(ListaGenerica* lg){
+  NOG* atual = lg->Inicio;
+  int nPessoasCaixas = 0;
+  while (atual != NULL) { 
+    CAIXA* caixaAtual = (CAIXA*)atual->Info;
+    nPessoasCaixas = nPessoasCaixas+caixaAtual->filaCaixa->tamanho;
+
+    atual = atual->Prox;
+  }
+
+  return nPessoasCaixas;
+}

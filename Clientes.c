@@ -225,12 +225,18 @@ void DestruirClientesAsCompras(void *obj){
 }
 
 //Coloca os clientes compras na fila 
-void adicionarClienteComprasFila(CAIXA* caixaAtual, CLIENTEASCOMPRAS* cesto) {
-    FILAGENERICA* fila = (FILAGENERICA *) caixaAtual->filaCaixa;
-    AdicionaAFila(fila, cesto);
+void adicionarClienteComprasFila(CAIXA* caixaAtual, CLIENTEASCOMPRAS* cesto,RELOGIO *R) {
+  FILAGENERICA* fila = (FILAGENERICA *) caixaAtual->filaCaixa;
+  AdicionaAFila(fila, cesto);
         
-    caixaAtual->tempoEsperaReal = calculaTempoRealEspera(fila);
+  float tempoEspera = calculaTempoRealEspera(fila);
+  caixaAtual->tempoEsperaReal = tempoEspera;
 
+  time_t horaSaida = VerTimeRelogio(R);
+  struct tm *tmp = localtime(&horaSaida);
+  tmp->tm_sec += tempoEspera;
+  horaSaida = mktime(tmp);
+  cesto->horaSaidaSupermercado = horaSaida; 
 }
 
 void trocarClientedeFila(SUPERMERCADO *S,CAIXA *cxDestino,CLIENTEASCOMPRAS *CC){
