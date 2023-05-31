@@ -57,7 +57,7 @@ int main(void) {
   AdicionarVariosClientesAsCompras(supermercadoActual,R); 
 
   int PessoasSuper = supermercadoActual->ClientesAsCompras->NEL;
-  int PessoasFila = totalClientesFila(supermercadoActual->Caixas);
+  int PessoasFila = 0;
   while (PessoasSuper > 0 || PessoasFila > 0) {
     VerificaTempoEntradaCaixa(supermercadoActual,R);
     
