@@ -189,7 +189,7 @@ void VerificaTempoEntradaCaixa(SUPERMERCADO *S,RELOGIO * R){
       }
       CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
       //Adiciona o cesto do cliente na fila da caixa
-      adicionarClienteComprasFila(caixaAtual, CC);
+      adicionarClienteComprasFila(caixaAtual, CC,R);
       
       noTratar = P;      
     }else if (strHoraCaixa->tm_hour == tmp->tm_hour && strHoraCaixa->tm_min < tmp->tm_min){
@@ -198,7 +198,7 @@ void VerificaTempoEntradaCaixa(SUPERMERCADO *S,RELOGIO * R){
         AbreFechaCaixa(S, NumCaixaAbrir, 1, R);
       }
       CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
-      adicionarClienteComprasFila(caixaAtual, CC);
+      adicionarClienteComprasFila(caixaAtual, CC,R);
       noTratar = P;
     }else if (strHoraCaixa->tm_hour == tmp->tm_hour && strHoraCaixa->tm_min == tmp->tm_min && strHoraCaixa->tm_sec <= tmp->tm_sec){
       if (decideAbreCaixaNova(S) == 1) {
@@ -206,7 +206,7 @@ void VerificaTempoEntradaCaixa(SUPERMERCADO *S,RELOGIO * R){
         AbreFechaCaixa(S, NumCaixaAbrir, 1, R);
       }
       CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
-      adicionarClienteComprasFila(caixaAtual, CC);
+      adicionarClienteComprasFila(caixaAtual, CC,R);
       noTratar = P;
     }
     P = P->Prox;

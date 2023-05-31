@@ -47,7 +47,7 @@ float calcularTempoEsperaMedio(CAIXA *cx);
 CAIXA *CaixaMaisAtendeu(ListaGenerica *lg);
 int decideAbreCaixaNova(SUPERMERCADO* super);
 int decideFechaCaixa(SUPERMERCADO* super); 
-void redistribuirClientes(FILAGENERICA* fila, ListaGenerica* lg);
+void redistribuirClientes(FILAGENERICA* fila, ListaGenerica* lg,RELOGIO *R);
 CAIXA* procurarCaixaCliente(ListaGenerica *lg,int codigoCliente);
 float calculaTempoMedioCaixas(ListaGenerica* lg);
 void EscreveCaixaLog(void *L, FILE *ficheiro);
