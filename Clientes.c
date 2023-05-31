@@ -163,7 +163,7 @@ void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,RELOGIO *R){
   int numClientesSM = S->ClientesAsCompras->NEL;
   int numVerificacao = (S->nmrClientesSupermercado) - numClientesSM;
   if (numVerificacao > 0) {
-    int numClientes = aleatorio(1,numVerificacao);
+    int numClientes = aleatorio(1,20);
     printf("Nº de clientes adicionados: %d\n",numClientes);
     for (int i = 1; i<=numClientes; i++){
       AdicionarClienteAsCompras(S,R);
@@ -249,6 +249,8 @@ void adicionarClienteComprasFila(CAIXA* caixaAtual, CLIENTEASCOMPRAS* cesto,RELO
         
   float tempoEspera = calculaTempoRealEspera(fila);
   caixaAtual->tempoEsperaReal = tempoEspera;
+
+  tempoEspera += tempoProcessarProdutosCaixa(cesto);
 
   time_t horaSaida = VerTimeRelogio(R);
   struct tm *tmp = localtime(&horaSaida);
