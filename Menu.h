@@ -8,10 +8,10 @@
 #include "Caixa.h"
 #include "Produtos.h"
 
-void menuUtilizador(SUPERMERCADO *S);
-void menuMostrarClientes(SUPERMERCADO *S);
+void menuUtilizador(SUPERMERCADO *S,RELOGIO *R);
+//void menuMostrarClientes(SUPERMERCADO *S);
 void menuOperacoesClientes(SUPERMERCADO *S);
-void menuMostrarCaixa(SUPERMERCADO *S);
-void menuOperacoesCaixa(SUPERMERCADO *S);
+//void menuMostrarCaixa(SUPERMERCADO *S);
+void menuOperacoesCaixa(SUPERMERCADO *S,RELOGIO *R);
 
 #endif
