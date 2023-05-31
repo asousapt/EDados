@@ -30,14 +30,16 @@
 int main(void) {
   printf("*** Bem-vindo ***\n"); 
 
+  //Cria o supermecado com dados introduzidos pelo usuario ou autopreenchidos
   SUPERMERCADO * supermercadoActual = CriarSM();
+
   //Iniciar Relogio
   RELOGIO* R = (RELOGIO *) malloc(sizeof(RELOGIO));
-  StartRelogio(R, 100, supermercadoActual);
+  StartRelogio(R, 1000, supermercadoActual);
+
   LOG  * logCriar = CriarLog("Supermercado inicializado com sucesso!", R);
   AddBeginLG(supermercadoActual->LogApp, logCriar);
   
-
   //carrega dados do supermercado
   if(carregaSupermercado(supermercadoActual) == 0) {
     printf("%s", "Erro ao carregar os dados do supermercado! O programa vai ser encerrado!\n"); 
@@ -50,13 +52,39 @@ int main(void) {
   // Abre uma caixa do supermercado 
   int primeiraCaixaAbrir = buscaUmaCaixaParaAbrir(supermercadoActual->Caixas);
   AbreFechaCaixa(supermercadoActual, primeiraCaixaAbrir, 1, R);
+
+  //Adicionar primeiros clientes
+  AdicionarVariosClientesAsCompras(supermercadoActual,R); 
+
+  int PessoasSuper = supermercadoActual->ClientesAsCompras->NEL;
+  int PessoasFila = totalClientesFila(supermercadoActual->Caixas);
+  while (PessoasSuper > 0 || PessoasFila > 0) {
+    VerificaTempoEntradaCaixa(supermercadoActual,R);
+    
+    atendeClientesCaixas(supermercadoActual->Caixas,R,supermercadoActual);
+
+    AdicionarVariosClientesAsCompras(supermercadoActual,R);
+    
+    PessoasFila = totalClientesFila(supermercadoActual->Caixas);
+    PessoasSuper = supermercadoActual->ClientesAsCompras->NEL;
+
+    time_t horaRelogio = VerTimeRelogio(R);
+    struct tm *tmp = localtime(&horaRelogio);
+
+    printf("Pessoas no supermercado: %d\n",PessoasSuper);
+    printf("Pessoas em filas na caixa: %d\n",PessoasFila);
+    printf("Hora Relógio: %dh %dm %ds\n",tmp->tm_hour,tmp->tm_min,tmp->tm_sec);
+
+    Wait(2);
+  }
+
+
   //listarCaixas(supermercadoActual->Caixas);
 
   
    //ShowLG(supermercadoActual->ClientesAsCompras, MostrarClientesAsCompras);
   // indica qual a caixa com menos pessoas
 
-  AdicionarVariosClientesAsCompras(supermercadoActual,R);
  sleep(3);
  VerificaTempoEntradaCaixa(supermercadoActual, R); 
 

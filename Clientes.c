@@ -97,7 +97,7 @@ void AdicionarClienteAsCompras(SUPERMERCADO *S,RELOGIO *R){
   CLIENTE *cl;
 
   while (skip == 0){
-    altCliente = aleatorio(1,1000);
+    altCliente = aleatorio(1,10000);
     
     NOG *P = S->Clientes->Inicio;
     while (P) {
@@ -121,7 +121,7 @@ void AdicionarClienteAsCompras(SUPERMERCADO *S,RELOGIO *R){
     }
   }
 
-  int nProd = aleatorio(1,5); 
+  int nProd = aleatorio(1,10); 
   CLIENTEASCOMPRAS* NovoCliente = (CLIENTEASCOMPRAS *) malloc(sizeof(CLIENTEASCOMPRAS));
   NovoCliente->cliente = cl;
   NovoCliente->nProdutos = nProd;
@@ -158,10 +158,12 @@ void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,RELOGIO *R){
   if (strHoraActual->tm_hour <= strHoraFecho->tm_hour && strHoraActual->tm_min <= strHoraFecho->tm_min && strHoraActual->tm_sec <= strHoraFecho->tm_sec ) {
     int numClientesSM = S->ClientesAsCompras->NEL;
     int numVerificacao = (S->nmrClientesSupermercado) - numClientesSM;
-    int numClientes = aleatorio(1,numVerificacao);
+    if (numVerificacao > 0) {
+      int numClientes = aleatorio(1,numVerificacao);
 
-    for (int i = 1; i<=numClientes; i++){
-      AdicionarClienteAsCompras(S,R);
+      for (int i = 1; i<=numClientes; i++){
+        AdicionarClienteAsCompras(S,R);
+      }
     }
   }
  
@@ -189,7 +191,7 @@ void VerificaTempoEntradaCaixa(SUPERMERCADO *S,RELOGIO * R){
       }
       CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
       //Adiciona o cesto do cliente na fila da caixa
-      adicionarClienteComprasFila(caixaAtual, CC);
+      adicionarClienteComprasFila(caixaAtual, CC,R);
       
       noTratar = P;      
     }else if (strHoraCaixa->tm_hour == tmp->tm_hour && strHoraCaixa->tm_min < tmp->tm_min){
@@ -198,7 +200,7 @@ void VerificaTempoEntradaCaixa(SUPERMERCADO *S,RELOGIO * R){
         AbreFechaCaixa(S, NumCaixaAbrir, 1, R);
       }
       CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
-      adicionarClienteComprasFila(caixaAtual, CC);
+      adicionarClienteComprasFila(caixaAtual, CC,R);
       noTratar = P;
     }else if (strHoraCaixa->tm_hour == tmp->tm_hour && strHoraCaixa->tm_min == tmp->tm_min && strHoraCaixa->tm_sec <= tmp->tm_sec){
       if (decideAbreCaixaNova(S) == 1) {
@@ -206,7 +208,7 @@ void VerificaTempoEntradaCaixa(SUPERMERCADO *S,RELOGIO * R){
         AbreFechaCaixa(S, NumCaixaAbrir, 1, R);
       }
       CAIXA* caixaAtual = caixaComMenorTempo(S->Caixas);
-      adicionarClienteComprasFila(caixaAtual, CC);
+      adicionarClienteComprasFila(caixaAtual, CC,R);
       noTratar = P;
     }
     P = P->Prox;
@@ -225,12 +227,18 @@ void DestruirClientesAsCompras(void *obj){
 }
 
 //Coloca os clientes compras na fila 
-void adicionarClienteComprasFila(CAIXA* caixaAtual, CLIENTEASCOMPRAS* cesto) {
-    FILAGENERICA* fila = (FILAGENERICA *) caixaAtual->filaCaixa;
-    AdicionaAFila(fila, cesto);
+void adicionarClienteComprasFila(CAIXA* caixaAtual, CLIENTEASCOMPRAS* cesto,RELOGIO *R) {
+  FILAGENERICA* fila = (FILAGENERICA *) caixaAtual->filaCaixa;
+  AdicionaAFila(fila, cesto);
         
-    caixaAtual->tempoEsperaReal = calculaTempoRealEspera(fila);
+  float tempoEspera = calculaTempoRealEspera(fila);
+  caixaAtual->tempoEsperaReal = tempoEspera;
 
+  time_t horaSaida = VerTimeRelogio(R);
+  struct tm *tmp = localtime(&horaSaida);
+  tmp->tm_sec += tempoEspera;
+  horaSaida = mktime(tmp);
+  cesto->horaSaidaSupermercado = horaSaida; 
 }
 
 void trocarClientedeFila(SUPERMERCADO *S,CAIXA *cxDestino,CLIENTEASCOMPRAS *CC){

@@ -160,7 +160,7 @@ void AbreFechaCaixa(SUPERMERCADO *super, int numero, int operacao, RELOGIO* R){
       int distribui = 0;
       distribui = validarInt("Pretende distribuir os clientes pelas caixas abertas (1 -Sim /0 -Nao )",0,1 );
       if (distribui == 1) {
-        redistribuirClientes(caixaEscolhida->filaCaixa, super->Caixas);
+        redistribuirClientes(caixaEscolhida->filaCaixa, super->Caixas,R);
       }
     }
     
@@ -371,6 +371,8 @@ void atendeClientesCaixas(ListaGenerica *lg,RELOGIO *R, SUPERMERCADO* S){
 }
 
 void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R, SUPERMERCADO* S){
+  if (cx == NULL) return;
+
   NOFILA *P = cx->filaCaixa->cabeca;
  
   time_t tempoAtual = VerTimeRelogio(R);
@@ -432,7 +434,9 @@ void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R, SUPERMERCADO* S){
      P = P->Prox;
 
     if (remove == 1) {
-      cx->func->nmrClientesAtendidos++;
+      if (cx->func != NULL){
+        cx->func->nmrClientesAtendidos++;
+      }
       cx->contadorPessoas = cx->contadorPessoas+1;
       cx->contadorProdutos = cx->contadorProdutos + CC->nProdutos;
 
@@ -490,7 +494,7 @@ CAIXA *CaixaMaisVendeu(ListaGenerica *lg){
 }
 
 // Funcao que distribui os clientes pelas caixas abertas
-void redistribuirClientes(FILAGENERICA* fila, ListaGenerica* lg) {
+void redistribuirClientes(FILAGENERICA* fila, ListaGenerica* lg,RELOGIO *R) {
     if(!fila || !fila->cabeca) return;
      NOFILA *p = (NOFILA *)fila->cabeca;
 
@@ -499,7 +503,7 @@ void redistribuirClientes(FILAGENERICA* fila, ListaGenerica* lg) {
         CC->horaSaidadaFila = NULL;
         CAIXA* caixaNova = caixaComMenorTempo(lg);
         
-        adicionarClienteComprasFila(caixaNova, CC);
+        adicionarClienteComprasFila(caixaNova, CC,R);
 
         p = p->Prox;
         RetirarDaFilaInicio(fila);
@@ -588,4 +592,17 @@ int numeroTotalClientesAtendidos(ListaGenerica* lg) {
     P = P->Prox;
   }
   return nmrTotalClientesAtendidos;
+}
+
+int totalClientesFila(ListaGenerica* lg){
+  int nPessoasCaixas = 0;
+  NOG* atual = lg->Inicio;
+  while (atual != NULL) { 
+    CAIXA* caixaAtual = (CAIXA*)atual->Info;
+    nPessoasCaixas = nPessoasCaixas+caixaAtual->filaCaixa->tamanho;
+
+    atual = atual->Prox;
+  }
+
+  return nPessoasCaixas;
 }
