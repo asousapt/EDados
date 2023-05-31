@@ -62,9 +62,10 @@ int main(void) {
     
     VerificaTempoEntradaCaixa(supermercadoActual,R);
     PessoasFila = totalClientesFila(supermercadoActual->Caixas);
-    AdicionarVariosClientesAsCompras(supermercadoActual,R);
-    PessoasSuper = supermercadoActual->ClientesAsCompras->NEL;
-
+    if (PessoasSuper<=100 && PessoasFila<=100){
+      AdicionarVariosClientesAsCompras(supermercadoActual,R);
+      PessoasSuper = supermercadoActual->ClientesAsCompras->NEL;
+    }
     time_t horaRelogio = VerTimeRelogio(R);
     struct tm *tmp = localtime(&horaRelogio);
     int nmrcaixas = nmrCaixasAbertas(supermercadoActual);
