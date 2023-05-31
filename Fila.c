@@ -47,6 +47,7 @@ void *RetirarDaFilaInicio(FILAGENERICA *fila) {
         printf("fila VAzia\n");
         return NULL;
     }
+      printf("chegueiaqui\n");
     NOFILA *temp = fila->cabeca;
     void *dados = temp->Dados;
     fila->cabeca = fila->cabeca->Prox;

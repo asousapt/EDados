@@ -28,12 +28,16 @@ CAIXA* CriarCaixa(int numero){
 
 
 void listarCaixas(ListaGenerica* listaCaixas) {
+  if(!listaCaixas) printf("Lista nao existe");
+  if(listaCaixas->NEL==0) printf("Lista Vazia");
   printf("*****Caixas ******\n"); 
   printf("No | Caixa  | Estado  | Tempo Espera Medio\n");
   ShowLG(listaCaixas, MostrarCaixa);
 }
 
 void MostrarCaixa(void* F){
+  if(!F)
+    return;
   CAIXA* objCaixa = (CAIXA *) F;
  
   char *nome = (char *)malloc(10);
@@ -46,6 +50,7 @@ void MostrarCaixa(void* F){
 
 // Faz print de uma caixa aberta
 void MostrarCaixaAberta(void* F){
+  if(!F) return;
   CAIXA* objCaixa = (CAIXA *) F;
   char *nome = (char *)malloc(10);
   sprintf(nome,"%s %d", "Caixa ", objCaixa->numCaixa);
@@ -56,6 +61,7 @@ void MostrarCaixaAberta(void* F){
 }
 
 void MostrarCaixaFechada(void* F){
+  if(!F) return;
   CAIXA* objCaixa = (CAIXA *) F;
   char *nome = (char *)malloc(10);
   sprintf(nome,"%s %d", "Caixa ", objCaixa->numCaixa);
@@ -67,14 +73,19 @@ void MostrarCaixaFechada(void* F){
 
 
 void DestruirCaixa(void* F){
+  if(!F) return;
   CAIXA* objCaixa = (CAIXA *) F;
   DestruirFuncionario(objCaixa->func);
   DestruirFila(objCaixa->filaCaixa, DestruirClientesAsCompras);
+  DestruirLG(objCaixa->pessoasAtendidas,DestruirCliente);
   free(objCaixa);
 }
 
+//Recebe a Lista de caixas e numero da caixa por encontrar e devolve a caixa
 CAIXA* ProcurarCaixa(ListaGenerica *lg,int numero){
-  CAIXA *cx,*cxR;
+  CAIXA *cx,*cxR=NULL;
+  if(!lg) printf("Lista nao existe");
+  if(lg->NEL==0) printf("Lista Vazia");
   NOG *P = lg->Inicio;
   while (P) {
     cx = P->Info;
@@ -83,11 +94,15 @@ CAIXA* ProcurarCaixa(ListaGenerica *lg,int numero){
     }
     P = P->Prox;
   }
+  if(!cxR)
+    printf("Caixa nao encontrada");
   return cxR;
 }
 
 // Retorna o numero de uma caixa que esteja fechada
 int buscaUmaCaixaParaAbrir(ListaGenerica *lg){
+  if(!lg) printf("Lista nao existe");
+  if(lg->NEL==0) printf("Lista Vazia");
   CAIXA *cx;
   NOG *P = lg->Inicio;
   while (P) {
@@ -101,6 +116,8 @@ int buscaUmaCaixaParaAbrir(ListaGenerica *lg){
 }
 
 CAIXA* ProcurarCaixaAberta(ListaGenerica *lg,int numero){
+  if(!lg) printf("Lista nao existe");
+  if(lg->NEL==0) printf("Lista Vazia");
   CAIXA *cx,*cxR;
   NOG *P = lg->Inicio;
   while (P) {
@@ -125,7 +142,16 @@ void AbreFechaCaixa(SUPERMERCADO *super, int numero, int operacao, RELOGIO* R){
   ListaGenerica * lg = (ListaGenerica *) super->Caixas;
   CAIXA* caixaEscolhida = (CAIXA *) malloc(sizeof(CAIXA));
 
-  if (!lg) return;
+  if (!lg){
+    printf("Lista nao existe");
+    return;
+  }
+
+  if (lg->NEL==0)
+  {
+    printf("Lista Vazia");
+  }
+  
   if (numero == 0  && operacao == 0) {
     printf("\n***** Caixas -> Fechar *****\n");
     ShowLG(super->Caixas, MostrarCaixaAberta);
@@ -402,7 +428,7 @@ void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R, SUPERMERCADO* S){
     
     strHoraSaidaSuper->tm_sec += tempoProcCaixa;
     HoraSaidaSuper = mktime(strHoraSaidaSuper);
-    //CC->horaSaidaSupermercado =  HoraSaidaSuper;
+    CC->horaSaidaSupermercado =  HoraSaidaSuper;
     
     if (difftime(tempoAtual,CC->horaSaidaSupermercado) > 0){
       

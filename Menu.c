@@ -1,27 +1,55 @@
 #include "Menu.h"
+#include "funcoes.h"
 
-int menuUtilizador(){
-  int opcao = 0;
-
+void menuUtilizador(){
   printf("====================================");
   printf("========== Menu Utilizador =========");
   printf("====================================");
-  printf("= 1 - Abrir Caixa                  =");
-  printf("= 2 - Fechar Caixa                 =");
-  printf("= 3 - Mostrar Caixas               =");
-  printf("= 4 - Mostrar Clientes da Caixa    =");
-  printf("= 5 - Pesquisar Cliente            =");
-  printf("=              =");
-  printf("= 6 - Continuar                    =");
+  printf("= 1 - Operacoes com Caixas         =");
+  printf("= 2 - Operacoes com Clientes       =");
+  printf("= 3 - Operacoes com Clientes       =");
+  printf("= 5 - Continuar                    =");
   printf("= 0 - Terminar o programa          =");
   printf("====================================");
-  scanf("%d",&opcao);
-
-  return opcao;
 }
 
-int menuMostrarCaixa(){
-  int opcao = 0;
+void menuMostrarClientes(){
+  printf("============================================");
+  printf("============ Mostrar Clientes ==============");
+  printf("============================================");
+  printf("= 1 - Mostrar Clientes atendidos numa caixa=");
+  printf("= 2 - Pesquisar Cliente                    =");
+  printf("= 0 - Sair                                 =");
+  printf("============================================");
+}
+
+void menuOperacoesClientes(){
+  printf("===========================================");
+  printf("========== Operacoes com Clientes =========");
+  printf("===========================================");
+  printf("= 1 - Mostrar Clientes atendidos numa caixa=");
+  printf("= 2 - Pesquisar Cliente                    =");
+  printf("= 3 - Mudar Cliente de uma fila para outra =");
+  printf("= 0 - Sair                                 =");
+  printf("============================================");
+}
+
+void menuOperacoesCaixa(){
+  printf("============================================");
+  printf("========== Operacoes com Caixas ============");
+  printf("============================================");
+  printf("= 1 - Mostrar Clientes atendidos numa caixa=");
+  printf("= 3 - Mostrar Caixas                       =");
+  printf("= 0 - Sair                                 =");
+  printf("============================================");
+}
+
+void menuMostrarClientes(){
+  int opcao = validarInt("Escolha uma das opcoes: ", 0,3);
+}
+
+void menuMostrarCaixa(){
+  
   printf("====================================");
   printf("========== Mostrar Caixas ==========");
   printf("====================================");
@@ -30,7 +58,6 @@ int menuMostrarCaixa(){
   printf("= 3 - Caixas Fechadas              =");
   printf("= 0 - Sair                         =");
   printf("====================================");
-  scanf("%d",&opcao);
-
-  return opcao;
 }
+
+

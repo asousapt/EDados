@@ -62,8 +62,6 @@ int main(void) {
     
     VerificaTempoEntradaCaixa(supermercadoActual,R);
     PessoasFila = totalClientesFila(supermercadoActual->Caixas);
-     atendeClientesCaixas(supermercadoActual->Caixas,R,supermercadoActual);
-    
     AdicionarVariosClientesAsCompras(supermercadoActual,R);
     PessoasSuper = supermercadoActual->ClientesAsCompras->NEL;
 
@@ -76,7 +74,7 @@ int main(void) {
     printf("Hora Relógio: %dh %dm %ds\n",tmp->tm_hour,tmp->tm_min,tmp->tm_sec);
 
 
-   
+    atendeClientesCaixas(supermercadoActual->Caixas,R,supermercadoActual);
 
     Wait(2);
   }
