@@ -428,9 +428,10 @@ void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R, SUPERMERCADO* S){
     
     strHoraSaidaSuper->tm_sec += tempoProcCaixa;
     HoraSaidaSuper = mktime(strHoraSaidaSuper);
-    CC->horaSaidaSupermercado =  HoraSaidaSuper;
+    //CC->horaSaidaSupermercado =  HoraSaidaSuper;
     
     if (difftime(tempoAtual,CC->horaSaidaSupermercado) > 0){
+      
       AddBeginLG(cx->pessoasAtendidas,CC);
       char *texto1 = (char *)malloc(300);
       sprintf(texto1, "Cliente n %d saiu do supermercado", CC->cliente->cod);
@@ -438,6 +439,7 @@ void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R, SUPERMERCADO* S){
       AddBeginLG(S->LogApp, logCriar1);
       free(texto1);  
       remove = 1; 
+      
     }
    
     /*if (strHoraSaidaSuper->tm_hour < tmp->tm_hour){
