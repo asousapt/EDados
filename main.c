@@ -62,10 +62,12 @@ int main(void) {
     VerificaTempoEntradaCaixa(supermercadoActual,R);
     PessoasFila = totalClientesFila(supermercadoActual->Caixas);
 
-    AdicionarVariosClientesAsCompras(supermercadoActual,R);
-    PessoasSuper = supermercadoActual->ClientesAsCompras->NEL;
-
     atendeClientesCaixas(supermercadoActual->Caixas,R,supermercadoActual);
+    if (PessoasSuper<=100 && PessoasFila<=100) {
+      printf("Nº de clientes adicionados: 0\n");
+      AdicionarVariosClientesAsCompras(supermercadoActual,R);
+      PessoasSuper = supermercadoActual->ClientesAsCompras->NEL;
+    }
 
     time_t horaRelogio = VerTimeRelogio(R);
     struct tm *tmp = localtime(&horaRelogio);
@@ -101,7 +103,7 @@ while (i < 100 ) {
   //ShowLG(supermercadoActual->Clientes, MostrarCliente);
   //AdicionarClienteAsCompras(supermercadoActual);
  
-  mostraEstatisticasGerais(supermercadoActual);
+  //mostraEstatisticasGerais(supermercadoActual);
   //printf("Hora de abertura do supermercado: %s", asctime(localtime(&(supermercadoActual->horaAbertura))));
   exportaCaixas(supermercadoActual->Caixas);
   exportaLogCsv(supermercadoActual->LogApp);
