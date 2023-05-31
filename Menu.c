@@ -16,7 +16,7 @@ void menuUtilizador(SUPERMERCADO *S,RELOGIO *R){
   while (opcao != 0) {
     switch(opcao){
       case 1:
-        menuOperacoesCaixa(S);
+        menuOperacoesCaixa(S,R);
         break;
         
       case 2:
