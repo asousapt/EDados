@@ -34,7 +34,7 @@ int main(void) {
 
   //Iniciar Relogio
   RELOGIO* R = (RELOGIO *) malloc(sizeof(RELOGIO));
-  StartRelogio(R, 100, supermercadoActual);
+  StartRelogio(R, 1000, supermercadoActual);
 
   LOG  * logCriar = CriarLog("Supermercado inicializado com sucesso!", R);
   AddBeginLG(supermercadoActual->LogApp, logCriar);
@@ -54,16 +54,27 @@ int main(void) {
 
   //Adicionar primeiros clientes
   AdicionarVariosClientesAsCompras(supermercadoActual,R); 
-  
-  printf("Estou a trabalhar... entre as [%d] e as [%d]\n", supermercadoActual->horaAbertura, supermercadoActual->horaFecho);
 
-  NOG *P = supermercadoActual->ClientesAsCompras->Inicio;
-  int Pessoas = totalClientesFila(supermercadoActual->Caixas);
-  while (P != NULL || Pessoas > 0) {
+  int PessoasSuper = supermercadoActual->ClientesAsCompras->NEL;
+  int PessoasFila = totalClientesFila(supermercadoActual->Caixas);
+  while (PessoasSuper > 0 || PessoasFila > 0) {
+    VerificaTempoEntradaCaixa(supermercadoActual,R);
+    
+    atendeClientesCaixas(supermercadoActual->Caixas,R,supermercadoActual);
+
     AdicionarVariosClientesAsCompras(supermercadoActual,R);
     
-    Pessoas = totalClientesFila(supermercadoActual->Caixas);
-    P = P->Prox;
+    PessoasFila = totalClientesFila(supermercadoActual->Caixas);
+    PessoasSuper = supermercadoActual->ClientesAsCompras->NEL;
+
+    time_t horaRelogio = VerTimeRelogio(R);
+    struct tm *tmp = localtime(&horaRelogio);
+
+    printf("Pessoas no supermercado: %d\n",PessoasSuper);
+    printf("Pessoas em filas na caixa: %d\n",PessoasFila);
+    printf("Hora Relógio: %dh %dm %ds\n",tmp->tm_hour,tmp->tm_min,tmp->tm_sec);
+
+    Wait(2);
   }
 
 

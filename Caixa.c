@@ -375,6 +375,8 @@ void atendeClientesCaixas(ListaGenerica *lg,RELOGIO *R, SUPERMERCADO* S){
 }
 
 void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R, SUPERMERCADO* S){
+  if (cx == NULL) return;
+
   NOFILA *P = cx->filaCaixa->cabeca;
  
   time_t tempoAtual = VerTimeRelogio(R);
@@ -436,7 +438,9 @@ void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R, SUPERMERCADO* S){
      P = P->Prox;
 
     if (remove == 1) {
-      cx->func->nmrClientesAtendidos++;
+      if (cx->func != NULL){
+        cx->func->nmrClientesAtendidos++;
+      }
       cx->contadorPessoas = cx->contadorPessoas+1;
       cx->contadorProdutos = cx->contadorProdutos + CC->nProdutos;
 
@@ -587,8 +591,8 @@ int numeroTotalClientesAtendidos(ListaGenerica* lg) {
 }
 
 int totalClientesFila(ListaGenerica* lg){
-  NOG* atual = lg->Inicio;
   int nPessoasCaixas = 0;
+  NOG* atual = lg->Inicio;
   while (atual != NULL) { 
     CAIXA* caixaAtual = (CAIXA*)atual->Info;
     nPessoasCaixas = nPessoasCaixas+caixaAtual->filaCaixa->tamanho;

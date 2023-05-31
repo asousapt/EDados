@@ -97,7 +97,7 @@ void AdicionarClienteAsCompras(SUPERMERCADO *S,RELOGIO *R){
   CLIENTE *cl;
 
   while (skip == 0){
-    altCliente = aleatorio(1,1000);
+    altCliente = aleatorio(1,10000);
     
     NOG *P = S->Clientes->Inicio;
     while (P) {
@@ -121,7 +121,7 @@ void AdicionarClienteAsCompras(SUPERMERCADO *S,RELOGIO *R){
     }
   }
 
-  int nProd = aleatorio(1,5); 
+  int nProd = aleatorio(1,10); 
   CLIENTEASCOMPRAS* NovoCliente = (CLIENTEASCOMPRAS *) malloc(sizeof(CLIENTEASCOMPRAS));
   NovoCliente->cliente = cl;
   NovoCliente->nProdutos = nProd;
@@ -158,10 +158,12 @@ void AdicionarVariosClientesAsCompras(SUPERMERCADO *S,RELOGIO *R){
   if (strHoraActual->tm_hour <= strHoraFecho->tm_hour && strHoraActual->tm_min <= strHoraFecho->tm_min && strHoraActual->tm_sec <= strHoraFecho->tm_sec ) {
     int numClientesSM = S->ClientesAsCompras->NEL;
     int numVerificacao = (S->nmrClientesSupermercado) - numClientesSM;
-    int numClientes = aleatorio(1,numVerificacao);
+    if (numVerificacao > 0) {
+      int numClientes = aleatorio(1,numVerificacao);
 
-    for (int i = 1; i<=numClientes; i++){
-      AdicionarClienteAsCompras(S,R);
+      for (int i = 1; i<=numClientes; i++){
+        AdicionarClienteAsCompras(S,R);
+      }
     }
   }
  
