@@ -18,12 +18,11 @@ int validarInt(char *pergunta, int menor,int maior){
 }
 
 char *getString(char *pergunta){
-	fflush(stdin);
-	char *string;
+	char *string,a;
+	while ((a=getchar()!='\n' && a==EOF));
 	string = (char *)malloc(sizeof(char)*100);
 	printf("%s",pergunta);
-	gets(string);
-	printf("nome : %s",string);
+	fgets(string, 100,stdin);
 	fflush(stdin);
 	return string;
 }
@@ -38,14 +37,13 @@ int validaHoras(int hora, int minutos) {
 		return 0; 
 	} 
 	if (hora < 0 || hora > 23) {
-		return 0;
 		printf("Hora invalida (00:01 - 23:59)");
+		return 0;
 	} 
 	if (minutos < 0 || minutos > 59) {
 		printf("Hora invalida (00:01 - 23:59)");
 		return 0; 
 	}
-
 	return 1;
 }
 
