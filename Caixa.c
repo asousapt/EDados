@@ -71,7 +71,6 @@ void MostrarCaixaFechada(void* F){
   free(nome);
 }
 
-
 void DestruirCaixa(void* F){
   if(!F) return;
   CAIXA* objCaixa = (CAIXA *) F;
@@ -99,7 +98,7 @@ CAIXA* ProcurarCaixa(ListaGenerica *lg,int numero){
   return cxR;
 }
 
-// Retorna o numero de uma caixa que esteja fechada
+// Retorna o numero da primeira caixa que esteja fechada na lista
 int buscaUmaCaixaParaAbrir(ListaGenerica *lg){
   if(!lg) printf("Lista nao existe");
   if(lg->NEL==0) printf("Lista Vazia");
@@ -115,6 +114,7 @@ int buscaUmaCaixaParaAbrir(ListaGenerica *lg){
   return 0;
 }
 
+//Devolve uma caixa com o numero que esta no parametro numero se esta estiver aberta
 CAIXA* ProcurarCaixaAberta(ListaGenerica *lg,int numero){
   if(!lg) printf("Lista nao existe");
   if(lg->NEL==0) printf("Lista Vazia");
@@ -150,6 +150,7 @@ void AbreFechaCaixa(SUPERMERCADO *super, int numero, int operacao, RELOGIO* R){
   if (lg->NEL==0)
   {
     printf("Lista Vazia");
+    return;
   }
   
   if (numero == 0  && operacao == 0) {
