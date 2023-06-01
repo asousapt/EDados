@@ -68,4 +68,6 @@ ESTATCX* criarNoEstatCaixa(int hora, int numero, float tempotot) ;
 ESTATCX* verificaEstHora(ListaGenerica* lg, int hora);
 void estatisticaHoraria(ListaGenerica* lg, int hora);
 float tempoMedioHoraCaixa(ListaGenerica* lg, int hora);
+int NumeroClienteshora(ListaGenerica* lg, int hora);
+
 #endif // CAIXA_H_INCLUDED

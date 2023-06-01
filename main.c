@@ -103,14 +103,7 @@ int main(void) {
    //ShowLG(supermercadoActual->ClientesAsCompras, MostrarClientesAsCompras);
   // indica qual a caixa com menos pessoas
  
-  //ShowLG(supermercadoActual->Caixas, MostrarCaixa);
-  
-  //ShowLG(supermercadoActual->ProdutosOferecidos, MostrarProduto);
-  //ShowLG(supermercadoActual->Clientes, MostrarCliente);
-  //AdicionarClienteAsCompras(supermercadoActual);
- 
   //mostraEstatisticasGerais(supermercadoActual);
-  //printf("Hora de abertura do supermercado: %s", asctime(localtime(&(supermercadoActual->horaAbertura))));
   exportaCaixas(supermercadoActual->Caixas);
   exportaLogCsv(supermercadoActual->LogApp);
   exportaProdutosG(supermercadoActual->ProdutosOferecidos);
