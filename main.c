@@ -59,9 +59,6 @@ int main(void) {
   int primeiraCaixaAbrir = buscaUmaCaixaParaAbrir(supermercadoActual->Caixas);
   AbreFechaCaixa(supermercadoActual, primeiraCaixaAbrir, 1, R);
 
-  //Adicionar primeiros clientes
-  //AdicionarVariosClientesAsCompras(supermercadoActual,R); 
-
   time_t horaRelogio = VerTimeRelogio(R);
   int PessoasSuper = supermercadoActual->ClientesAsCompras->NEL;
   int PessoasFila = 0;
@@ -82,6 +79,7 @@ int main(void) {
     printf("=Caixas Abertas:%d              =\n", nmrcaixas);
     printf("=Pessoas nas filas: %d          =\n",PessoasFila);
     printf("=Hora Relógio: %dh %dm %ds      =\n",tmp->tm_hour,tmp->tm_min,tmp->tm_sec);
+    estatisticaHoraria(supermercadoActual->Caixas, tmp->tm_hour); 
     printf("===================================\n");
 
     /*if(kbhit()){
@@ -94,23 +92,8 @@ int main(void) {
     atendeClientesCaixas(supermercadoActual->Caixas,R,supermercadoActual);
     Wait(2);
   }
-  
-   estatisticaHoraria(supermercadoActual->Caixas, 10); 
-
-  //listarCaixas(supermercadoActual->Caixas);
-
-  
-   //ShowLG(supermercadoActual->ClientesAsCompras, MostrarClientesAsCompras);
-  // indica qual a caixa com menos pessoas
  
-  //ShowLG(supermercadoActual->Caixas, MostrarCaixa);
-  
-  //ShowLG(supermercadoActual->ProdutosOferecidos, MostrarProduto);
-  //ShowLG(supermercadoActual->Clientes, MostrarCliente);
-  //AdicionarClienteAsCompras(supermercadoActual);
- 
-  //mostraEstatisticasGerais(supermercadoActual);
-  //printf("Hora de abertura do supermercado: %s", asctime(localtime(&(supermercadoActual->horaAbertura))));
+  mostraEstatisticasGerais(supermercadoActual);
   exportaCaixas(supermercadoActual->Caixas);
   exportaLogCsv(supermercadoActual->LogApp);
   exportaProdutosG(supermercadoActual->ProdutosOferecidos);
