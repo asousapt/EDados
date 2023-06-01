@@ -64,6 +64,7 @@ int main(void) {
   int PessoasSuper = supermercadoActual->ClientesAsCompras->NEL;
   int PessoasFila = 0;
   while (PessoasSuper > 0 || PessoasFila > 0) {
+  system("clear");
   /*Funcao com keyboard hit
     if(kbhit()){
             char a = getch();
@@ -83,10 +84,12 @@ int main(void) {
     time_t horaRelogio = VerTimeRelogio(R);
     struct tm *tmp = localtime(&horaRelogio);
     int nmrcaixas = nmrCaixasAbertas(supermercadoActual);
-    printf("Pessoas no supermercado: %d\n",PessoasSuper);
-    printf("Caixas Abertas:%d\n", nmrcaixas);
-    printf("Pessoas nas filas: %d\n",PessoasFila);
-    printf("Hora Relógio: %dh %dm %ds\n",tmp->tm_hour,tmp->tm_min,tmp->tm_sec);
+    printf("===================================\n");
+    printf("=Pessoas no supermercado:%d     =\n",PessoasSuper);
+    printf("=Caixas Abertas:%d              =\n", nmrcaixas);
+    printf("=Pessoas nas filas: %d          =\n",PessoasFila);
+    printf("=Hora Relógio: %dh %dm %ds      =\n",tmp->tm_hour,tmp->tm_min,tmp->tm_sec);
+    printf("===================================\n");
 
 
     
