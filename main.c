@@ -64,13 +64,14 @@ int main(void) {
   int PessoasSuper = supermercadoActual->ClientesAsCompras->NEL;
   int PessoasFila = 0;
   while (PessoasSuper > 0 || PessoasFila > 0) {
+  /*Funcao com keyboard hit
     if(kbhit()){
             char a = getch();
             if(a == 'm'){
               menuUtilizador(supermercadoActual,R);
             }
             printf("O char e: %c\nNumero do char: %d\n", a,a);
-    }
+    }*/
     VerificaTempoEntradaCaixa(supermercadoActual,R);
     PessoasFila = totalClientesFila(supermercadoActual->Caixas);
     if (PessoasSuper<=100 && PessoasFila<=100){
