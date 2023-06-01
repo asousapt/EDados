@@ -118,5 +118,7 @@ void DestruirSupermercado(SUPERMERCADO *mercado){
     DestruirLG(mercado->LogApp,DestruirLog);
     DestruirLG(mercado->Produtos,DestruirProduto);
     DestruirLG(mercado->ProdutosOferecidos,DestruirProduto);
+    DestruirLG(mercado->CaixasAbertasEmInstantes, DestruirListaInt);
+    DestruirLG(mercado->ClientesEmInstantes, DestruirListaInt);
     free(mercado);
 }
