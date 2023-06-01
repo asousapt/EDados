@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <termios.h>
+#include <fcntl.h>
 #include "Relogio.h"
 #include "ListaGenerica.h"
 #include "Clientes.h"
@@ -91,17 +93,6 @@ int main(void) {
   
    //ShowLG(supermercadoActual->ClientesAsCompras, MostrarClientesAsCompras);
   // indica qual a caixa com menos pessoas
-
- sleep(3);
- VerificaTempoEntradaCaixa(supermercadoActual, R); 
-
-sleep(3);
-int i = 1;
-while (i < 100 ) {
-  
-  atendeClientesCaixas(supermercadoActual->Caixas,R, supermercadoActual); 
-  i++;
-}
  
   //ShowLG(supermercadoActual->Caixas, MostrarCaixa);
   
