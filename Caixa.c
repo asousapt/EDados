@@ -397,6 +397,8 @@ void atendeClientesCaixas(ListaGenerica *lg,RELOGIO *R, SUPERMERCADO* S){
   
 }
 
+
+//Atende os Clientes na caixa cx de acordo com o tempo
 void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R, SUPERMERCADO* S){
   if (cx == NULL) return;
 
@@ -572,6 +574,7 @@ float calculaTempoMedioCaixas(ListaGenerica* lg) {
   
 }
 
+//Procura em cliente se ele estiver numa das filas e devolve a caixa
 CAIXA* procurarCaixaCliente(ListaGenerica *lg,int codigoCliente){
   CAIXA *cx;
   NOG *P = lg->Inicio;
@@ -632,6 +635,7 @@ int numeroTotalClientesAtendidos(ListaGenerica* lg) {
   return nmrTotalClientesAtendidos;
 }
 
+//Numero de Clientes em todas as filas
 int totalClientesFila(ListaGenerica* lg){
   int nPessoasCaixas = 0;
   NOG* atual = lg->Inicio;

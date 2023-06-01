@@ -1,19 +1,18 @@
 #include "Menu.h"
 
 void menuUtilizador(SUPERMERCADO *S,RELOGIO *R){
-  int opcao = -1;
+  int opcao;
 
-  printf("\n====================================\n");
-  printf("========== Menu Utilizador =========\n");
-  printf("====================================\n");
-  printf("= 1 - Operacoes com Caixas         =\n");
-  printf("= 2 - Operacoes com Clientes       =\n");
-  printf("= 3 - Estatistica                  =\n");
-  printf("= 0 - Continuar                    =\n");
-  printf("====================================\n");
-  opcao = validarInt("Escolha uma opcao", 0,3);
-
-  while (opcao != 0) {
+  do{
+    printf("\n====================================\n");
+    printf("========== Menu Utilizador =========\n");
+    printf("====================================\n");
+    printf("= 1 - Operacoes com Caixas         =\n");
+    printf("= 2 - Operacoes com Clientes       =\n");
+    printf("= 3 - Estatistica                  =\n");
+    printf("= 0 - Continuar                    =\n");
+    printf("====================================\n");
+    opcao = validarInt("Escolha uma opcao", 0,3);
     switch(opcao){
       case 1:
         menuOperacoesCaixa(S,R);
@@ -34,7 +33,7 @@ void menuUtilizador(SUPERMERCADO *S,RELOGIO *R){
         printf("Opção inválida\n");
         break;
     }
-  }
+  }while (opcao != 0);
 }
 
 /*void menuMostrarClientes(SUPERMERCADO *S){
@@ -93,19 +92,18 @@ void menuUtilizador(SUPERMERCADO *S,RELOGIO *R){
 }*/
 
 void menuOperacoesClientes(SUPERMERCADO *S,RELOGIO *R){
-  int opcao = -1;
-
-  printf("\n===========================================\n");
-  printf("========== Operacoes com Clientes =========\n");
-  printf("===========================================\n");
-  printf("= 1 - Mostrar Clientes atendidos numa caixa=\n");
-  printf("= 2 - Pesquisar Cliente                    =\n");
-  printf("= 3 - Mudar Cliente de fila                =\n");
-  printf("= 0 - Sair                                 =\n");
-  printf("============================================\n");
-  opcao = validarInt("Escolha uma opcao", 0,3);
-
-  while (opcao != 0) {
+  int opcao;
+  do{
+    printf("\n===========================================\n");
+    printf("========== Operacoes com Clientes =========\n");
+    printf("===========================================\n");
+    printf("= 1 - Mostrar Clientes atendidos numa caixa=\n");
+    printf("= 2 - Pesquisar Cliente                    =\n");
+    printf("= 3 - Mudar Cliente de fila                =\n");
+    printf("= 0 - Sair                                 =\n");
+    printf("============================================\n");
+    opcao = validarInt("Escolha uma opcao", 0,3);
+    
     switch(opcao){
       case 1:
         listarCaixas(S->Caixas);
@@ -168,26 +166,25 @@ void menuOperacoesClientes(SUPERMERCADO *S,RELOGIO *R){
         printf("Opção inválida\n");
         break;
     }
-  }
+  }while (opcao != 0);
 }
 
 void menuOperacoesCaixa(SUPERMERCADO *S,RELOGIO *R){
   int opcao = -1;
+  do{
+    printf("\n============================================\n");
+    printf("========== Operacoes com Caixas ============\n");
+    printf("============================================\n");
+    printf("= 1 - Mostrar Todas as Caixas              =\n");
+    printf("= 2 - Mostrar Caixas Abertas               =\n");
+    printf("= 3 - Mostrar Caixas Fechadas              =\n");
+    printf("= 4 - Mostrar Clientes atendidos numa caixa=\n");
+    printf("= 5 - Abrir Caixa                          =\n");
+    printf("= 6 - Fechar Caixa                         =\n");
+    printf("= 0 - Sair                                 =\n");
+    printf("============================================\n");
+    opcao = validarInt("Escolha uma opcao", 0,6);
 
-  printf("\n============================================\n");
-  printf("========== Operacoes com Caixas ============\n");
-  printf("============================================\n");
-  printf("= 1 - Mostrar Todas as Caixas              =\n");
-  printf("= 2 - Mostrar Caixas Abertas               =\n");
-  printf("= 3 - Mostrar Caixas Fechadas              =\n");
-  printf("= 4 - Mostrar Clientes atendidos numa caixa=\n");
-  printf("= 5 - Abrir Caixa                          =\n");
-  printf("= 6 - Fechar Caixa                         =\n");
-  printf("= 0 - Sair                                 =\n");
-  printf("============================================\n");
-  opcao = validarInt("Escolha uma opcao", 0,6);
-
-  while (opcao != 0) {
     switch(opcao){
       case 1:
         listarCaixas(S->Caixas);
@@ -226,7 +223,7 @@ void menuOperacoesCaixa(SUPERMERCADO *S,RELOGIO *R){
         printf("Opção inválida\n");
         break;
     }
-  }
+  }while (opcao != 0);
 }
 
 /*void menuMostrarCaixa(SUPERMERCADO *S){

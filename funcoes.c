@@ -35,6 +35,7 @@ void inicializarAleatorio() {
 }
 
 int aleatorio(int min, int max) {
+	//inicializarAleatorio();
     return min + rand() % (max - min + 1);
 }
 
