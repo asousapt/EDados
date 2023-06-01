@@ -278,12 +278,32 @@ void adicionarClienteComprasFila(CAIXA* caixaAtual, CLIENTEASCOMPRAS* cesto,RELO
   cesto->horaSaidaSupermercado = horaSaida; 
 }
 
-void trocarClientedeFila(SUPERMERCADO *S,CAIXA *cxDestino,CLIENTEASCOMPRAS *CC){
+void trocarClientedeFila(SUPERMERCADO *S,CAIXA *cxDestino,CLIENTEASCOMPRAS *CC,RELOGIO *R){
   CAIXA *cxOrigem = procurarCaixaCliente(S->Caixas,CC->cliente->cod);
 
   if (cxOrigem != NULL){
     AdicionaAFila(cxDestino->filaCaixa,CC);
     RetirarDaFila(cxOrigem->filaCaixa,CompararCliente,CC);
+
+    float tempoEsperaOrigem = calculaTempoRealEspera(cxOrigem->filaCaixa);
+    cxOrigem->tempoEsperaReal = tempoEsperaOrigem;
+    
+    float tempoEsperaDestino = calculaTempoRealEspera(cxDestino->filaCaixa);
+    cxDestino->tempoEsperaReal = tempoEsperaOrigem;
+
+    tempoEsperaDestino += tempoProcessarProdutosCaixa(CC);
+    time_t horaSaida = VerTimeRelogio(R);
+    struct tm *tmp = localtime(&horaSaida);
+    tmp->tm_sec += tempoEsperaDestino;
+    horaSaida = mktime(tmp);
+    CC->horaSaidaSupermercado = horaSaida; 
+
+    char *texto = (char *)malloc(300);
+    sprintf(texto, "Cliente n %d saio da fila da caixa %d e entrou na fila da caixa %d", CC->cliente->cod, cxOrigem->numCaixa,cxDestino->numCaixa);
+    LOG  * logCriar = CriarLog(texto, R);
+    AddBeginLG(S->LogApp, logCriar);
+    free(texto); 
+
   }
 }
 

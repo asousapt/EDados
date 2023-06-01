@@ -20,7 +20,7 @@ void menuUtilizador(SUPERMERCADO *S,RELOGIO *R){
         break;
         
       case 2:
-        menuOperacoesClientes(S);
+        menuOperacoesClientes(S,R);
         break;
         
       case 3:
@@ -92,7 +92,7 @@ void menuUtilizador(SUPERMERCADO *S,RELOGIO *R){
   }
 }*/
 
-void menuOperacoesClientes(SUPERMERCADO *S){
+void menuOperacoesClientes(SUPERMERCADO *S,RELOGIO *R){
   int opcao = -1;
 
   printf("\n===========================================\n");
@@ -100,7 +100,7 @@ void menuOperacoesClientes(SUPERMERCADO *S){
   printf("===========================================\n");
   printf("= 1 - Mostrar Clientes atendidos numa caixa=\n");
   printf("= 2 - Pesquisar Cliente                    =\n");
-  printf("= 3 - Mudar Cliente de uma fila para outra =\n");
+  printf("= 3 - Mudar Cliente de fila                =\n");
   printf("= 0 - Sair                                 =\n");
   printf("============================================\n");
   opcao = validarInt("Escolha uma opcao", 0,3);
@@ -158,7 +158,7 @@ void menuOperacoesClientes(SUPERMERCADO *S){
           if (CC == NULL) printf("Cliente selecionado não se encontra numa caixa!");
         }
 
-        trocarClientedeFila(S,cx,CC);
+        trocarClientedeFila(S,cx,CC,R);
         break;
 
       case 0:

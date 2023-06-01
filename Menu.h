@@ -10,7 +10,7 @@
 
 void menuUtilizador(SUPERMERCADO *S,RELOGIO *R);
 //void menuMostrarClientes(SUPERMERCADO *S);
-void menuOperacoesClientes(SUPERMERCADO *S);
+void menuOperacoesClientes(SUPERMERCADO *S,RELOGIO *R);
 //void menuMostrarCaixa(SUPERMERCADO *S);
 void menuOperacoesCaixa(SUPERMERCADO *S,RELOGIO *R);
 
