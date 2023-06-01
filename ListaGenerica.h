@@ -28,4 +28,6 @@ void removerNoLG(ListaGenerica* lg, NOG* noRemover);
 void *Maior(ListaGenerica *lg, int (*fcomp)(void *, void *));
 void *Menor(ListaGenerica *lg, int (*fcomp)(void *, void *));
 int Total(ListaGenerica *lg, int (*fcomp)(void *, void *));
+float media(ListaGenerica *lg);
+void DestruirListaInt(ListaGenerica *lg);
 #endif // LISTAGENERICA_H_INCLUDED

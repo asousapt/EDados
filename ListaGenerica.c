@@ -2,7 +2,6 @@
 #include "ListaGenerica.h"
 #include "Fila.h"
 
-
 ListaGenerica *CriarLG() {
   ListaGenerica *L = (ListaGenerica *)malloc(sizeof(ListaGenerica));
   L->Inicio = NULL;
@@ -125,4 +124,18 @@ void *Menor(ListaGenerica *lg, int (*fcomp)(void *, void *)){
     no = no->Prox;
   }
   return menor;
+}
+
+//Recebe uma lista de ints e devolve a media de todos os elementos
+float media(ListaGenerica *lg){
+  float media;
+  NOG *P = lg->Inicio;
+  while(P){
+    media += (int)P->Info;
+    P = P->Prox;
+  }
+  return media;
+}
+
+c{
 }
