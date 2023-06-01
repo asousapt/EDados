@@ -69,5 +69,6 @@ ESTATCX* verificaEstHora(ListaGenerica* lg, int hora);
 void estatisticaHoraria(ListaGenerica* lg, int hora);
 float tempoMedioHoraCaixa(ListaGenerica* lg, int hora);
 int NumeroClienteshora(ListaGenerica* lg, int hora);
+void DestruirEstatistica(void* C);
 
 #endif // CAIXA_H_INCLUDED

@@ -73,6 +73,11 @@ void MostrarCaixaFechada(void* F){
   }
   free(nome);
 }
+void DestruirEstatistica(void* C){
+  ESTATCX* objEst = (ESTATCX *) C;
+  
+  free(objEst);
+}
 
 void DestruirCaixa(void* F){
   if(!F) return;
@@ -80,6 +85,7 @@ void DestruirCaixa(void* F){
   DestruirFuncionario(objCaixa->func);
   DestruirFila(objCaixa->filaCaixa, DestruirClientesAsCompras);
   DestruirLG(objCaixa->pessoasAtendidas,DestruirCliente);
+  DestruirLG(objCaixa->estatisticahora,DestruirEstatistica);
   free(objCaixa);
 }
 
