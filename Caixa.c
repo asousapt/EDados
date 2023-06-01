@@ -738,13 +738,14 @@ void estatisticaHoraria(ListaGenerica* lg, int hora) {
     CAIXA* cx =  (CAIXA* ) p->Info;
 
     ListaGenerica* lgEst = ( ListaGenerica*) cx->estatisticahora; 
-    printf("H %d * CX  %d* TM %f \n", hora, cx->numCaixa, tempoMedioHoraCaixa(lgEst, hora));
+    printf("H %d * CX  %d* TOT CL %d * TM %f \n", hora, cx->numCaixa, NumeroClienteshora(lgEst, hora), tempoMedioHoraCaixa(lgEst, hora));
 
     p = p->Prox; 
   }
   
 }
 
+// retorna o tempo medio de atendimento numa determinada hora
 float tempoMedioHoraCaixa(ListaGenerica* lg, int hora) {
   if (!lg) return;
 
@@ -764,3 +765,21 @@ float tempoMedioHoraCaixa(ListaGenerica* lg, int hora) {
   return 0;
 }
 
+int NumeroClienteshora(ListaGenerica* lg, int hora) {
+  if (!lg) return;
+
+  NOG* p = (NOG*) lg->Inicio;
+
+  while (p)
+  {
+    ESTATCX* est = (ESTATCX*) p->Info;
+    
+    if(est->hora == hora) {
+      return est->nmrPessoas;
+    } 
+
+    p = p->Prox;
+  }
+
+  return 0;
+}

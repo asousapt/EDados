@@ -93,7 +93,7 @@ int main(void) {
     Wait(2);
   }
  
-  mostraEstatisticasGerais(supermercadoActual);
+  //mostraEstatisticasGerais(supermercadoActual);
   exportaCaixas(supermercadoActual->Caixas);
   exportaLogCsv(supermercadoActual->LogApp);
   exportaProdutosG(supermercadoActual->ProdutosOferecidos);
