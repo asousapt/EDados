@@ -31,5 +31,5 @@ SUPERMERCADO * CriarSM();
 int carregaSupermercado(SUPERMERCADO* supermercadoActual);
 void carregaCaixas(SUPERMERCADO* supermercadoActual);
 void DestruirSupermercado(SUPERMERCADO *mercado);
-void Estado(SUPERMERCADO *mercado);
+
 #endif // SUPERMERCADO_H_INCLUDED

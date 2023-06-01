@@ -3,7 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include <conio.h>
+//#include <conio.h>
 
 #include "Relogio.h"
 #include "ListaGenerica.h"
@@ -84,12 +84,12 @@ int main(void) {
     printf("=Hora Relógio: %dh %dm %ds      =\n",tmp->tm_hour,tmp->tm_min,tmp->tm_sec);
     printf("===================================\n");
 
-    if(kbhit()){
+    /*if(kbhit()){
         char ch = getch();
         if ((int)ch == 13) {
             menuUtilizador(supermercadoActual,R);
         }
-    }
+    }*/
     
     atendeClientesCaixas(supermercadoActual->Caixas,R,supermercadoActual);
     Wait(2);

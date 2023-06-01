@@ -126,16 +126,3 @@ void *Menor(ListaGenerica *lg, int (*fcomp)(void *, void *)){
   return menor;
 }
 
-//Recebe uma lista de ints e devolve a media de todos os elementos
-float media(ListaGenerica *lg){
-  float media;
-  NOG *P = lg->Inicio;
-  while(P){
-    media += (int)P->Info;
-    P = P->Prox;
-  }
-  return media;
-}
-
-c{
-}

@@ -4,10 +4,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+
 #include "Relogio.h"
 #include "Funcionarios.h"
 #include "ListaGenerica.h"
-#include "funcoes.h"
+#include "supermercado.h"
 
 typedef struct log {
     time_t *data_hora_atual;  
@@ -20,5 +21,6 @@ void exportaLogCsv(ListaGenerica* ListaLog);
 void EscreveLog(void *L, FILE *ficheiro);
 void DestruirLog(void *L);
 void exportaProdutosG(ListaGenerica* ListaProdGratis);
+void mostraEstatisticasGerais(SUPERMERCADO* S);
 
 #endif // LOG_H_INCLUDED
