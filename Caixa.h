@@ -21,8 +21,17 @@ typedef struct caixa {
     int contadorPessoas,contadorProdutos;
     FUNCIONARIO* func;
     FILAGENERICA* filaCaixa;
+    ListaGenerica* estatisticahora;
     ListaGenerica *pessoasAtendidas;
 } CAIXA;
+
+typedef struct estatcx {
+    int nmrPessoas; 
+    float tempoTot;
+    float tempoMedio; 
+    int hora;
+} ESTATCX;
+
 
 int tempoEsperaMin(void* C);
 CAIXA* CriarCaixa(int numero);
@@ -55,4 +64,8 @@ void exportaCaixas(ListaGenerica* lg);
 CAIXA *CaixaMaisVendeu(ListaGenerica *lg);
 int totalClientesFila(ListaGenerica* lg);
 int clienteJaFoiAtendido(ListaGenerica* lg, int numero);
+ESTATCX* criarNoEstatCaixa(int hora, int numero, float tempotot) ;
+ESTATCX* verificaEstHora(ListaGenerica* lg, int hora);
+void estatisticaHoraria(ListaGenerica* lg, int hora);
+float tempoMedioHoraCaixa(ListaGenerica* lg, int hora);
 #endif // CAIXA_H_INCLUDED

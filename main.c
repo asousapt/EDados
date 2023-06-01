@@ -40,7 +40,7 @@ int main(void) {
 
   //Iniciar Relogio
   RELOGIO* R = (RELOGIO *) malloc(sizeof(RELOGIO));
-  StartRelogio(R, 500, supermercadoActual);
+  StartRelogio(R, 1000, supermercadoActual);
 
   LOG  * logCriar = CriarLog("Supermercado inicializado com sucesso!", R);
   AddBeginLG(supermercadoActual->LogApp, logCriar);
@@ -86,7 +86,8 @@ int main(void) {
     atendeClientesCaixas(supermercadoActual->Caixas,R,supermercadoActual);
     Wait(2);
   }
-
+  
+   estatisticaHoraria(supermercadoActual->Caixas, 10); 
 
   //listarCaixas(supermercadoActual->Caixas);
 

@@ -7,10 +7,12 @@
 #include "Fila.h"
 #include "Produtos.h"
 
+
 // Criar objecto caixa
 CAIXA* CriarCaixa(int numero){
   CAIXA* novaCaixa = (CAIXA *) malloc(sizeof(CAIXA));
   FILAGENERICA *filaCaixa = CriarFila();
+  ListaGenerica* estatistica = CriarLG();
 
   novaCaixa->numCaixa = numero; 
   novaCaixa->contadorPessoas = 0;
@@ -22,6 +24,7 @@ CAIXA* CriarCaixa(int numero){
   novaCaixa->tempoEsperaMed = 0;
   novaCaixa->tempoTotal = 0;
   novaCaixa->pessoasAtendidas = CriarLG();
+  novaCaixa->estatisticahora = estatistica;
 
   return novaCaixa;
 }
@@ -479,6 +482,21 @@ void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R, SUPERMERCADO* S){
 
       tempo += difftime(CC->horaSaidadaFila, CC->horaEntradaFila);
 
+      // bloco que alimenta a estatistica
+
+      ListaGenerica* lgEst = (ListaGenerica*) cx->estatisticahora;
+      
+      ESTATCX* est = verificaEstHora(lgEst, (int )strHoraSaida->tm_hour);
+
+      float tempoest = (float ) tempo; 
+
+      if (est == NULL) {
+        est = criarNoEstatCaixa((int) strHoraSaida->tm_hour, cx->numCaixa, tempoest);
+        AddBeginLG(lgEst, est);
+      } else {
+        updateEstat(est, tempoest);
+      }
+
       // determina se é necessario oferecer algum produto ao cliente 
       if (ofereceProduto(S, tempo) == 1) {
         PRODUTO* prodOfer = produtoMaisBarato(CC);
@@ -668,3 +686,76 @@ int clienteJaFoiAtendido(ListaGenerica* lg, int numero) {
   }
   return 0;
 }
+
+//criar no estatistica 
+ESTATCX* criarNoEstatCaixa(int hora, int numero, float tempotot) {
+  ESTATCX* novaEstat = (ESTATCX*) malloc(sizeof(ESTATCX));
+  novaEstat->hora = hora; 
+  novaEstat->nmrPessoas = numero;
+  novaEstat->tempoTot = tempotot;
+  novaEstat->tempoMedio = tempotot /  numero;
+  return novaEstat;
+}
+
+// Verifica se ja existe um no para esta hora
+ESTATCX* verificaEstHora(ListaGenerica* lg, int hora) {
+  if (!lg) return NULL;
+  
+  NOG* p = (NOG*) lg->Inicio; 
+ 
+  while (p)
+  {
+    ESTATCX* estatistica = (ESTATCX*) p->Info; 
+    
+    if (estatistica->hora == hora) {
+      return estatistica;
+    }
+    p = p->Prox;
+  }
+  
+  return NULL;
+}
+
+// funcao que atualiza o no de estatistica 
+void updateEstat(ESTATCX* estatistica, float tempo) {
+  estatistica->nmrPessoas += 1; 
+  estatistica->tempoTot += tempo; 
+  estatistica->tempoMedio = estatistica->tempoTot / estatistica->nmrPessoas;
+}
+
+void estatisticaHoraria(ListaGenerica* lg, int hora) {
+  if (!lg) return NULL; 
+
+  NOG* p = lg->Inicio; 
+
+  while (p)
+  {
+    CAIXA* cx =  (CAIXA* ) p->Info;
+
+    ListaGenerica* lgEst = ( ListaGenerica*) cx->estatisticahora; 
+    printf("H %d * CX  %d* TM %f \n", hora, cx->numCaixa, tempoMedioHoraCaixa(lgEst, hora));
+
+    p = p->Prox; 
+  }
+  
+}
+
+float tempoMedioHoraCaixa(ListaGenerica* lg, int hora) {
+  if (!lg) return;
+
+  NOG* p = (NOG*) lg->Inicio;
+
+  while (p)
+  {
+    ESTATCX* est = (ESTATCX*) p->Info;
+    
+    if(est->hora == hora) {
+      return est->tempoMedio;
+    } 
+
+    p = p->Prox;
+  }
+
+  return 0;
+}
+
