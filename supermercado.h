@@ -23,11 +23,13 @@ typedef struct supermercado{
     ListaGenerica *LogApp;
     ListaGenerica *ClientesAsCompras; 
     ListaGenerica *ProdutosOferecidos;
+    ListaGenerica *ClientesEmInstantes;
+    ListaGenerica *CaixasAbertasEmInstantes;
 } SUPERMERCADO;
 
 SUPERMERCADO * CriarSM();
 int carregaSupermercado(SUPERMERCADO* supermercadoActual);
 void carregaCaixas(SUPERMERCADO* supermercadoActual);
 void DestruirSupermercado(SUPERMERCADO *mercado);
-void Estado(SUPERMERCADO *mercado);
+
 #endif // SUPERMERCADO_H_INCLUDED

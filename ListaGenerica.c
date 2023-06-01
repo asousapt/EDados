@@ -2,7 +2,6 @@
 #include "ListaGenerica.h"
 #include "Fila.h"
 
-
 ListaGenerica *CriarLG() {
   ListaGenerica *L = (ListaGenerica *)malloc(sizeof(ListaGenerica));
   L->Inicio = NULL;
@@ -126,3 +125,4 @@ void *Menor(ListaGenerica *lg, int (*fcomp)(void *, void *)){
   }
   return menor;
 }
+

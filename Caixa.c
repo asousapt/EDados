@@ -74,7 +74,6 @@ void MostrarCaixaFechada(void* F){
   free(nome);
 }
 
-
 void DestruirCaixa(void* F){
   if(!F) return;
   CAIXA* objCaixa = (CAIXA *) F;
@@ -102,7 +101,7 @@ CAIXA* ProcurarCaixa(ListaGenerica *lg,int numero){
   return cxR;
 }
 
-// Retorna o numero de uma caixa que esteja fechada
+// Retorna o numero da primeira caixa que esteja fechada na lista
 int buscaUmaCaixaParaAbrir(ListaGenerica *lg){
   if(!lg) printf("Lista nao existe");
   if(lg->NEL==0) printf("Lista Vazia");
@@ -118,6 +117,7 @@ int buscaUmaCaixaParaAbrir(ListaGenerica *lg){
   return 0;
 }
 
+//Devolve uma caixa com o numero que esta no parametro numero se esta estiver aberta
 CAIXA* ProcurarCaixaAberta(ListaGenerica *lg,int numero){
   if(!lg) printf("Lista nao existe");
   if(lg->NEL==0) printf("Lista Vazia");
@@ -153,6 +153,7 @@ void AbreFechaCaixa(SUPERMERCADO *super, int numero, int operacao, RELOGIO* R){
   if (lg->NEL==0)
   {
     printf("Lista Vazia");
+    return;
   }
   
   if (numero == 0  && operacao == 0) {
@@ -399,6 +400,8 @@ void atendeClientesCaixas(ListaGenerica *lg,RELOGIO *R, SUPERMERCADO* S){
   
 }
 
+
+//Atende os Clientes na caixa cx de acordo com o tempo
 void atendeClientesPorCaixa(CAIXA *cx,RELOGIO *R, SUPERMERCADO* S){
   if (cx == NULL) return;
 
@@ -589,6 +592,7 @@ float calculaTempoMedioCaixas(ListaGenerica* lg) {
   
 }
 
+//Procura em cliente se ele estiver numa das filas e devolve a caixa
 CAIXA* procurarCaixaCliente(ListaGenerica *lg,int codigoCliente){
   CAIXA *cx;
   NOG *P = lg->Inicio;
@@ -649,6 +653,7 @@ int numeroTotalClientesAtendidos(ListaGenerica* lg) {
   return nmrTotalClientesAtendidos;
 }
 
+//Numero de Clientes em todas as filas
 int totalClientesFila(ListaGenerica* lg){
   int nPessoasCaixas = 0;
   NOG* atual = lg->Inicio;

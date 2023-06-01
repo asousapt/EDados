@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <unistd.h>
-#include <termios.h>
 #include <fcntl.h>
 #include <time.h>
 #include "ListaGenerica.h"
@@ -35,6 +34,7 @@ void inicializarAleatorio() {
 }
 
 int aleatorio(int min, int max) {
+	//inicializarAleatorio();
     return min + rand() % (max - min + 1);
 }
 

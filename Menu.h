@@ -7,11 +7,10 @@
 #include "Clientes.h"
 #include "Caixa.h"
 #include "Produtos.h"
+#include "Log.h"
 
 void menuUtilizador(SUPERMERCADO *S,RELOGIO *R);
-//void menuMostrarClientes(SUPERMERCADO *S);
-void menuOperacoesClientes(SUPERMERCADO *S);
-//void menuMostrarCaixa(SUPERMERCADO *S);
+void menuOperacoesClientes(SUPERMERCADO *S,RELOGIO *R);
 void menuOperacoesCaixa(SUPERMERCADO *S,RELOGIO *R);
 
 #endif
