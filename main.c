@@ -3,7 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
-//#include <conio.h>
+#include <conio.h>
 
 #include "Relogio.h"
 #include "ListaGenerica.h"
@@ -30,7 +30,6 @@
 #include "Funcionarios.c"
 #include "Caixa.c"
 #include "Log.c"
-
 
 int main(void) {
   inicializarAleatorio();
@@ -82,18 +81,18 @@ int main(void) {
     estatisticaHoraria(supermercadoActual->Caixas, tmp->tm_hour); 
     printf("===================================\n");
 
-    /*if(kbhit()){
+    if(kbhit()){
         char ch = getch();
         if ((int)ch == 13) {
             menuUtilizador(supermercadoActual,R);
         }
-    }*/
+    }
     
     atendeClientesCaixas(supermercadoActual->Caixas,R,supermercadoActual);
     Wait(2);
   }
  
-  //mostraEstatisticasGerais(supermercadoActual);
+  mostraEstatisticasGerais(supermercadoActual);
   exportaCaixas(supermercadoActual->Caixas);
   exportaLogCsv(supermercadoActual->LogApp);
   exportaProdutosG(supermercadoActual->ProdutosOferecidos);
