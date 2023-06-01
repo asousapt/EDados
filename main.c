@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <termios.h>
 #include <fcntl.h>
+#include <conio.h>
+
 #include "Relogio.h"
 #include "ListaGenerica.h"
 #include "Clientes.h"
@@ -15,6 +16,7 @@
 #include "supermercado.h"
 #include "Fila.h"
 #include "Menu.h"
+#include "funcoes.h"
 
 // estes ficheiros estao incluidos aqui para compilar apenas com main.c 
 #include "funcoes.c"
@@ -36,7 +38,6 @@ int main(void) {
 
   //Cria o supermecado com dados introduzidos pelo usuario ou autopreenchidos
   SUPERMERCADO * supermercadoActual = CriarSM();
-  //switchPrincipal();
 
   //Iniciar Relogio
   RELOGIO* R = (RELOGIO *) malloc(sizeof(RELOGIO));
@@ -59,27 +60,20 @@ int main(void) {
   AbreFechaCaixa(supermercadoActual, primeiraCaixaAbrir, 1, R);
 
   //Adicionar primeiros clientes
-  AdicionarVariosClientesAsCompras(supermercadoActual,R); 
+  //AdicionarVariosClientesAsCompras(supermercadoActual,R); 
 
+  time_t horaRelogio = VerTimeRelogio(R);
   int PessoasSuper = supermercadoActual->ClientesAsCompras->NEL;
   int PessoasFila = 0;
-  while (PessoasSuper > 0 || PessoasFila > 0) {
-    if(kbhit()){
-            char a = getch();
-            if(a == 'm'){
-              menuUtilizador(supermercadoActual,R);
-            }
-            printf("O char e: %c\nNumero do char: %d\n", a,a);
-    }
+  while (PessoasSuper > 0 || PessoasFila > 0 || difftime(horaRelogio,supermercadoActual->horaFecho) < 0) {
     VerificaTempoEntradaCaixa(supermercadoActual,R);
     PessoasFila = totalClientesFila(supermercadoActual->Caixas);
     if (PessoasSuper<=100 && PessoasFila<=100){
       AdicionarVariosClientesAsCompras(supermercadoActual,R);
       PessoasSuper = supermercadoActual->ClientesAsCompras->NEL;
     }
-    
 
-    time_t horaRelogio = VerTimeRelogio(R);
+    horaRelogio = VerTimeRelogio(R);
     struct tm *tmp = localtime(&horaRelogio);
     int nmrcaixas = nmrCaixasAbertas(supermercadoActual);
     printf("Pessoas no supermercado: %d\n",PessoasSuper);
@@ -87,38 +81,25 @@ int main(void) {
     printf("Pessoas nas filas: %d\n",PessoasFila);
     printf("Hora Relógio: %dh %dm %ds\n",tmp->tm_hour,tmp->tm_min,tmp->tm_sec);
 
-
+    if(kbhit()){
+        char ch = getch();
+        if ((int)ch == 13) {
+            menuUtilizador(supermercadoActual,R);
+        }
+    }
     
     atendeClientesCaixas(supermercadoActual->Caixas,R,supermercadoActual);
     Wait(2);
   }
-
-
-  //listarCaixas(supermercadoActual->Caixas);
-
-  
-   //ShowLG(supermercadoActual->ClientesAsCompras, MostrarClientesAsCompras);
-  // indica qual a caixa com menos pessoas
  
-  //ShowLG(supermercadoActual->Caixas, MostrarCaixa);
-  
-  //ShowLG(supermercadoActual->ProdutosOferecidos, MostrarProduto);
-  //ShowLG(supermercadoActual->Clientes, MostrarCliente);
-  //AdicionarClienteAsCompras(supermercadoActual);
- 
-  //mostraEstatisticasGerais(supermercadoActual);
-  //printf("Hora de abertura do supermercado: %s", asctime(localtime(&(supermercadoActual->horaAbertura))));
+  mostraEstatisticasGerais(supermercadoActual);
   exportaCaixas(supermercadoActual->Caixas);
   exportaLogCsv(supermercadoActual->LogApp);
   exportaProdutosG(supermercadoActual->ProdutosOferecidos);
   exportaFuncionarios(supermercadoActual->Funcionarios);
-  // while(1){
-  //   if(kbhit()){
-  //     puts("Key was pressed");
-  //   }
-  // }
 
-  free(supermercadoActual);
+  DestruirSupermercado(supermercadoActual);
+  free(R);
 
   return 0;
 }

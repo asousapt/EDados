@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <unistd.h>
-#include <termios.h>
 #include <fcntl.h>
 #include <time.h>
 #include "ListaGenerica.h"

@@ -99,20 +99,29 @@ void mostraEstatisticasGerais(SUPERMERCADO* S) {
   printf("Clientes atendidos na caixa %d\n", caixaConsultar);
 
   CAIXA* cx3 = ProcurarCaixa(S->Caixas, caixaConsultar);
-  ListaGenerica* lg = (ListaGenerica*) cx3->pessoasAtendidas;
-  ShowLG(lg, MostrarCliente);
+  if (cx3){
+    ListaGenerica* lg = (ListaGenerica*) cx3->pessoasAtendidas;
+    if (lg)
+    {
+      ShowLG(lg, MostrarClientesAsCompras);
+    }
+  }
 
   FUNCIONARIO* func1 = funcionarioAtendeuMaisMenos(S->Funcionarios, 1);
   FUNCIONARIO* func2 = funcionarioAtendeuMaisMenos(S->Funcionarios, 0);
-
-  printf("\n");
-  printf("Funcionario que mais clientes atendeu: %s\n", func1->nome); 
-  printf("N clientes atendidos %d\n", func1->nmrClientesAtendidos);
-  printf("Funcionario que menos clientes atendeu: %s\n", func2->nome); 
-  printf("N clientes atendidos %d\n", func2->nmrClientesAtendidos);
-
+  if(func1){
+    printf("\n");
+    printf("Funcionario que mais clientes atendeu: %s\n", func1->nome);
+    printf("N clientes atendidos %d\n", func1->nmrClientesAtendidos);
+  }
+  if(func2){
+    printf("Funcionario que menos clientes atendeu: %s\n", func2->nome);
+    printf("N clientes atendidos %d\n", func2->nmrClientesAtendidos);
+  }
   ListaGenerica* lgProd = (ListaGenerica*) S->ProdutosOferecidos;
-  printf("\n"); 
-  printf("Numero de produtos Oferecidos %d\n", lgProd->NEL);
-  printf("Valor monetario dos produtos oferecidos %f\n", totalValorProdutosOferecidos(lgProd) );
+  if (lgProd){
+    printf("\n");
+    printf("Numero de produtos Oferecidos %d\n", lgProd->NEL);
+    printf("Valor monetario dos produtos oferecidos %f\n", totalValorProdutosOferecidos(lgProd));
+  }
 }
